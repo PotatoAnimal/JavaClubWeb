@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Create FlowСounter</title>
+</head>
+<h2>
+    Create Gas Flow Meter
+</h2>
+<body>
+<form th:method="POST" th:action="@{/flowcounters}" th:object=${flowcounter}>
+    <table>
+        <tr>
+            <td>
+                <label for="type"> FlowCounterType: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{type}" id="type"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="mode"> FlowCounterMode: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{mode}" id="mode"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="qMin"> Qmin, m3/h: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{qMin}" id="qMin"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="qMax"> Qmax, m3/h: </label>
+            </td>
+            <td>
+                <input type="text" th:field="*{qMax}" id="qMax"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Create">
+            </td>
+            <td>
+                <input type="reset" value="Clear">
+            </td>
+
+        </tr>
+    </table>
+</form>
+<form action="/flowcounters">
+    <button>ListOfFlowCounters</button>
+</form>
+</body>
+</html>
