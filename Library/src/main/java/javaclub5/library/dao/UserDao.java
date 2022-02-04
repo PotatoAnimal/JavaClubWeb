@@ -29,7 +29,7 @@ public class UserDao {
         sf = configuration.buildSessionFactory();
     }
 
-    public UserDao() {
+    private UserDao() {
 
     }
 
@@ -41,4 +41,5 @@ public class UserDao {
         session.close();
         return users;
     }
+
 }
