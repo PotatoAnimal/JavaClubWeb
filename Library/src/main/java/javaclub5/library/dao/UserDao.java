@@ -1,6 +1,7 @@
 package javaclub5.library.dao;
 
-import javaclub5.library.models.User;
+import javaclub5.library.models.Roles;
+import javaclub5.library.models.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,13 +9,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
+
 import java.util.LinkedList;
 import java.util.List;
 
 @Component
 public class UserDao {
 
-    private List<User> users = new LinkedList<>();
+    private List<Users> users = new LinkedList<>();
 
     private static UserDao userDaoInstance = null;
     private static Configuration configuration;
@@ -23,20 +25,22 @@ public class UserDao {
 
     static {
         configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Users.class)
+                .addAnnotatedClass(Roles.class);
         builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         sf = configuration.buildSessionFactory();
     }
 
-    private UserDao() {
+    public UserDao() {
 
     }
 
-    public List<User> readAll() {
+    public List<Users> readAll() {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
-        users = session.createQuery("from User").list();
+        users =
+                session.createQuery("from Users u join Roles on u.idRole=Roles ").list();
         transaction.commit();
         session.close();
         return users;
