@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users", schema = "library", catalog = "JavaClubWeb")
-public class Users {
+public class User {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
@@ -19,8 +19,8 @@ public class Users {
     @Column(name = "email", nullable = true, length = 30)
     private String email;
     @ManyToOne
-    @JoinColumn(name = "roles.id")
-    private Roles idRole;
+    @JoinColumn(name ="roles.id", referencedColumnName="id")
+    private Role role;
     @Column(name = "birthday", nullable = true)
     private Date birthday;
     @Column(name = "surname", nullable = true, length = 20)
@@ -29,8 +29,8 @@ public class Users {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Users)) return false;
-        Users users = (Users) o;
+        if (!(o instanceof User)) return false;
+        User users = (User) o;
         return getId() == users.getId() && Objects.equals(getName(), users.getName()) && Objects.equals(getLogin(), users.getLogin()) && Objects.equals(getPassword(), users.getPassword()) && Objects.equals(getEmail(), users.getEmail()) && Objects.equals(getBirthday(), users.getBirthday()) && Objects.equals(getSurname(), users.getSurname());
     }
 
@@ -47,7 +47,7 @@ public class Users {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", idRole=" + id +
+                ", role=" + role +
                 ", birthday=" + birthday +
                 ", surname='" + surname + '\'' +
                 '}';
@@ -93,12 +93,12 @@ public class Users {
         this.email = email;
     }
 
-    public Roles getIdRole() {
-        return idRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setIdRole(Roles idRole) {
-        this.idRole = idRole;
+    public void setRole(Role idRole) {
+        this.role = idRole;
     }
 
     public Date getBirthday() {

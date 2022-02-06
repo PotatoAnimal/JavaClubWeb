@@ -1,7 +1,7 @@
 package javaclub5.library.dao;
 
-import javaclub5.library.models.Roles;
-import javaclub5.library.models.Users;
+import javaclub5.library.models.Role;
+import javaclub5.library.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class UserDao {
 
-    private List<Users> users = new LinkedList<>();
+    private List<User> users = new LinkedList<>();
 
     private static UserDao userDaoInstance = null;
     private static Configuration configuration;
@@ -25,8 +25,8 @@ public class UserDao {
 
     static {
         configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(Users.class)
-                .addAnnotatedClass(Roles.class);
+        configuration.addAnnotatedClass(User.class)
+                .addAnnotatedClass(Role.class);
         builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         sf = configuration.buildSessionFactory();
@@ -36,11 +36,11 @@ public class UserDao {
 
     }
 
-    public List<Users> readAll() {
+    public List<User> readAll() {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
         users =
-                session.createQuery("from Users u join Roles on u.idRole=Roles ").list();
+                session.createQuery("FROM User as u INNER JOIN FETCH u.role as r").list();
         transaction.commit();
         session.close();
         return users;
