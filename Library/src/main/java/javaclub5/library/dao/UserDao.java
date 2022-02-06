@@ -26,7 +26,7 @@ public class UserDao {
     static {
         configuration = new Configuration().configure();
         configuration.addAnnotatedClass(User.class)
-                .addAnnotatedClass(Role.class);
+                  .addAnnotatedClass(Role.class);
         builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         sf = configuration.buildSessionFactory();
@@ -40,7 +40,8 @@ public class UserDao {
         Session session = sf.openSession();
         Transaction transaction = session.beginTransaction();
         users =
-                session.createQuery("FROM User as u INNER JOIN FETCH u.role as r").list();
+                    session.createQuery("select u FROM User u " +
+                            "join fetch Role r on u.role = r" ).list();
         transaction.commit();
         session.close();
         return users;

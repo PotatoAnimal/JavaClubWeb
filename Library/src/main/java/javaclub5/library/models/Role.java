@@ -9,8 +9,16 @@ public class Role {
     @Id
     @Column(name = "id", nullable = false)
     private int idRole;
-    @OneToMany(mappedBy = "role")
-    private List<User> users;
+    @Column
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return idRole;
@@ -20,19 +28,13 @@ public class Role {
         this.idRole = id;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 
     @Override
     public String toString() {
         return "Roles{" +
                 "idRole=" + idRole +
-                ", users=" + users +
+                ", users=" + name +
                 '}';
     }
 }

@@ -19,7 +19,7 @@ public class User {
     @Column(name = "email", nullable = true, length = 30)
     private String email;
     @ManyToOne
-    @JoinColumn(name ="roles.id", referencedColumnName="id")
+    @JoinColumn(name = "id_role")
     private Role role;
     @Column(name = "birthday", nullable = true)
     private Date birthday;
@@ -47,7 +47,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
+                ", role=" + role.getName() +
                 ", birthday=" + birthday +
                 ", surname='" + surname + '\'' +
                 '}';
