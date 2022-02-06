@@ -5,7 +5,8 @@ import javaclub5.library.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScans(value = { @ComponentScan("javaclub5.library")})
 public class HibernateConfig {
 
     @Autowired
@@ -23,7 +25,7 @@ public class HibernateConfig {
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
+        factoryBean.setConfigLocation(context.getResource("hibernate.cfg.xml"));
         factoryBean.setAnnotatedClasses(User.class, Role.class);
         return factoryBean;
     }
@@ -34,6 +36,4 @@ public class HibernateConfig {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
-
-
 }
