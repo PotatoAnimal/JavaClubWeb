@@ -1,7 +1,7 @@
 package javaclub5.library.models;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -22,7 +22,7 @@ public class User {
     @JoinColumn(name = "id_role")
     private Role role;
     @Column(name = "birthday", nullable = true)
-    private Date birthday;
+    private LocalDate birthday;
     @Column(name = "surname", nullable = true, length = 20)
     private String surname;
 
@@ -31,7 +31,9 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User users = (User) o;
-        return getId() == users.getId() && Objects.equals(getName(), users.getName()) && Objects.equals(getLogin(), users.getLogin()) && Objects.equals(getPassword(), users.getPassword()) && Objects.equals(getEmail(), users.getEmail()) && Objects.equals(getBirthday(), users.getBirthday()) && Objects.equals(getSurname(), users.getSurname());
+        return getId() == users.getId() && Objects.equals(getName(), users.getName()) && Objects.equals(getLogin(),
+                users.getLogin()) && Objects.equals(getPassword(), users.getPassword()) && Objects.equals(getEmail(),
+                users.getEmail()) && Objects.equals(getBirthday(), users.getBirthday()) && Objects.equals(getSurname(), users.getSurname());
     }
 
     @Override
@@ -101,11 +103,11 @@ public class User {
         this.role = idRole;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

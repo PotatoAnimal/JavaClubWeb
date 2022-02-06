@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Users</title>
+</head>
+<h2>
+    List of Users
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>login</th>
+        <th>password</th>
+        <th>role</th>
+        <th>email</th>
+        <th>birthday</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}">ID</td>
+        <td th:text="${user.getName()}">name</td>
+        <td th:text="${user.getSurname()}">surname</td>
+        <td th:text="${user.getLogin()}">login</td>
+        <td th:text="${user.getPassword()}">password</td>
+        <td th:text="${user.getRole().toStirng()}">role</td>
+        <td th:text="${user.getEmail()}">email</td>
+        <td th:text="${user.getBirthday}">birthday</td>
+    </tr>
+</table>
+</body>
+</html>
