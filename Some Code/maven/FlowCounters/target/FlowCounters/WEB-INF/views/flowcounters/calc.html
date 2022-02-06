@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Calculate</title>
+</head>
+<h2> Input Conditions for Gas Flow Meter
+
+</h2>
+<body>
+<form th:method="POST" th:action="@{/flowcounters/{id}/calc (id = ${flowcounter.getId()})}">
+    <table>
+        <tr>
+            <td>
+                <label for="flowcountertype"> FlowCounterType: </label>
+            </td>
+            <td>
+                <input type="text" id="flowcountertype" name="flowcountertype" th:value="${flowcounter.getType()}"
+                       th:field="*{flowcounter.type}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="flowcountermode"> FlowCounterMode: </label>
+            </td>
+            <td>
+                <input type="text" id="flowcountermode" name="flowcountermode" th:value="${flowcounter.getMode()}"
+                       th:field="*{flowcounter.mode}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="qmin"> Qmin, m3/h: </label>
+            </td>
+            <td><input type="text" id="qmin" name="qmin" th:value="${flowcounter.getqMin()}"
+                       th:field="*{flowcounter.qMin}" disabled>
+            </td>
+            <td><label for="qmax"> Qmax, m3/h: </label>
+            </td>
+            <td><input type="text" id="qmax" name="qmax" th:value="${flowcounter.getqMax()}"
+                       th:field="*{flowcounter.qMax}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="tmin"> Tmin, C: </label>
+            </td>
+            <td><input type="text" id="tmin" name="tmin">
+            </td>
+            <td><label for="tmax"> Tmax, C: </label>
+            </td>
+            <td><input type="text" id="tmax" name="tmax">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="pmin"> Pmin, MPa: </label>
+            </td>
+            <td><input type="text" id="pmin" name="pmin">
+            </td>
+            <td><label for="pmax"> Pmax, MPa: </label>
+            </td>
+            <td><input type="text" id="pmax" name="pmax">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="xa"> xA, %: </label>
+            </td>
+            <td><input type="text" id="xa" name="xa" value=1.2>
+            </td>
+            <td><label for="xy"> xY, %: </label>
+            </td>
+            <td><input type="text" id="xy" name="xy" value=0.8>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="rostcondition"> roStCondition kg/m3: </label>
+            </td>
+            <td><input type="text" id="rostcondition" name="rostcondition" value="0.78">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Calculate">
+            </td>
+            <td>
+                <input type="reset" value="Clear">
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+<form class="btn btn-success" action="/">
+    <button>home</button>
+</form>
+</body>
+</html>

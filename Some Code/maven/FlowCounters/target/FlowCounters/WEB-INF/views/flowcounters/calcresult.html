@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>CalcResult</title>
+</head>
+<body>
+<form action="/flowcounters/calcresult" method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="flowcountertype"> FlowCounterType: </label>
+            </td>
+            <td>
+                <input type="text" id="flowcountertype" name="flowcountertype" th:value="${flowcounter.getType()}"
+                       disabled>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="flowcountermode"> FlowCounterMode: </label>
+            </td>
+            <td>
+                <input type="text" id="flowcountermode" name="flowcountermode" th:value="${flowcounter.getMode()}"
+                       disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="qmin"> Qmin, m3/h: </label>
+            </td>
+            <td><input type="text" id="qmin" name="qmin" th:value="${flowcounter.getqMin()}" disabled>
+            </td>
+            <td><label for="qmax"> Qmax, m3/h: </label>
+            </td>
+            <td><input type="text" id="qmax" name="qmax" th:value="${flowcounter.getqMax()}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="tmin"> Tmin, C: </label>
+            </td>
+            <td><input type="text" id="tmin" name="tmin" th:value="${condition.gettMin()}" disabled>
+            </td>
+            <td><label for="tmax"> Tmax, C: </label>
+            </td>
+            <td><input type="text" id="tmax" name="tmax" th:value="${condition.gettMax()}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="pmin"> Pmin, MPa: </label>
+            </td>
+            <td><input type="text" id="pmin" name="pmin" th:value="${condition.getpMin()}" disabled>
+            </td>
+            <td><label for="pmax"> Pmax, MPa: </label>
+            </td>
+            <td><input type="text" id="pmax" name="pmax" th:value="${condition.getpMax()}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="xa"> xA, %: </label>
+            </td>
+            <td><input type="text" id="xa" name="xa" th:value="${ngchar.getxA()}" disabled>
+            </td>
+            <td><label for="xy"> xY, %: </label>
+            </td>
+            <td><input type="text" id="xy" name="xy" th:value="${ngchar.getxY()}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="rostcondition"> roStCondition, kg/m3: </label>
+            </td>
+            <td><input type="text" id="rostcondition" name="rostcondition"
+                       th:value="${ngchar.getRoStCondidion()}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="zmin"> zMin: </label>
+            </td>
+            <td><input type="text" id="zmin" name="zmin" th:value="${zmin}" disabled>
+            </td>
+            <td><label for="zmax"> zMax: </label>
+            </td>
+            <td><input type="text" id="zmax" name="zmax" th:value="${zmax}" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="qminst"> QminSt, m3/h st: </label>
+            </td>
+            <td><input type="text" id="qminst" name="qminst" th:value="${qminst}" disabled>
+            </td>
+            <td><label for="qmaxst"> QmaxSt, m3/h st: </label>
+            </td>
+            <td><input type="text" id="qmaxst" name="qmaxst" th:value="${qminst}" disabled>
+            </td>
+        </tr>
+    </table>
+</form>
+<form action="/">
+    <button>Home</button>
+</form>
+
+</body>
+</html>
