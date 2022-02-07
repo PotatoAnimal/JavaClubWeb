@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "authors", schema = "library", catalog = "JavaClubWeb")
 public class Author {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private int id;
     @Column(length = 20)

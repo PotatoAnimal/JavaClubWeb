@@ -12,36 +12,59 @@ import java.util.List;
 @Component
 public class BookDao {
 
-    public Book createDummyBook() {
+    public List<Book> showAll() {
         Session session = HibernateUtil.sf.openSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery<Book> query = session
-                .createNativeQuery("INSERT INTO library.books(title,yearProduction) VALUES ('test','1339') RETURNING *",
+                .createNativeQuery("SELECT id, title, yearProduction, idAuthor  FROM library.books",
                         Book.class);
 //        #todo learn to set paras
-        Book createdBook = query.getSingleResult();
+        List<Book> allBooks = query.getResultList();
+        transaction.commit();
+        session.close();
+        return allBooks;
+    }
+
+    public Book createDummyBook(String authorName, String titleName, int year) {
+        Session session = HibernateUtil.sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery<Book> query = session
+                .createNativeQuery("INSERT INTO library.books(idauthor,title,yearProduction) " +
+                                "VALUES ((SELECT library.authors.id FROM library.authors WHERE name = ?1),?2,?3) RETURNING *",
+                        Book.class);
+//        #todo learn to set paras
+        Book createdBook = query
+                .setParameter(1, authorName)
+                .setParameter(2, titleName)
+                .setParameter(3, year)
+                .getSingleResult();
         transaction.commit();
         session.close();
         return createdBook;
     }
 
-    public Book findBookByName(String bookName) {
-//        Session session = HibernateUtil.sf.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        NativeQuery<Book> query = session
-//                .createNativeQuery("SELECT title FROM library.books WHERE title = ?1", Book.class);
-//        String title = bookName;
-//        Book bookTitle = query.setParameter(1, title).getSingleResult();
-//        transaction.commit();
-//        session.close();
-        return null;
+    public Book findBookByTitle(String bookName) {
+        Session session = HibernateUtil.sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery<Book> query = session
+                .createNativeQuery("SELECT * FROM library.books WHERE title = ?1", Book.class);
+        Book bookTitle = query.setParameter(1, bookName).getSingleResult();
+        transaction.commit();
+        session.close();
+        return bookTitle;
+    }
+
+    public Book findBookByAuthor(String authorName) {
+        Session session = HibernateUtil.sf.openSession();
+        Transaction transaction = session.beginTransaction();
+        NativeQuery<Book> query = session
+                .createNativeQuery("SELECT * FROM library.books b join library.authors a on b.id = a.id where name = ?1", Book.class);
+        Book authorsName = query.setParameter(1, authorName).getSingleResult();
+        transaction.commit();
+        session.close();
+        return authorsName;
     }
 
     public void deleteBookByName(String bookName) {
     }
-
-    public Book findBookByAuthor(String authorName) {
-        return null;
-    }
-
 }
