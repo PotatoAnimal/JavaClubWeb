@@ -5,7 +5,7 @@
 <!-- Version 8 MySQL hiberante-cfg.xml example for Hibernate 5 -->
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.archive.autodetection">class,hbm</property>
+
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/JavaClubWeb</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
