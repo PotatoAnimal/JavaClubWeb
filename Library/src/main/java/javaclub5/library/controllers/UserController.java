@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     UserDao userDao;
 
-    @GetMapping("/")
+    @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userDao.readAll());
         return "users/list";

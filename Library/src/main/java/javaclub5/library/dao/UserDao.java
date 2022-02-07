@@ -21,22 +21,7 @@ import java.util.List;
 public class UserDao {
     @Autowired
     private SessionFactory sf;
-    //private HibernateTransactionManager hm;
     private List<User> users = new LinkedList<>();
-
-   /* private static UserDao userDaoInstance = null;
-    private static Configuration configuration;
-    private static StandardServiceRegistryBuilder builder;
-    private static SessionFactory sf;*/
-
-   /* static {
-        configuration = new Configuration().configure();
-        configuration.addAnnotatedClass(User.class)
-                  .addAnnotatedClass(Role.class);
-        builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        sf = configuration.buildSessionFactory();
-    }*/
 
     public UserDao() {
 
@@ -44,12 +29,8 @@ public class UserDao {
 
     @Transactional
     public List<User> readAll() {
-       /* Session session = sf.openSession();
-        Transaction transaction = session.beginTransaction();*/
         users =  sf.getCurrentSession().createQuery("select u FROM User u " +
                             "join fetch Role r on u.role = r" ).list();
-        /*transaction.commit();
-        session.close();*/
         return users;
     }
 

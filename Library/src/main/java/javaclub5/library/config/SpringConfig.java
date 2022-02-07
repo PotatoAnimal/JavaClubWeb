@@ -53,12 +53,12 @@ public class SpringConfig implements WebMvcConfigurer {
         return source;
     }
 
-    @Override
+    /*@Override
     public Validator getValidator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(messageSource());
         return validator;
-    }
+    }*/
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {

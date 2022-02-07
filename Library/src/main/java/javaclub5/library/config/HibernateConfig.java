@@ -2,6 +2,7 @@ package javaclub5.library.config;
 
 import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
 
 
 @Configuration
@@ -25,7 +28,7 @@ public class HibernateConfig {
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setConfigLocation(context.getResource("hibernate.cfg.xml"));
+        factoryBean.setDataSource(getDataSource());
         factoryBean.setAnnotatedClasses(User.class, Role.class);
         return factoryBean;
     }
@@ -35,5 +38,15 @@ public class HibernateConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
+    }
+
+    @Bean
+    public static DataSource getDataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/JavaClubWeb");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("1111");
+        return dataSource;
     }
 }
