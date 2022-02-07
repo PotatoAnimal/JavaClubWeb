@@ -2,6 +2,7 @@ package javaclub.library.model;
 
 import javaclub.library.config.AnnotatedBean;
 import javaclub.library.config.AppConfig;
+import javaclub.library.dao.UserDAOImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -35,10 +36,11 @@ public class AppSpring {
 
             //Annotated
 //            AnnotatedBean annAuthor = context.getBean("author", AnnotatedBean.class);
-
+//            AnnotatedBean annUser = context.getBean("user", AnnotatedBean.class);
+//            new UserDAOImpl().listUsers();
 //            System.out.println(annAuthor);
 
-//            ((AnnotationConfigApplicationContext) context).close();
+            //((AnnotationConfigApplicationContext) context).close();
         }finally {
             session.close();
             factory.close();

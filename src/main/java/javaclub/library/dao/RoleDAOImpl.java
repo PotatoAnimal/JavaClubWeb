@@ -1,7 +1,6 @@
 package javaclub.library.dao;
 
 import javaclub.library.model.Role;
-import javaclub.library.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
