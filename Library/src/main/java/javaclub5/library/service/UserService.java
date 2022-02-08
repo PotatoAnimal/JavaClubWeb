@@ -1,14 +1,22 @@
 package javaclub5.library.service;
 
-import org.springframework.stereotype.Service;
+import javaclub5.library.models.User;
 
-@Service
-public class UserService {
+import java.util.List;
 
-//    @Autowired
-//    private UserRepository userDao;
-//
-//    public List<User> findAll(){
-//
-//    }
+public interface UserService {
+
+    // save operation
+    User saveUser(User user);
+
+    // read operation
+    List<User> fetchUserList();
+
+    // update operation
+    User updateUser(User user, Integer userId);
+
+    // delete operation
+    Object deleteUserById(Integer userId);
+
+    public Long count();
 }
