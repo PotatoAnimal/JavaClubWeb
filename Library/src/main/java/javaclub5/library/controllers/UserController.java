@@ -1,6 +1,6 @@
 package javaclub5.library.controllers;
 
-import javaclub5.library.dao.UserDao;
+import javaclub5.library.dao.UserDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    UserDao userDao;
+    UserDAOImpl userDao;
 
     @GetMapping()
     public String index(Model model) {
