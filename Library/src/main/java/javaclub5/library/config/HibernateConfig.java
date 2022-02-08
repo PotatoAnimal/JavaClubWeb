@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("javaclub5.library")})
-@EnableJpaRepositories(basePackages = "javaclub5.library.dao")
+@EnableJpaRepositories(basePackages = "javaclub5.library.repository")
 public class HibernateConfig {
 
     @Autowired
@@ -54,11 +54,6 @@ public class HibernateConfig {
         dataSource.setUsername("postgres");
         dataSource.setPassword("1111");
         return dataSource;
-    }
-
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-        return new PersistenceExceptionTranslationPostProcessor();
     }
 
     @Bean
