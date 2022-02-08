@@ -14,6 +14,6 @@ public class UserDaoTest {
     @Test
     public void userDAOTest() {
 
-        userDao.readAll();
+        userDao.findAll();
     }
 }

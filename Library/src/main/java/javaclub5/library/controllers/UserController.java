@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     UserDao userDao;
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userDao.readAll());
+        model.addAttribute("users", userDao.findAll());
         return "users/list";
     }
 
