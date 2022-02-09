@@ -1,7 +1,7 @@
 package javaclub5.library.models;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Entity
 @Table(name = "roles", schema = "library", catalog = "JavaClubWeb")

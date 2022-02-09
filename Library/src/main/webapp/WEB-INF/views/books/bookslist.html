@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<h2>
+    List of Users
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>title</th>
+        <th>year production</th>
+        <th>Authors</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getId()}">ID</td>
+        <td th:text="${book.getTitle()}">title</td>
+        <td th:text="${book.getYearProduction()}">year</td>
+        <td th:text="${book.getTitle()}">authors</td>
+    </tr>
+</table>
+
+</body>
+</html>
