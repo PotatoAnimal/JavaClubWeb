@@ -2,6 +2,7 @@ package javaclub5.library.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 //@Table(name = "books")
@@ -68,5 +69,18 @@ public class Book {
     @Override
     public String toString() {
         return "Book [" + id + " " + title + " " + author.getName() + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && yearProduction == book.yearProduction && Objects.equals(title, book.title) && Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, yearProduction, author);
     }
 }

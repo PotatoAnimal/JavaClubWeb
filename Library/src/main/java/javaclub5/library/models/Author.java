@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 //@Table(name = "authors")
@@ -70,5 +71,18 @@ public class Author {
             allBooks += o.getTitle() + " ";
         }
         return "Author [" + id + " " + name + " " + allBooks + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return id == author.id && Objects.equals(name, author.name) && Objects.equals(birthDay, author.birthDay) && Objects.equals(surname, author.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, birthDay, surname);
     }
 }
