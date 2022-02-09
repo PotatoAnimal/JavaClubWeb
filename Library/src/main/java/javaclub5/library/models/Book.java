@@ -1,6 +1,7 @@
 package javaclub5.library.models;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -18,10 +19,9 @@ public class Book {
     //#todo Popova - clarify.
     @Column
     private Integer idAuthor;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "idAuthor",insertable=false, updatable=false)
-//    private Author author;
+//
+//    @OneToMany(mappedBy = "idBook", fetch = FetchType.LAZY)
+//    private List<BookAuthors> bookAuthors;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -36,6 +36,14 @@ public class Book {
 
     }
 
+//    public List<BookAuthors> getBookAuthors() {
+//        return bookAuthors;
+//    }
+//
+//    public void setBookAuthors(List<BookAuthors> bookAuthors) {
+//        this.bookAuthors = bookAuthors;
+//    }
+
     public Book(List<Author> authors) {
         this.authors = authors;
     }
@@ -47,14 +55,6 @@ public class Book {
     public void setAuthors(List<Author> authors) {
         this.authors = authors;
     }
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "booksAuthors",
-//            schema = "library",
-//            joinColumns = {@JoinColumn(name = "idBook")},
-//            inverseJoinColumns = {@JoinColumn(name = "idAuthor")}
-//    )
-//    private List<Author> authors;
 
     public Integer getId() {
         return id;

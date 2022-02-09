@@ -21,9 +21,8 @@ public class Author {
     @Column(length = 20)
     private String surname;
 
-    //    @OneToMany(mappedBy = "author")
-//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-//    private List<Book> books;
+//    @OneToMany (mappedBy="idAuthor", fetch=FetchType.LAZY)
+//    private List<BookAuthors> bookAuthors;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> booksAuthors;
@@ -39,6 +38,22 @@ public class Author {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getSurname(), getBirthDay());
+    }
+
+//    public List<BookAuthors> getBookAuthors() {
+//        return bookAuthors;
+//    }
+//
+//    public void setBookAuthors(List<BookAuthors> bookAuthors) {
+//        this.bookAuthors = bookAuthors;
+//    }
+
+    public List<Book> getBooksAuthors() {
+        return booksAuthors;
+    }
+
+    public void setBooksAuthors(List<Book> booksAuthors) {
+        this.booksAuthors = booksAuthors;
     }
 
     public int getId() {
