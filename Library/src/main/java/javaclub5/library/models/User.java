@@ -18,13 +18,27 @@ public class User {
     private String password;
     @Column(name = "email", nullable = true, length = 30)
     private String email;
-    @ManyToOne
-    @JoinColumn(name = "id_role")
-    private Role role;
     @Column(name = "birthday", nullable = true)
     private LocalDate birthday;
     @Column(name = "surname", nullable = true, length = 20)
     private String surname;
+
+    @ManyToOne
+    @JoinColumn(name = "id_role")
+    private Role role;
+
+
+    public User() {
+    }
+
+    public User(String name, String login, String password, String email, LocalDate birthday, String surname) {
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.birthday = birthday;
+        this.surname = surname;
+    }
 
     @Override
     public boolean equals(Object o) {

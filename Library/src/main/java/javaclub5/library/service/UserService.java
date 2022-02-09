@@ -7,16 +7,18 @@ import java.util.List;
 public interface UserService {
 
     // save operation
-    User saveUser(User user);
+    public User saveUser(User user);
 
     // read operation
-    List<User> fetchUserList();
+    public List<User> fetchUserList();
+
+    public User findByName(String name);
 
     // update operation
-    User updateUser(User user, Integer userId);
+    public User updateUser(User user, Integer userId);
 
     // delete operation
-    Object deleteUserById(Integer userId);
+    public void deleteUserById(int userId);
 
     public Long count();
 }

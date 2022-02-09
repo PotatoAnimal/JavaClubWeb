@@ -5,6 +5,7 @@ import javaclub5.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,16 +16,27 @@ public class UserServiceImp implements UserService {
     private UserRepository userRepository;
 
     @Override
+    @Transactional
     public User saveUser(User user) {
         return userRepository.save(user);
     }
 
+
     @Override
+    @Transactional
     public List<User> fetchUserList() {
         return (List<User>) userRepository.findAll();
     }
 
     @Override
+    @Transactional
+    public User findByName(String nameUser) {
+        User user = userRepository.findByName(nameUser);
+        return user;
+    }
+
+    @Override
+    @Transactional
     public User updateUser(User user, Integer userId) {
         User userDB = userRepository.findById(userId).get();
 
@@ -52,13 +64,14 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Object deleteUserById(Integer userId) {
+    @Transactional
+    public void deleteUserById(int userId) {
         userRepository.deleteById(userId);
-        return null;
     }
 
     @Override
-    public Long count(){
+    @Transactional
+    public Long count() {
         return userRepository.count();
     }
 }

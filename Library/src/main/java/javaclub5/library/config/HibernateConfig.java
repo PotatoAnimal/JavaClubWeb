@@ -1,5 +1,7 @@
 package javaclub5.library.config;
 
+import javaclub5.library.models.Author;
+import javaclub5.library.models.Book;
 import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -35,7 +37,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setAnnotatedClasses(User.class, Role.class);
+        factoryBean.setAnnotatedClasses(User.class, Role.class, Author.class, Book.class);
         return factoryBean;
     }
 
