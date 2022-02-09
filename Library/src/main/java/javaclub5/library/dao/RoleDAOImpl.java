@@ -42,15 +42,14 @@ public class RoleDAOImpl implements RoleDAO{
     public Role getRoleById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
 //        Role role = (Role) session.load(Role.class, new Integer(id));
-        Role role = (Role) session.load(Role.class, id);
-        return role;
+        return session.load(Role.class, id);
     }
 
     @Override
     public void removeRole(int id) {
         Session session = this.sessionFactory.getCurrentSession();
 //        Role role = (Role) session.load(Role.class, new Integer(id));
-        Role role = (Role) session.load(Role.class, id);
+        Role role = session.load(Role.class, id);
         if (null != role) {
             session.delete(role);
         }
