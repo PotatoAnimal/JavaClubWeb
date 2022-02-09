@@ -3,7 +3,7 @@ package javaclub5.library.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "regBooks", schema = "library", catalog = "JavaClubWeb")
+@Table(name = "regBooks", schema = "library", catalog = "javatest")
 public class RegBook {
 
     @Id

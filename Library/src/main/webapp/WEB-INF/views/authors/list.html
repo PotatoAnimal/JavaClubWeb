@@ -20,7 +20,7 @@
             </form>
         </td>
     </tr>
-    <tr th:each="author : ${authors}">
+    <tr th:each="author : ${listAuthors}">
         <td th:text="${author.getId()}">ID</td>
         <td th:text="${author.getName()}">name</td>
         <td th:text="${author.getSurname()}">surname</td>

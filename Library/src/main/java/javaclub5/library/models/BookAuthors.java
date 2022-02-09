@@ -5,7 +5,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 
 @Embeddable
-@Table(name = "booksAuthors", schema = "library", catalog = "JavaClubWeb")
+@Table(name = "booksAuthors", schema = "library", catalog = "javatest")
 public class BookAuthors {
 
 

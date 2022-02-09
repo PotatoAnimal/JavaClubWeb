@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "authors", schema = "library", catalog = "JavaClubWeb")
+@Table(name = "authors", schema = "library", catalog = "javatest")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,17 +16,17 @@ public class Author {
     private int id;
     @Column(length = 20)
     private String name;
-    @Column(name = "birthDay")
+    @Column
     private LocalDate birthDay;
     @Column(length = 20)
     private String surname;
 
-//    @OneToMany(mappedBy = "author")
-//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-//    private List<Book> books;
+    @OneToMany(mappedBy = "author")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Book> books;
 
-    @ManyToMany(mappedBy = "authors")
-    private List<Book> booksAuthors;
+//    @ManyToMany(mappedBy = "authors")
+//    private List<Book> booksAuthors;
 
     public Author() {
     }
@@ -49,13 +49,13 @@ public class Author {
 //        this.books = books;
 //    }
 
-    public List<Book> getBooksAuthors() {
-        return booksAuthors;
-    }
-
-    public void setBooksAuthors(List<Book> booksAuthors) {
-        this.booksAuthors = booksAuthors;
-    }
+//    public List<Book> getBooksAuthors() {
+//        return booksAuthors;
+//    }
+//
+//    public void setBooksAuthors(List<Book> booksAuthors) {
+//        this.booksAuthors = booksAuthors;
+//    }
 
     public int getId() {
         return id;

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "logBook", schema = "library", catalog = "JavaClubWeb")
+@Table(name = "logBook", schema = "library", catalog = "javatest")
 public class LogBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

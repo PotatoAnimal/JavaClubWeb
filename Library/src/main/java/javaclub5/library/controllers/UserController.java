@@ -15,17 +15,17 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("users", userService.fetchUserList());
-        return "users/list";
-    }
-
 //    @GetMapping()
 //    public String index(Model model) {
-//        User user = userService.findByName("Steve");
-//        model.addAttribute("users", user);
+//        model.addAttribute("users", userService.fetchUserList());
 //        return "users/list";
 //    }
+
+    @GetMapping()
+    public String index(Model model) {
+        User user = userService.findByName("Anna");
+        model.addAttribute("users", user);
+        return "users/list";
+    }
 
 }

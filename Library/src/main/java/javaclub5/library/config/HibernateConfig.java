@@ -1,9 +1,6 @@
 package javaclub5.library.config;
 
-import javaclub5.library.models.Author;
-import javaclub5.library.models.Book;
-import javaclub5.library.models.Role;
-import javaclub5.library.models.User;
+import javaclub5.library.models.*;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +19,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -37,7 +35,8 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setAnnotatedClasses(User.class, Role.class, Author.class, Book.class);
+        factoryBean.setAnnotatedClasses(User.class, Role.class, Author.class, Book.class, LogBook.class, RegBook.class);
+        factoryBean.setHibernateProperties(hibernateProperties());
         return factoryBean;
     }
 
@@ -52,10 +51,20 @@ public class HibernateConfig {
     public static DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/JavaClubWeb");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/javatest");
         dataSource.setUsername("postgres");
         dataSource.setPassword("1111");
         return dataSource;
+    }
+
+    final Properties hibernateProperties() {
+        final Properties hibernateProperties = new Properties();
+
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
+        hibernateProperties.setProperty("hibernate.show_sql", "true");
+
+        return hibernateProperties;
     }
 
     @Bean
