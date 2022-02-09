@@ -3,7 +3,7 @@ package javaclub5.library.models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,8 +19,8 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "birthDay")
-    private LocalDateTime birthDay ;
+    @Column(name = "birthday")
+    private LocalDate birthDay ;
 
     @Column(name = "surname")
     private String surname;
@@ -53,9 +53,9 @@ public class Author {
         this.books = books;
     }
 
-    public LocalDateTime getBirthDay() {return birthDay;}
+    public LocalDate getBirthDay() {return birthDay;}
 
-    public void setBirthDay(LocalDateTime birthDay) {this.birthDay = birthDay;}
+    public void setBirthDay(LocalDate birthDay) {this.birthDay = birthDay;}
 
     public String getSurname() {return surname;}
 
