@@ -26,6 +26,7 @@ public class AuthorDAOImpl implements AuthorDAO{
         session.update(author);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Author> listAuthors() {
         Session session = this.sessionFactory.getCurrentSession();
