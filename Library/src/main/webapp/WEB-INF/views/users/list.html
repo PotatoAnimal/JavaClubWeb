@@ -24,7 +24,7 @@
             </form>
         </td>
     </tr>
-    <tr th:each="user : ${users}">
+    <tr th:each="user : ${listUsers}">
         <td th:text="${user.getId()}">ID</td>
         <td th:text="${user.getName()}">name</td>
         <td th:text="${user.getSurname()}">surname</td>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Library</title>
+</head>
+<body>
+	<h2>
+    Library
+</h2>
+<form class="btn btn-success" action="/users">
+    <button>Users</button>
+</form>
+<form class="btn btn-success" action="/roles">
+    <button>Roles</button>
+</form>
+
+<header role="banner"><div class="nav" role="navigation"><div class="top-nav-container" id="mmenu"><a class="header-logo" href="zabbix.php?action=dashboard.view"><div class="logo"></div></a>
+<ul class="top-nav"><li class="selected" id="view" onclick="javascript: MMenu.mouseOver('view');"><a tabindex="0">Мониторинг</a></li><li id="cm" onclick="javascript: MMenu.mouseOver('cm');" class=""><a tabindex="0">Инвентаризация</a></li><li id="reports" onclick="javascript: MMenu.mouseOver('reports');" class=""><a tabindex="0">Отчеты</a></li><li id="config" onclick="javascript: MMenu.mouseOver('config');" class=""><a tabindex="0">Настройка</a></li><li id="admin" onclick="javascript: MMenu.mouseOver('admin');" class=""><a tabindex="0">Администрирование</a></li></ul>
+</div>
+    <div class="top-subnav-container" onmouseover="javascript: MMenu.submenu_mouseOver();" onmouseout="javascript: MMenu.mouseOut();"><ul class="top-subnav" id="sub_view" style="display: block;"><li><a class="selected" href="zabbix.php?action=dashboard.view&amp;ddreset=1">ПАНЕЛЬ</a></li><li><a href="zabbix.php?action=problem.view&amp;ddreset=1">Проблемы</a></li><li><a href="overview.php?ddreset=1">Обзор</a></li></ul>
+    <ul class="top-subnav" id="sub_cm" style="display: none;"><li><a href="hostinventoriesoverview.php?ddreset=1">Обзор</a></li><li><a href="hostinventories.php?ddreset=1">Узлы сети</a></li></ul><ul class="top-subnav" id="sub_reports" style="display: none;"><li><a href="zabbix.php?action=report.status&amp;ddreset=1">Состояние Zabbix</a></li><li><a href="report2.php?ddreset=1">Отчет о доступности</a></li><li><a href="toptriggers.php?ddreset=1">100 наиболее активных триггеров</a></li><li><a href="auditlogs.php?ddreset=1">Аудит</a></li><li><a href="auditacts.php?ddreset=1">Журнал действий</a></li><li><a href="report4.php?ddreset=1">Оповещения</a></li></ul><ul class="top-subnav" id="sub_config" style="display: none;"><li><a href="hostgroups.php?ddreset=1">Группы узлов сети</a></li><li><a href="templates.php?ddreset=1">Шаблоны</a></li><li><a href="hosts.php?ddreset=1">Узлы сети</a></li><li><a href="maintenance.php?ddreset=1">Обслуживание</a></li><li><a href="actionconf.php?ddreset=1">Действия</a></li><li><a href="correlation.php?ddreset=1">Корреляция событий</a></li><li><a href="discoveryconf.php?ddreset=1">Обнаружение</a></li><li><a href="services.php?ddreset=1">Услуги IT</a></li></ul><ul class="top-subnav" id="sub_admin" style="display: none;"><li><a href="adm.gui.php?ddreset=1">Общие</a></li><li><a href="zabbix.php?action=proxy.list&amp;ddreset=1">Прокси</a></li><li><a href="authentication.php?ddreset=1">Аутентификация</a></li><li><a href="usergrps.php?ddreset=1">Группы пользователей</a></li><li></li></ul>
+    <div class="server-name">Zabbix Appliance</div></div></div></header>
+
+</body>
+</html>

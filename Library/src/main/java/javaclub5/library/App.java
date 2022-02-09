@@ -1,13 +1,13 @@
 package javaclub5.library;
 
 
-import javaclub5.library.dao.UserDAOImpl;
+import javaclub5.library.dao.old.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class App {
     @Autowired
-    static UserDAOImpl userDao;
+    static UserDao userDao;
 
     public static void main(String[] args) {
        /* AnnotationConfigApplicationContext context =

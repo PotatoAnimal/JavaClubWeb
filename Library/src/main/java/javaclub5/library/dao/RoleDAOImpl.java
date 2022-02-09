@@ -14,9 +14,9 @@ public class RoleDAOImpl implements RoleDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
-    //public void setSessionFactory(SessionFactory sf) {
-    //    this.sessionFactory = sf;
-    //}
+//    public void setSessionFactory(SessionFactory sf) {
+//        this.sessionFactory = sf;
+//    }
 
     @Override
     public void addRole(Role role) {
@@ -41,14 +41,16 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public Role getRoleById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Role role = (Role) session.load(Role.class, new Integer(id));
+//        Role role = (Role) session.load(Role.class, new Integer(id));
+        Role role = (Role) session.load(Role.class, id);
         return role;
     }
 
     @Override
     public void removeRole(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Role role = (Role) session.load(Role.class, new Integer(id));
+//        Role role = (Role) session.load(Role.class, new Integer(id));
+        Role role = (Role) session.load(Role.class, id);
         if (null != role) {
             session.delete(role);
         }
