@@ -4,7 +4,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
-@Entity
 @Embeddable
 @Table(name = "booksAuthors", schema = "library", catalog = "JavaClubWeb")
 public class BookAuthors {

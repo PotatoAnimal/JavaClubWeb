@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-//    @GetMapping({"/home", "/Home", "/"})
-//    public String index() {
-//        return "home";
-//    }
-
     @GetMapping({"/home", "/Home", "/"})
-    public String listAuthors() {
+    public String index() {
         return "home";
     }
+//
+//    @GetMapping({"/home", "/Home", "/"})
+//    public String listAuthors() {
+//        return "home";
+//    }
 
 }
