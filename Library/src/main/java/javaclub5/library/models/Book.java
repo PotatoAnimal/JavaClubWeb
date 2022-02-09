@@ -19,9 +19,10 @@ public class Book {
     //#todo Popova - clarify.
     @Column
     private Integer idAuthor;
-//
-//    @OneToMany(mappedBy = "idBook", fetch = FetchType.LAZY)
-//    private List<BookAuthors> bookAuthors;
+
+//    @ManyToOne
+//    @JoinColumn(name = "idAuthor")
+//    private Author author;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -36,12 +37,12 @@ public class Book {
 
     }
 
-//    public List<BookAuthors> getBookAuthors() {
-//        return bookAuthors;
+//    public Author getAuthor() {
+//        return author;
 //    }
-//
-//    public void setBookAuthors(List<BookAuthors> bookAuthors) {
-//        this.bookAuthors = bookAuthors;
+
+//    public void setAuthor(Author author) {
+//        this.author = author;
 //    }
 
     public Book(List<Author> authors) {

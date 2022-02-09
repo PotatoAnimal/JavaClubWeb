@@ -21,8 +21,9 @@ public class Author {
     @Column(length = 20)
     private String surname;
 
-//    @OneToMany (mappedBy="idAuthor", fetch=FetchType.LAZY)
-//    private List<BookAuthors> bookAuthors;
+//    @OneToMany(mappedBy = "author")
+//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+//    private List<Book> books;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> booksAuthors;
@@ -40,12 +41,12 @@ public class Author {
         return Objects.hash(getId(), getName(), getSurname(), getBirthDay());
     }
 
-//    public List<BookAuthors> getBookAuthors() {
-//        return bookAuthors;
+//    public List<Book> getBooks() {
+//        return books;
 //    }
 //
-//    public void setBookAuthors(List<BookAuthors> bookAuthors) {
-//        this.bookAuthors = bookAuthors;
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
 //    }
 
     public List<Book> getBooksAuthors() {
