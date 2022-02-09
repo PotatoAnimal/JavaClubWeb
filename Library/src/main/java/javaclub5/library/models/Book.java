@@ -16,11 +16,11 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "yearProduction")
+    @Column(name = "year_production")
     private int yearProduction;
 
     @ManyToOne
-    @JoinColumn(name = "idAuthor")
+    @JoinColumn(name = "id_author")
     private Author author;
 
     @ManyToMany
