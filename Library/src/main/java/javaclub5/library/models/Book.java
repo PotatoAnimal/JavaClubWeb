@@ -63,6 +63,14 @@ public class Book {
         this.users = readers;
     }
 
+    public int getYearProduction() {
+        return yearProduction;
+    }
+
+    public void setYearProduction(int yearProduction) {
+        this.yearProduction = yearProduction;
+    }
+
     public Book() {
     }
 
