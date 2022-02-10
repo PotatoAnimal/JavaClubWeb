@@ -2,12 +2,13 @@ package javaclub5.library.service;
 
 import javaclub5.library.models.User;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface UserService {
 
     // save operation
-    public User saveUser(User user);
+    public User save(User user);
 
     // read operation
     public List<User> fetchUserList();

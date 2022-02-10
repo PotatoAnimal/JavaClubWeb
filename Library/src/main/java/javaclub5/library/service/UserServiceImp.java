@@ -1,11 +1,15 @@
 package javaclub5.library.service;
 
+import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
+import javaclub5.library.repository.RoleRepository;
 import javaclub5.library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transaction;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,10 +18,16 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Override
-    @Transactional
-    public User saveUser(User user) {
+    @Transactional//(Transaction = true)
+    public User save(User user) {
+        Role role = roleRepository.findById(1).orElse(new Role());
+        user.setRole(role);
+        User userNew = userRepository.save(user);
+        System.out.println(" ***" + userNew);
         return userRepository.save(user);
     }
 
@@ -28,11 +38,13 @@ public class UserServiceImp implements UserService {
         return (List<User>) userRepository.findAll();
     }
 
+
     @Override
     @Transactional
     public User findByName(String nameUser) {
-        User user = userRepository.findByName(nameUser);
-        return user;
+        return userRepository.findByName(nameUser);
+//        User user = userRepository.findByName(nameUser);
+//        return user;
     }
 
     @Override
