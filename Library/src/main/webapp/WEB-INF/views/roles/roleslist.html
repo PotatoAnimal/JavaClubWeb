@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Roles</title>
+</head>
+<h2>
+    LogBooks
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Role</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.getId()}">ID</td>
+        <td th:text="${role.getName()}">book</td>
+    </tr>
+</table>
+</body>
+</html>

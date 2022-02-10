@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<h2>
+    Authors
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Birthday</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.getId()}">ID</td>
+        <td th:text="${author.getName()}">name</td>
+        <td th:text="${author.getSurname()}">surname</td>
+        <td th:text="${author.getBirthDay()}">birthday</td>
+    </tr>
+</table>
+</body>
+</html>

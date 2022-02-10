@@ -29,10 +29,7 @@ public class UserDao {
 
     @Transactional
     public List<User> readAll() {
-        /*users =  sf.getCurrentSession().createQuery("select u FROM User u " +
-                            "join fetch Role r on u.role = r" ).list();*/
         users =  sf.getCurrentSession().createQuery("from User").list();
-        System.out.println(users);
         return users;
     }
 

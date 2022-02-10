@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -22,7 +23,6 @@ public class HibernateConfig {
 
     @Autowired
     private ApplicationContext context;
-
 
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
@@ -50,5 +50,15 @@ public class HibernateConfig {
         dataSource.setUsername("postgres");
         dataSource.setPassword("1111");
         return dataSource;
+    }
+
+    final Properties hibernateProperties() {
+        final Properties hibernateProperties = new Properties();
+
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
+        hibernateProperties.setProperty("hibernate.show_sql", "true");
+
+        return hibernateProperties;
     }
 }

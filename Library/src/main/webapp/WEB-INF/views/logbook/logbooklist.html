@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LogBook</title>
+</head>
+<h2>
+    LogBooks
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>User</th>
+        <th>Date Out</th>
+        <th>Date In</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="logbook : ${logbooks}">
+        <td th:text="${logbook.getId()}">ID</td>
+        <td th:text="${logbook.getBook()}">book</td>
+        <td th:text="${logbook.getUser()}">user</td>
+        <td th:text="${logbook.getDataOut()}">dateOut</td>
+        <td th:text="${logbook.getDateIn()}">dateIn</td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
 </head>
 <h2>
-    List of Users
+    Books
 </h2>
 <body>
 <table>
@@ -24,7 +24,7 @@
         <td th:text="${book.getId()}">ID</td>
         <td th:text="${book.getTitle()}">title</td>
         <td th:text="${book.getYearProduction()}">year</td>
-        <td th:text="${book.getTitle()}">authors</td>
+        <td th:text="${book.getAuthors()}">authors</td>
     </tr>
 </table>
 

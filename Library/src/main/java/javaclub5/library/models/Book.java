@@ -17,7 +17,7 @@ public class Book {
     @Column(name = "year_production", nullable = true)
     private int yearProduction;
     @ManyToMany()
-    @JoinTable(name = "booksAuthors",
+    @JoinTable(name = "books_authors", schema = "library", catalog = "JavaClubWeb",
     joinColumns = @JoinColumn(name = "id_book"),
     inverseJoinColumns = @JoinColumn(name = "id_author"))
     private List<Author> Authors;

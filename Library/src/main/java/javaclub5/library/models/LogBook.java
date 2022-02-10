@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "logBook", schema = "library", catalog = "JavaClubWeb")
+@Table(name = "log_book", schema = "library", catalog = "JavaClubWeb")
 public class LogBook {
     @Id
     @Column(name = "id", nullable = false)
