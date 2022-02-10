@@ -26,10 +26,10 @@
     <tr th:each="regbook : ${regbooks}">
         <td th:text="${regbook.getId()}">ID</td>
         <td th:text="${regbook.getBook()}">book</td>
-        <td th:text="${regbook.getCount()}">user</td>
-        <td th:text="${regbook.getPrice()}">dateOut</td>
-        <td th:text="${regbook.isDonated()}">dateIn</td>
-        <td th:text="${regbook.getOperations()}">dateIn</td>
+        <td th:text="${regbook.getCount()}">count</td>
+        <td th:text="${regbook.getPrice()}">price</td>
+        <td th:text="${regbook.isDonated()}">donated</td>
+        <td th:text="${regbook.getOperations()}">operations</td>
     </tr>
 </table>
 </body>
