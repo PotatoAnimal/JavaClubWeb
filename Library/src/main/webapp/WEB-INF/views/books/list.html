@@ -23,7 +23,7 @@
     <tr th:each="book : ${listBooks}">
         <td th:text="${book.getId()}">ID</td>
         <td th:text="${book.getTitle()}">title</td>
-        <td th:text="${book.getAuthor()}">author</td>
+        <td th:text="${book.getAuthor().toString()}">author</td>
         <td th:text="${book.getYearProduction()}">yearProduction</td>
     </tr>
 </table>

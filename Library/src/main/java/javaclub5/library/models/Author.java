@@ -66,11 +66,12 @@ public class Author {
 
     @Override
     public String toString() {
-        String allBooks = "";
-        for (Book o : books) {
-            allBooks += o.getTitle() + " ";
-        }
-        return "Author [" + id + " " + name + " " + allBooks + "]";
+//        String allBooks = "";
+//        for (Book o : books) {
+//            allBooks += o.getTitle() + " ";
+//        }
+//        return "Author [" + id + " " + name + " " + allBooks + "]";
+        return this.surname + " " + this.name;
     }
 
     @Override
