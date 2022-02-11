@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class RegBooksDao {
@@ -22,9 +23,8 @@ public class RegBooksDao {
 
     @Transactional
     public List<RegBooks> readAll() {
-        sf.getCurrentSession().createQuery("select b FROM Book b " +
-                "join fetch b.Authors" ).list();
-        regBooks =  sf.getCurrentSession().createQuery("from RegBooks ").list();
+        regBooks = (List<RegBooks>) sf.getCurrentSession().createQuery("select rb from RegBooks rb " +
+                "join fetch rb.book b join fetch b.Authors").list().stream().distinct().collect(Collectors.toList());
         return regBooks;
     }
 

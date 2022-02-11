@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class BookDao {
     @Autowired
@@ -20,8 +22,8 @@ public class BookDao {
 
     @Transactional
     public List<Book> readAll() {
-        books =  sf.getCurrentSession().createQuery("select b FROM Book b " +
-                "join fetch b.Authors" ).list();
+        books = (List<Book>) sf.getCurrentSession().createQuery("select b FROM Book b " +
+                "join fetch b.Authors" ).list().stream().distinct().collect(Collectors.toList());
         return books;
     }
 }
