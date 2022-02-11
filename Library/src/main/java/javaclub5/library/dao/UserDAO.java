@@ -1,12 +1,10 @@
-package javaclub5.library.service;
+package javaclub5.library.dao;
 
 import javaclub5.library.models.User;
 
-import java.time.LocalDate;
 import java.util.List;
 
-public interface UserService {
-
+public interface UserDAO {
     public void addUser(User user);
     public void updateUser(User user);
     public List<User> listUsers();

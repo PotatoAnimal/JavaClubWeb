@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", schema = "library", catalog = "javatest")
+@Table(name = "users", schema = "library", catalog = "JavaClubWeb")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

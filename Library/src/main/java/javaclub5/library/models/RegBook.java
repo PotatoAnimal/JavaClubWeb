@@ -3,7 +3,7 @@ package javaclub5.library.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "regBooks", schema = "library", catalog = "javatest")
+@Table(name = "reg_books", schema = "library", catalog = "JavaClubWeb")
 public class RegBook {
 
     @Id
@@ -12,7 +12,7 @@ public class RegBook {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idBook", insertable = false, updatable = false)
+    @JoinColumn(name = "id_book", insertable = false, updatable = false)
     private Book book;
 
     @Column

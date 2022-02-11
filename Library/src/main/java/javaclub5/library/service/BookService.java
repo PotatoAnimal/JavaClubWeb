@@ -12,14 +12,14 @@ public interface BookService {
     // read operation
     public List<Book> fetchBookList();
 
-    public Book findByTitle(String bookTitle);
+//    public Book findByTitle(String bookTitle);
 
     // update operation
     public Book updateBook(Book book, Integer bookId);
 
-    // delete operation
-    public void deleteBookById(int bookId);
-
-    public Book findBookByAuthor(String authorName);
+//    // delete operation
+//    public void deleteBookById(int bookId);
+//
+//    public Book findBookByAuthor(String authorName);
 
 }

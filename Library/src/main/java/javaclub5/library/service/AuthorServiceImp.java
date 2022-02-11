@@ -1,8 +1,10 @@
 package javaclub5.library.service;
 
+import javaclub5.library.dao.AuthorDAO;
 import javaclub5.library.models.Author;
-import javaclub5.library.models.User;
-import javaclub5.library.repository.AuthorRepository;
+import javaclub5.library.models.Book;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,19 +12,35 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class AuthorServiceImp implements AuthorService{
+public class AuthorServiceImp implements AuthorService {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorDAO authorDAO;
 
     @Override
     @Transactional
-    public Author addAuthor(Author author) {
-        return authorRepository.save(author);
+    public void addAuthor(Author author) {
+        this.authorDAO.addAuthor(author);
+    }
+
+    @Override
+    public void updateRole(Author author) {
+        this.authorDAO.updateAuthor(author);
     }
 
     @Override
     @Transactional
-    public List<Author> fetchAuthorList() {
-        return (List<Author>) authorRepository.findAll();    }
+    public List<Author> listAuthors() {
+        return this.authorDAO.listAuthors();
+    }
+
+    @Override
+    public Author findAuthorById(int id) {
+        return this.authorDAO.findAuthorById(id);
+    }
+
+    @Override
+    public void removeAuthor(int id) {
+        this.authorDAO.removeAuthor(id);
+    }
 }

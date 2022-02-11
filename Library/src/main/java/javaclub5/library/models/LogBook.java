@@ -1,11 +1,10 @@
 package javaclub5.library.models;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "logBook", schema = "library", catalog = "javatest")
+@Table(name = "log_book", schema = "library", catalog = "JavaClubWeb")
 public class LogBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,15 +12,15 @@ public class LogBook {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idBook", insertable = false,updatable = false)
+    @JoinColumn(name = "id_book", insertable = false,updatable = false)
     private Book idBook;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser", insertable = false, updatable = false)
+    @JoinColumn(name = "id_user", insertable = false, updatable = false)
     private User idUser;
-    @Column(name = "dataOut")
+    @Column(name = "data_out")
     private LocalDate dataOut;
-    @Column(name = "dateIn")
+    @Column(name = "date_in")
     private LocalDate dateIn;
 
     public Book getIdBook() {

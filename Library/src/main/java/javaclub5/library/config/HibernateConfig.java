@@ -25,7 +25,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("javaclub5.library")})
-@EnableJpaRepositories(basePackages = "javaclub5.library.repository")
+//@EnableJpaRepositories(basePackages = "javaclub5.library.repository")
 public class HibernateConfig {
 
     @Autowired
@@ -51,7 +51,7 @@ public class HibernateConfig {
     public static DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/javatest");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/JavaClubWeb");
         dataSource.setUsername("postgres");
         dataSource.setPassword("1111");
         return dataSource;
@@ -67,17 +67,17 @@ public class HibernateConfig {
         return hibernateProperties;
     }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em
-                = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("javaclub5.library");
-
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-
-        return em;
-    }
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//        LocalContainerEntityManagerFactoryBean em
+//                = new LocalContainerEntityManagerFactoryBean();
+//        em.setDataSource(dataSource());
+//        em.setPackagesToScan("javaclub5.library");
+//
+//        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        em.setJpaVendorAdapter(vendorAdapter);
+//
+//        return em;
+//    }
 
 }

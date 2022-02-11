@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "books", schema = "library", catalog = "javatest")
+@Table(name = "books", schema = "library", catalog = "JavaClubWeb")
 public class Book {
 
     @Id
@@ -13,24 +13,23 @@ public class Book {
     private int id;
     @Column(length = 35)
     private String title;
-    @Column
+    @Column(name = "year_production")
     private int yearProduction;
     //#todo Popova - clarify.
-    @Column(name = "idAuthor")
+    @Column(name = "id_author")
     private int idAuthor;
 
     @ManyToOne
-    @JoinColumn(name = "idAuthor", insertable = false, updatable = false)
+    @JoinColumn(name = "id_author", insertable = false,updatable = false)
     private Author author;
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "booksauthors",
-//            schema = "library",
-//            joinColumns = {@JoinColumn(name = "idBook")},
-//            inverseJoinColumns = {@JoinColumn(name = "idAuthor")}
-//    )
-//    private List<Author> authors;
+    @ManyToMany
+    @JoinTable(
+            name = "log_book",
+            joinColumns = @JoinColumn(name = "id_book"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
+    )
+    private List<User> users;
 
 
     public Author getAuthor() {

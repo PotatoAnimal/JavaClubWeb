@@ -7,7 +7,7 @@
     <session-factory>
 
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/javatest</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/JavaClubWeb</property>-->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
        <!-- <property name="connection.username">postgres</property>
         <property name="connection.password">1111</property>-->

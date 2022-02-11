@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "authors", schema = "library", catalog = "javatest")
+@Table(name = "authors", schema = "library", catalog = "JavaClubWeb")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Author {
     private int id;
     @Column(length = 20)
     private String name;
-    @Column
+    @Column(name = "birthday")
     private LocalDate birthDay;
     @Column(length = 20)
     private String surname;
@@ -25,8 +25,6 @@ public class Author {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Book> books;
 
-//    @ManyToMany(mappedBy = "authors")
-//    private List<Book> booksAuthors;
 
     public Author() {
     }

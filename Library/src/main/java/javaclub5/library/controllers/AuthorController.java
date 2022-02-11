@@ -18,7 +18,7 @@ public class AuthorController {
     @RequestMapping(value = "/authors", method = RequestMethod.GET)
     public String listAuthors(Model model) {
 //        model.addAttribute("authors", new Author());
-        model.addAttribute("listAuthors", authorService.fetchAuthorList());
+        model.addAttribute("listAuthors", authorService.listAuthors());
         return "authors/list";
     }
 }
