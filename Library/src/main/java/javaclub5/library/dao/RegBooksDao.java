@@ -22,8 +22,9 @@ public class RegBooksDao {
 
     @Transactional
     public List<RegBooks> readAll() {
+        sf.getCurrentSession().createQuery("select b FROM Book b " +
+                "join fetch b.Authors" ).list();
         regBooks =  sf.getCurrentSession().createQuery("from RegBooks ").list();
-        System.out.println(regBooks);
         return regBooks;
     }
 

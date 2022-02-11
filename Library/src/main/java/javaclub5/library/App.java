@@ -16,21 +16,18 @@ public class App {
     static UserDao userDao;
 
     public static void main(String[] args) {
-       /* AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(SpringConfig.class);*/
+
        /* userDao = new UserDao();
         List<User> users = new LinkedList<>();
         users = userDao.readAll();
         System.out.println(users);
 */
-       /* App app = new App();
-        app.start();
-    }*/
-
+        /*App app = new App();
+        app.start();*/
+    }
    /* public void start() {
         List<User> users = new LinkedList<>();
         users = userDao.readAll();
         System.out.println(users);
-    }*/
-    }
+        }*/
 }

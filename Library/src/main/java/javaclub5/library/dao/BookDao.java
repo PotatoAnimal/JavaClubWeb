@@ -20,8 +20,8 @@ public class BookDao {
 
     @Transactional
     public List<Book> readAll() {
-        books =  sf.getCurrentSession().createQuery("FROM Book" ).list();
-        System.out.println(books);
+        books =  sf.getCurrentSession().createQuery("select b FROM Book b " +
+                "join fetch b.Authors" ).list();
         return books;
     }
 }
