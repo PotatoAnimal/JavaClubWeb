@@ -28,4 +28,25 @@ public class RegBooksDao {
         return regBooks;
     }
 
+    @Transactional
+    public void create(RegBooks regBooks) {
+        sf.getCurrentSession().save(regBooks);
+    }
+
+    @Transactional
+    public RegBooks readByID(int id) {
+        RegBooks regBooks = sf.getCurrentSession().get(RegBooks.class, id);
+        return regBooks;
+    }
+
+    @Transactional
+    public void update(RegBooks regBooks) {
+        sf.getCurrentSession().update(regBooks);
+    }
+
+    @Transactional
+    public void delete(RegBooks regBooks) {
+        sf.getCurrentSession().delete(regBooks);
+    }
+
 }

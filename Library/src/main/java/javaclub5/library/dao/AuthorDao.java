@@ -25,4 +25,25 @@ public class AuthorDao {
         return authors;
     }
 
+    @Transactional
+    public void create(Author author) {
+        sf.getCurrentSession().save(author);
+    }
+
+    @Transactional
+    public Author readByID(int id) {
+        Author author = sf.getCurrentSession().get(Author.class, id);
+        return author;
+    }
+
+    @Transactional
+    public void update(Author author) {
+        sf.getCurrentSession().update(author);
+    }
+
+    @Transactional
+    public void delete(Author author) {
+        sf.getCurrentSession().delete(author);
+    }
+
 }

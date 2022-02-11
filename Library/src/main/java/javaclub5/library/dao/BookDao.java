@@ -26,4 +26,25 @@ public class BookDao {
                 "join fetch b.Authors" ).list().stream().distinct().collect(Collectors.toList());
         return books;
     }
+
+    @Transactional
+    public void create(Book book) {
+        sf.getCurrentSession().save(book);
+    }
+
+    @Transactional
+    public Book readByID(int id) {
+        Book book = sf.getCurrentSession().get(Book.class, id);
+        return book;
+    }
+
+    @Transactional
+    public void update(Book book) {
+        sf.getCurrentSession().update(book);
+    }
+
+    @Transactional
+    public void delete(Book book) {
+        sf.getCurrentSession().delete(book);
+    }
 }
