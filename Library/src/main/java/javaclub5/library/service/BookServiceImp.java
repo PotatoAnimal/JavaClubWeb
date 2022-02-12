@@ -1,5 +1,6 @@
 package javaclub5.library.service;
 
+import javaclub5.library.dao.BookDAO;
 import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 import org.hibernate.Session;
@@ -8,27 +9,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class BookServiceImp implements BookService {
 
     @Autowired
-    private SessionFactory sf;
+    private BookDAO bookDAO;
+    private List<Book> books = new LinkedList<>();
 
 
     @Override
     @Transactional
-    public Book saveUser(Book book) {
-        return null;
+    public List<Book> readAll() {
+       return this.bookDAO.readAll();
     }
 
     @Override
     @Transactional
-    public List<Book> fetchBookList() {
-        Session session = this.sf.getCurrentSession();
-        List<Book> bookList = session.createQuery("from Book ").list();
-        return bookList;
+    public void addBook(Book book) {
+        this.bookDAO.addBook(book);
+    }
+
+    @Override
+    @Transactional
+    public List<Book> listBook() {
+       return this.bookDAO.listBook();
     }
 
 //    @Override
@@ -39,8 +46,8 @@ public class BookServiceImp implements BookService {
 
     @Override
     @Transactional
-    public Book updateBook(Book book, Integer bookId) {
-        return null;
+    public void updateBook(Book book) {
+        this.bookDAO.updateBook(book);
     }
 //
 //    @Override

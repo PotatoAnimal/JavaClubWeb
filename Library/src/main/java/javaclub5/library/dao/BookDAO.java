@@ -1,12 +1,11 @@
-package javaclub5.library.service;
+package javaclub5.library.dao;
 
 import javaclub5.library.models.Book;
-import javaclub5.library.models.User;
 
 import java.util.List;
 
-public interface BookService {
-    List <Book> readAll();
+public interface BookDAO {
+    List<Book> readAll();
     // save operation
     public void addBook(Book book);
 
@@ -18,9 +17,8 @@ public interface BookService {
     // update operation
     public void updateBook(Book book);
 
-//    // delete operation
-//    public void deleteBookById(int bookId);
-//
-//    public Book findBookByAuthor(String authorName);
+    // delete operation
+    public void deleteBookById(int bookId);
 
+    public Book findBookByAuthor(String authorName);
 }
