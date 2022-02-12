@@ -37,10 +37,10 @@ public class Role {
 //    public String toString() {
 //        return name;
 //    }
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "id")
-private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "name")
     private String name;
