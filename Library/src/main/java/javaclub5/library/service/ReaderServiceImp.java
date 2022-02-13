@@ -38,6 +38,7 @@ public class ReaderServiceImp implements ReaderService{
     }
 
     @Override
+    @Transactional
     public List<Book> mostPopularAndUnpopular() {
         return this.bookDAO.mostPopularAndUnpopular();
     }

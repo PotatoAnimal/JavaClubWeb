@@ -64,7 +64,7 @@ public class BookDAOImp implements BookDAO {
         List<Book> book = query.list();
         return book;
     }
-
+//need to fix
     @Override
     public List<Book> availableBooks() {
         Session session = this.sf.getCurrentSession();
@@ -75,7 +75,7 @@ public class BookDAOImp implements BookDAO {
         List<Book> availableBooks = query.list();
         return availableBooks;
     }
-
+//need to fix
     @Override
     public List<Book> mostPopularAndUnpopular() {
         Session session = this.sf.getCurrentSession();
