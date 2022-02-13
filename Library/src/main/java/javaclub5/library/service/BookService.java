@@ -21,6 +21,6 @@ public interface BookService {
 //    // delete operation
 //    public void deleteBookById(int bookId);
 //
-//    public Book findBookByAuthor(String authorName);
+    public List<Book> findBookByAuthor(String authorName);
 
 }

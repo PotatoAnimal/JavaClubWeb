@@ -10,18 +10,19 @@ public class LogBook {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
+    @Column(name = "data_out")
+    private LocalDate dataOut;
+    @Column(name = "date_in")
+    private LocalDate dateIn;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_book", insertable = false,updatable = false)
+    @JoinColumn(name = "id_book", insertable = false, updatable = false)
     private Book idBook;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", insertable = false, updatable = false)
     private User idUser;
-    @Column(name = "data_out")
-    private LocalDate dataOut;
-    @Column(name = "date_in")
-    private LocalDate dateIn;
+
 
     public Book getIdBook() {
         return idBook;

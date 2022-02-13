@@ -2,9 +2,6 @@ package javaclub5.library.service;
 
 import javaclub5.library.dao.BookDAO;
 import javaclub5.library.models.Book;
-import javaclub5.library.models.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,10 +53,10 @@ public class BookServiceImp implements BookService {
 //        bookRepository.deleteBookById(bookId);
 //    }
 //
-//    @Override
-//    @Transactional
-//    public Book findBookByAuthor(String authorName) {
-//        return bookRepository.findBookByAuthor(authorName);
-//    }
+    @Override
+    @Transactional
+    public List<Book> findBookByAuthor(String authorName) {
+        return this.bookDAO.findByAuthor(authorName);
+    }
 
 }

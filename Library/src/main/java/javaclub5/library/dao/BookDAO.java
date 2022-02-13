@@ -12,7 +12,7 @@ public interface BookDAO {
     // read operation
     public List<Book> listBook();
 
-//    public Book findByTitle(String bookTitle);
+    public List<Book> findByTitle(String bookTitle);
 
     // update operation
     public void updateBook(Book book);
@@ -20,5 +20,6 @@ public interface BookDAO {
     // delete operation
     public void deleteBookById(int bookId);
 
-    public Book findBookByAuthor(String authorName);
+//    public Book findBookByAuthor(String authorName);
+    public List<Book> findByAuthor(String author);
 }

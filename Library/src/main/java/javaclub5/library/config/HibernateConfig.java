@@ -1,6 +1,7 @@
 package javaclub5.library.config;
 
 import javaclub5.library.models.*;
+import javaclub5.library.service.ReaderService;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -35,7 +36,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setAnnotatedClasses(User.class, Role.class, Author.class, Book.class, LogBook.class, RegBook.class);
+        factoryBean.setAnnotatedClasses(User.class, Role.class, Author.class, Book.class, LogBook.class, RegBook.class, ReaderService.class);
         factoryBean.setHibernateProperties(hibernateProperties());
         return factoryBean;
     }

@@ -24,6 +24,7 @@ public class AuthorServiceImp implements AuthorService {
     }
 
     @Override
+    @Transactional
     public void updateRole(Author author) {
         this.authorDAO.updateAuthor(author);
     }
@@ -35,11 +36,13 @@ public class AuthorServiceImp implements AuthorService {
     }
 
     @Override
+    @Transactional
     public Author findAuthorById(int id) {
         return this.authorDAO.findAuthorById(id);
     }
 
     @Override
+    @Transactional
     public void removeAuthor(int id) {
         this.authorDAO.removeAuthor(id);
     }
