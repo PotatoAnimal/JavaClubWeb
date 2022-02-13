@@ -2,9 +2,11 @@ package javaclub5.library.services;
 
 import javaclub5.library.dao.BookDao;
 import javaclub5.library.dao.LogBookDao;
+import javaclub5.library.dao.RegBooksDao;
 import javaclub5.library.models.Author;
 import javaclub5.library.models.Book;
 import javaclub5.library.models.LogBook;
+import javaclub5.library.models.RegBooks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,8 @@ public class UserService {
     private BookDao bookDao;
     @Autowired
     private LogBookDao logBookDao;
+    @Autowired
+    private RegBooksDao regBooksDao;
 
     public List<Book> getBookList() {
         return bookDao.readAll();
@@ -43,7 +47,6 @@ public class UserService {
                     booksByAuthor.add(book);
                     break;
                 }
-
             }
         }
         return booksByAuthor;
@@ -59,5 +62,26 @@ public class UserService {
             }
         }
         return booksByDate;
+    }
+
+    public String isAvailable(Book book) {
+        List<RegBooks> regBooks = regBooksDao.readAll();
+        List<LogBook> logBooks = logBookDao.readAll();
+        int regBooksAmount = 0;
+        int logBookAmount = 0;
+        for (RegBooks regBook: regBooks) {
+            if (regBook.getBook().getId() == book.getId())
+                regBooksAmount += regBook.getCount() * regBook.getOperations();
+        }
+        for (LogBook logBook: logBooks) {
+            if (logBook.getBook().getId() == book.getId())
+                logBookAmount ++;
+        }
+        if (regBooksAmount - logBookAmount > 0) {
+            return "available";
+        }
+        else {
+            return "unavailable";
+        }
     }
 }

@@ -29,12 +29,14 @@ public class UserController {
     public String findAllBooks(Model model) {
         this.title = "abc";
         model.addAttribute("books", userService.getBookList());
+        model.addAttribute("userService", userService);
         return "books/bookslist";
     }
 
     @GetMapping("/booksbytitle")
     public String findBookByTitle(@RequestParam("title") String title, Model model) {
         model.addAttribute("books", userService.getBookByTitle(title));
+        model.addAttribute("userService", userService);
         return "books/bookslist";
     }
 
@@ -42,6 +44,7 @@ public class UserController {
     public String findBookByAuthor(@RequestParam("name") String name,
                                    @RequestParam("surname") String surname, Model model) {
         model.addAttribute("books", userService.getBookByAuthor(name, surname));
+        model.addAttribute("userService", userService);
         return "books/bookslist";
     }
 
@@ -52,6 +55,7 @@ public class UserController {
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
                                    Model model) {
         model.addAttribute("books", userService.getBookByDate(firstDate, secondDate));
+        model.addAttribute("userService", userService);
         return "books/bookslist";
     }
 

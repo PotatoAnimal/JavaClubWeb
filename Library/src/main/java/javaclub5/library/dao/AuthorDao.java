@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AuthorDao {
@@ -22,6 +23,7 @@ public class AuthorDao {
     @Transactional
     public List<Author> readAll() {
         authors =  sf.getCurrentSession().createQuery("from Author").list();
+        authors = authors.stream().distinct().collect(Collectors.toList());
         return authors;
     }
 

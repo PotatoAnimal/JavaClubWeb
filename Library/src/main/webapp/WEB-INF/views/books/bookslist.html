@@ -84,6 +84,7 @@
         <th>title</th>
         <th>year production</th>
         <th>Authors</th>
+        <th>Availability</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -95,6 +96,7 @@
         <td th:text="${book.title}">title</td>
         <td th:text="${book.yearProduction}">year</td>
         <td th:text="${book.authorsToString(book.authors)}">authors</td>
+        <td th:text="${userService.isAvailable(book)}">authors</td>
     </tr>
 </table>
 
