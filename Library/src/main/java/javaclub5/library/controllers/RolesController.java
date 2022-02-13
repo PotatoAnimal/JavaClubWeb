@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/roles")
@@ -59,5 +62,23 @@ public class RolesController {
         model.addAttribute("listRoles", this.roleService.listRoles());
         return "role";
     }
+
+    @RequestMapping("/search")
+    public ModelAndView search(@RequestParam String keyword) {
+        List<Role> result = roleService.getRolesByName(keyword);
+        ModelAndView mav = new ModelAndView("roles/search");
+        mav.addObject("result", result);
+        return mav;
+    }
+
+//    @RequestMapping("/search")
+//    public String search(@RequestParam String keyword) {
+////        model.addAttribute("role", new Role());
+////        model.addAttribute("listRoles", this.roleService.listRoles());
+//        List<Role> result = roleService.getRolesByName(keyword);
+//        ModelAndView mav = new ModelAndView("search");
+//        mav.addObject("result", result);
+//        return "roles/search";
+//    }
 
 }

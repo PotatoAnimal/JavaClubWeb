@@ -44,6 +44,12 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     @Transactional
+    public List<Role> getRolesByName(String name) {
+        return this.roleDAO.getRolesByName(name);
+    }
+
+    @Override
+    @Transactional
     public void removeRole(int id) {
         this.roleDAO.removeRole(id);
     }

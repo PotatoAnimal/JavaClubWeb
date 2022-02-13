@@ -3,6 +3,7 @@ package javaclub5.library.dao;
 import javaclub5.library.models.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,19 @@ public class RoleDAOImpl implements RoleDAO{
         Session session = this.sessionFactory.getCurrentSession();
 //        Role role = (Role) session.load(Role.class, new Integer(id));
         return session.load(Role.class, id);
+    }
+
+    @Override
+    public List<Role> getRolesByName(String searchKey) {
+        Session session = this.sessionFactory.getCurrentSession();
+        String hql = "from Role WHERE name LIKE '%' || :searchKey || '%'";
+//        String hql = "from Role";
+//        String hql = "from Role WHERE name LIKE '%Writ%'";
+        Query query = session.createQuery(hql);
+        query.setParameter("searchKey",searchKey);
+        List<Role> rolesList = query.list();
+//        List<Role> rolesList = session.createQuery("from Role WHERE name like ").list();
+        return rolesList;
     }
 
     @Override
