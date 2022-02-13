@@ -59,4 +59,9 @@ public class BookServiceImp implements BookService {
         return this.bookDAO.findByAuthor(authorName);
     }
 
+    @Override
+    public List<Book> mostPopularAndUnpopular() {
+        return this.bookDAO.mostPopularAndUnpopular();
+    }
+
 }

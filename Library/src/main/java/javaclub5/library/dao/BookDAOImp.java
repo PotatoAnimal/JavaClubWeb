@@ -64,4 +64,29 @@ public class BookDAOImp implements BookDAO {
         List<Book> book = query.list();
         return book;
     }
+
+    @Override
+    public List<Book> availableBooks() {
+        Session session = this.sf.getCurrentSession();
+        String hql = "select b from Book b" +
+                "         join Author a on b.idAuthor = a.id " +
+                "         join RegBook r on r.count =b.id";
+        Query query = session.createQuery(hql);
+        List<Book> availableBooks = query.list();
+        return availableBooks;
+    }
+
+    @Override
+    public List<Book> mostPopularAndUnpopular() {
+        Session session = this.sf.getCurrentSession();
+        String hql = "SELECT b, COUNT(*)" +
+                "from Book b" +
+                "         join LogBook lB on b.id = lB.id" +
+                " order by count(*) desc";
+        Query query = session.createQuery(hql);
+        List<Book> popUnpop = query.list();
+        return popUnpop;
+    }
+
+
 }

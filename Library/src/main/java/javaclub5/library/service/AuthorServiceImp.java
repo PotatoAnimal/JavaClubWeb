@@ -2,9 +2,6 @@ package javaclub5.library.service;
 
 import javaclub5.library.dao.AuthorDAO;
 import javaclub5.library.models.Author;
-import javaclub5.library.models.Book;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,6 @@ public class AuthorServiceImp implements AuthorService {
     private AuthorDAO authorDAO;
 
     @Override
-    @Transactional
     public void addAuthor(Author author) {
         this.authorDAO.addAuthor(author);
     }

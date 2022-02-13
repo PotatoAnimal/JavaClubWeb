@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-        @GetMapping()
+    @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.listUsers());
         return "users/list";

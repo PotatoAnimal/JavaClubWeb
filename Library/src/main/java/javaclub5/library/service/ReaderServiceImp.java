@@ -30,4 +30,15 @@ public class ReaderServiceImp implements ReaderService{
     public List<Book> findByAuthor(String authorName) {
         return this.bookDAO.findByAuthor(authorName);
     }
+
+    @Override
+    @Transactional
+    public List<Book> availableBooks() {
+        return this.bookDAO.availableBooks();
+    }
+
+    @Override
+    public List<Book> mostPopularAndUnpopular() {
+        return this.bookDAO.mostPopularAndUnpopular();
+    }
 }

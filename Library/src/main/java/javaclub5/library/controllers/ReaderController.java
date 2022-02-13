@@ -15,15 +15,15 @@ public class ReaderController {
     @Autowired
     ReaderService readerService;
 
-        @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("listBooks", readerService.readAll());
-        return "books/list";
-    }
-
 //    @GetMapping()
 //    public String index(Model model) {
-//        model.addAttribute("listBooks", readerService.findByAuthor("Bruce"));
+//        model.addAttribute("listBooks", readerService.readAll());
+//        return "books/list";
+//    }
+
+//    @GetMapping()
+//    public String findByAuthor(Model model) {
+//        model.addAttribute("listBooks", readerService.availableBooks());
 //        return "books/list";
 //    }
 }

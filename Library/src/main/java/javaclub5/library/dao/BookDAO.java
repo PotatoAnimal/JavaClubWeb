@@ -22,4 +22,8 @@ public interface BookDAO {
 
 //    public Book findBookByAuthor(String authorName);
     public List<Book> findByAuthor(String author);
+
+    public List<Book> availableBooks();
+
+    public List<Book> mostPopularAndUnpopular();
 }

@@ -7,4 +7,6 @@ public interface ReaderService {
     public List<Book> listBook();
     List <Book> readAll();
     public List<Book> findByAuthor(String authorName);
+    public List<Book> availableBooks();
+    public List<Book> mostPopularAndUnpopular();
 }

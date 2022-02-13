@@ -2,9 +2,6 @@ package javaclub5.library.service;
 
 import javaclub5.library.dao.RoleDAO;
 import javaclub5.library.models.Role;
-import javaclub5.library.models.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

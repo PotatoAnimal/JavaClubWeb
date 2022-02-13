@@ -22,5 +22,6 @@ public interface BookService {
 //    public void deleteBookById(int bookId);
 //
     public List<Book> findBookByAuthor(String authorName);
+    public List<Book> mostPopularAndUnpopular();
 
 }
