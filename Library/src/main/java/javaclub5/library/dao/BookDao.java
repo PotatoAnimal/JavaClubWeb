@@ -23,7 +23,7 @@ public class BookDao {
     @Transactional
     public List<Book> readAll() {
         books = (List<Book>) sf.getCurrentSession().createQuery("select b FROM Book b " +
-                "join fetch b.Authors" ).list().stream().distinct().collect(Collectors.toList());
+                "left join fetch b.Authors" ).list().stream().distinct().collect(Collectors.toList());
         return books;
     }
 

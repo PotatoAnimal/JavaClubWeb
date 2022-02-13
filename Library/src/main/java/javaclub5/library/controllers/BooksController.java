@@ -2,6 +2,7 @@ package javaclub5.library.controllers;
 
 import javaclub5.library.dao.BookDao;
 import javaclub5.library.dao.UserDao;
+import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +15,6 @@ public class BooksController {
     @Autowired
     BookDao bookDao;
 
-    @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("books", bookDao.readAll());
-        return "books/bookslist";
-    }
+
+
 }

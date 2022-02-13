@@ -22,6 +22,24 @@ public class Book {
     inverseJoinColumns = @JoinColumn(name = "id_author"))
     private List<Author> Authors;
 
+    public String booksToString(Book book) {
+        return book.getTitle();
+    }
+
+    public String authorsToString(List<Author> authors) {
+        String result = "";
+        for (Author author: authors) {
+            if (author != null) {
+                result += author.getName() + " " + author.getSurname() + ", ";
+            }
+        }
+        if (result != "") {
+            result = result.substring(0, result.length() - 2);
+        }
+        else result = "no authors";
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Book{" +

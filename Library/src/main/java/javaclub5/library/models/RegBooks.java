@@ -9,7 +9,7 @@ public class RegBooks {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-    @Column(name = "count", nullable = true)
+    @Column(name = "amount", nullable = true)
     private int count;
     @Column(name = "price", nullable = true)
     private int price;

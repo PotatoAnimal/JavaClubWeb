@@ -1,22 +1,65 @@
 package javaclub5.library.controllers;
 
 import javaclub5.library.dao.UserDao;
+import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
     @Autowired
     UserDao userDao;
+    @Autowired
+    UserService userService;
+    String title = "";
 
-    @GetMapping()
+
+    @GetMapping("/users")
     public String index(Model model) {
         model.addAttribute("users", userDao.readAll());
         return "users/userslist";
     }
 
+    @GetMapping("/books")
+    public String findAllBooks(Model model) {
+        this.title = "abc";
+        model.addAttribute("books", userService.getBookList());
+        return "books/bookslist";
+    }
+
+    @GetMapping("/booksbytitle")
+    public String findBookByTitle(@RequestParam("title") String title, Model model) {
+        model.addAttribute("books", userService.getBookByTitle(title));
+        return "books/bookslist";
+    }
+
+    @GetMapping("/booksbyauthor")
+    public String findBookByAuthor(@RequestParam("name") String name,
+                                   @RequestParam("surname") String surname, Model model) {
+        model.addAttribute("books", userService.getBookByAuthor(name, surname));
+        return "books/bookslist";
+    }
+
+    @GetMapping("/popularbooks")
+    public String findPopularBooks(@RequestParam("firstDate")
+                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firstDate,
+                                   @RequestParam("secondDate")
+                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
+                                   Model model) {
+        model.addAttribute("books", userService.getBookByDate(firstDate, secondDate));
+        return "books/bookslist";
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

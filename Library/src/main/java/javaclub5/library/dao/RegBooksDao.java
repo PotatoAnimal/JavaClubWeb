@@ -24,7 +24,7 @@ public class RegBooksDao {
     @Transactional
     public List<RegBooks> readAll() {
         regBooks = (List<RegBooks>) sf.getCurrentSession().createQuery("select rb from RegBooks rb " +
-                "join fetch rb.book b join fetch b.Authors").list().stream().distinct().collect(Collectors.toList());
+                "left join fetch rb.book b join fetch b.Authors").list().stream().distinct().collect(Collectors.toList());
         return regBooks;
     }
 
