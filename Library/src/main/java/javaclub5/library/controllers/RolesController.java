@@ -33,34 +33,47 @@ public class RolesController {
 
     //For add and update role both
 //    @RequestMapping(value = "/roles/add", method = RequestMethod.POST)
-    @GetMapping("/add")
-    public String addRole(@ModelAttribute("role") Role r) {
-        if (r.getId() == 0) {
-            //new role, add it
-            this.roleService.addRole(r);
-        }else{
-            //existing role, call update
-            this.roleService.updateRole(r);
-        }
-
-        return "redirect:/roles";
-
+//    @GetMapping("/add")
+//    public String addRole(@ModelAttribute("role") Role r) {
+//        if (r.getId() == 0) {
+//            //new role, add it
+//            this.roleService.addRole(r);
+//        }else{
+//            //existing role, call update
+//            this.roleService.updateRole(r);
+//        }
+//        return "redirect:/roles";
+//    }
+    @GetMapping("/new")
+    public String newRoleForm(Model model){
+        model.addAttribute("role", new Role());
+        return "/roles/new";
     }
 
-//    @RequestMapping("/roles/remove/{id}")
+    @PostMapping()
+    public String create(@ModelAttribute("role") Role role){
+        this.roleService.addRole(role);
+        return "redirect:/roles";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editRoleForm(@PathVariable("id") int id, Model model){
+        model.addAttribute("role", this.roleService.getRoleById(id));
+//        model.addAttribute("listRoles", this.roleService.listRoles());
+        return "roles/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("role") Role role, @PathVariable("id") int id){
+        this.roleService.updateRole(role);
+        return "redirect:/roles";
+    }
+
     @GetMapping("/remove/{id}")
     public String removeRole(@PathVariable("id") int id){
 
         this.roleService.removeRole(id);
         return "redirect:/roles";
-    }
-
-//    @RequestMapping("/roles/edit/{id}")
-    @GetMapping("/edit/{id}")
-    public String editRole(@PathVariable("id") int id, Model model){
-        model.addAttribute("role", this.roleService.getRoleById(id));
-        model.addAttribute("listRoles", this.roleService.listRoles());
-        return "role";
     }
 
     @RequestMapping("/search")
@@ -70,15 +83,5 @@ public class RolesController {
         mav.addObject("result", result);
         return mav;
     }
-
-//    @RequestMapping("/search")
-//    public String search(@RequestParam String keyword) {
-////        model.addAttribute("role", new Role());
-////        model.addAttribute("listRoles", this.roleService.listRoles());
-//        List<Role> result = roleService.getRolesByName(keyword);
-//        ModelAndView mav = new ModelAndView("search");
-//        mav.addObject("result", result);
-//        return "roles/search";
-//    }
 
 }

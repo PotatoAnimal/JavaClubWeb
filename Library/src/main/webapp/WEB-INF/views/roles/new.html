@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>New Role</title>
+</head>
+<body>
+<div align="center">
+    <h2>New Role</h2>
+    <form th:method="POST" th:action="@{/roles}" th:object="${role}">
+        <table border="0" cellpadding="5">
+            <tr>
+                <label for="name">Enter name: </label>
+                <input type="text" th:field="*{name}" id="name"/>
+            </tr>
+            <tr>
+                <td colspan="1"><input type="submit" value="Create!"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
