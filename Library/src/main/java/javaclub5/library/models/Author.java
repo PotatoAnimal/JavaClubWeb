@@ -33,7 +33,9 @@ public class Author {
         if (this == o) return true;
         if (!(o instanceof Author)) return false;
         Author author = (Author) o;
-        return getId() == author.getId() && Objects.equals(getName(), author.getName()) && Objects.equals(getBirthDay(), author.getBirthDay()) && Objects.equals(getSurname(), author.getSurname());
+        return getId() == author.getId() && Objects.equals(getName(),
+                author.getName()) && Objects.equals(getBirthDay(),
+                author.getBirthDay()) && Objects.equals(getSurname(), author.getSurname());
     }
 
     @Override
