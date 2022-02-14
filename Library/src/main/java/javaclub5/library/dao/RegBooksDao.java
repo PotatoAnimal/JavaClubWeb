@@ -1,6 +1,7 @@
 package javaclub5.library.dao;
 
 
+import javaclub5.library.models.Author;
 import javaclub5.library.models.RegBooks;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,11 @@ public class RegBooksDao {
     @Transactional
     public List<RegBooks> readAll() {
         regBooks = (List<RegBooks>) sf.getCurrentSession().createQuery("select rb from RegBooks rb " +
-                "left join fetch rb.book b join fetch b.Authors").list().stream().distinct().collect(Collectors.toList());
+                "left join fetch rb.book b ").
+                list().stream().distinct().collect(Collectors.toList());
+        for (RegBooks regBook : regBooks) {
+            regBook.getBook().getAuthors().stream().distinct().collect(Collectors.toList());
+        }
         return regBooks;
     }
 

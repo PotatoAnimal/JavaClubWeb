@@ -12,6 +12,7 @@
     <tr>
         <th>ID</th>
         <th>Book</th>
+        <th>Authors</th>
         <th>User</th>
         <th>Date Out</th>
         <th>Date In</th>
@@ -22,11 +23,12 @@
         </td>
     </tr>
     <tr th:each="logbook : ${logbooks}">
-        <td th:text="${logbook.getId()}">ID</td>
-        <td th:text="${logbook.getBook()}">book</td>
-        <td th:text="${logbook.getUser()}">user</td>
-        <td th:text="${logbook.getDataOut()}">dateOut</td>
-        <td th:text="${logbook.getDateIn()}">dateIn</td>
+        <td th:text="${logbook.id}">ID</td>
+        <td th:text="${logbook.getBook().booksToString(logbook.getBook())}">book</td>
+        <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
+        <td th:text="${logbook.User.userToString(User)}">user</td>
+        <td th:text="${logbook.DataOut}">dateOut</td>
+        <td th:text="${logbook.DateIn}">dateIn</td>
     </tr>
 </table>
 

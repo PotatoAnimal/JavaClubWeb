@@ -6,13 +6,14 @@
 </head>
 </head>
 <h2>
-    LogBooks
+    RegBooks
 </h2>
 <body>
 <table>
     <tr>
         <th>ID</th>
         <th>Book</th>
+        <th>Authors</th>
         <th>Count</th>
         <th>Price</th>
         <th>Donated</th>
@@ -24,12 +25,13 @@
         </td>
     </tr>
     <tr th:each="regbook : ${regbooks}">
-        <td th:text="${regbook.getId()}">ID</td>
-        <td th:text="${regbook.getBook()}">book</td>
-        <td th:text="${regbook.getCount()}">count</td>
-        <td th:text="${regbook.getPrice()}">price</td>
-        <td th:text="${regbook.isDonated()}">donated</td>
-        <td th:text="${regbook.getOperations()}">operations</td>
+        <td th:text="${regbook.Id}">ID</td>
+        <td th:text="${regbook.getBook().booksToString(regbook.getBook())}">book</td>
+        <td th:text="${regbook.getBook().authorsToString(regbook.getBook().getAuthors())}">Authors</td>
+        <td th:text="${regbook.Amount}">count</td>
+        <td th:text="${regbook.Price}">price</td>
+        <td th:text="${regbook.Donated}">donated</td>
+        <td th:text="${regbook.Operations}">operations</td>
     </tr>
 </table>
 </body>

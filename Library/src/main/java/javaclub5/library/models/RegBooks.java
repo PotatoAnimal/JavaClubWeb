@@ -10,7 +10,7 @@ public class RegBooks {
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "amount", nullable = true)
-    private int count;
+    private int amount;
     @Column(name = "price", nullable = true)
     private int price;
     @Column(name = "donated", nullable = true)
@@ -25,7 +25,7 @@ public class RegBooks {
     public String toString() {
         return "RegBooks{" +
                 "id=" + id +
-                ", count=" + count +
+                ", amount=" + amount +
                 ", price=" + price +
                 ", donated=" + donated +
                 ", operations=" + operations +
@@ -38,14 +38,14 @@ public class RegBooks {
         if (this == o) return true;
         if (!(o instanceof RegBooks)) return false;
         RegBooks regBooks = (RegBooks) o;
-        return getId() == regBooks.getId() && getCount() == regBooks.getCount() && getPrice() == regBooks.getPrice() && isDonated() == regBooks.isDonated() && getOperations() == regBooks.getOperations() && Objects.equals(getBook(), regBooks.getBook());
+        return getId() == regBooks.getId() && getAmount() == regBooks.getAmount() && getPrice() == regBooks.getPrice() && isDonated() == regBooks.isDonated() && getOperations() == regBooks.getOperations() && Objects.equals(getBook(), regBooks.getBook());
     }
 
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCount(), getPrice(), isDonated(), getOperations(), getBook());
+        return Objects.hash(getId(), getAmount(), getPrice(), isDonated(), getOperations(), getBook());
     }
 
     public int getId() {
@@ -56,12 +56,12 @@ public class RegBooks {
         this.id = id;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAmount(int count) {
+        this.amount = count;
     }
 
     public int getPrice() {

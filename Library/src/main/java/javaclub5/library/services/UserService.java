@@ -71,7 +71,7 @@ public class UserService {
         int logBookAmount = 0;
         for (RegBooks regBook: regBooks) {
             if (regBook.getBook().getId() == book.getId())
-                regBooksAmount += regBook.getCount() * regBook.getOperations();
+                regBooksAmount += regBook.getAmount() * regBook.getOperations();
         }
         for (LogBook logBook: logBooks) {
             if (logBook.getBook().getId() == book.getId())
