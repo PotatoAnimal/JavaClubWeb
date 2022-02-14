@@ -16,7 +16,7 @@ public class RegBook {
     private Book book;
 
     @Column
-    private int count;
+    private int amount;
     @Column
     private int price;
     @Column
@@ -32,12 +32,12 @@ public class RegBook {
         this.book = book;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAmount(int count) {
+        this.amount = count;
     }
 
     public int getPrice() {
@@ -69,7 +69,7 @@ public class RegBook {
         return "RegBook{" +
                 "id=" + id +
                 ", book=" + book +
-                ", count=" + count +
+                ", count=" + amount +
                 ", price=" + price +
                 ", donated=" + donated +
                 ", operations=" + operations +

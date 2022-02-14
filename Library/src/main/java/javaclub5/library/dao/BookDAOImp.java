@@ -36,7 +36,7 @@ public class BookDAOImp implements BookDAO {
     @Override
     public List<Book> findByTitle(String bookTitle) {
         Session session = this.sf.getCurrentSession();
-        String hql = "select b from Book b join fetch RegBook r on b.id = r.count and b.id = r.price where b.title = :name ";
+        String hql = "select b from Book b join fetch RegBook r on b.id = r.amount and b.id = r.price where b.title = :name ";
         Query query = session.createQuery(hql);
         query.setParameter("name", bookTitle);
         List<Book> book = query.list();
@@ -64,28 +64,29 @@ public class BookDAOImp implements BookDAO {
         List<Book> book = query.list();
         return book;
     }
-//need to fix
+
+    //need to fix //supposed already start to work.
     @Override
     public List<Book> availableBooks() {
         Session session = this.sf.getCurrentSession();
-        String hql = "select b from Book b" +
+        String hql = "select b.title, a.name, a.surname, count(r) from Book b" +
                 "         join Author a on b.idAuthor = a.id " +
-                "         join RegBook r on r.count =b.id";
+                "         join RegBook r on r.amount =b.id group by b.title, a.name,a.surname";
         Query query = session.createQuery(hql);
         List<Book> availableBooks = query.list();
         return availableBooks;
     }
-//need to fix
+
+    //need to fix
     @Override
+
     public List<Book> mostPopularAndUnpopular() {
         Session session = this.sf.getCurrentSession();
-        String hql = "SELECT b, COUNT(*)" +
-                "from Book b" +
-                "         join LogBook lB on b.id = lB.id" +
-                " order by count(*) desc";
+        String hql = "SELECT  b.title, rb.idBook, COUNT(*)" +
+                "FROM Book b join LogBook rb on b.id = rb.id" +
+                " GROUP BY rb.idBook ORDER BY count(*) DESC";
         Query query = session.createQuery(hql);
-        List<Book> popUnpop = query.list();
-        return popUnpop;
+        return (List<Book>) query.getResultList();
     }
 
 

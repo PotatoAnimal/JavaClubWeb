@@ -21,6 +21,12 @@ public class ReaderController {
 //        return "books/list";
 //    }
 
+    @GetMapping()
+    public String index(Model model) {
+        model.addAttribute("listBooks", readerService.findByAuthor("Bruce"));
+        return "books/list";
+    }
+
 //    @GetMapping()
 //    public String findByAuthor(Model model) {
 //        model.addAttribute("listBooks", readerService.availableBooks());
