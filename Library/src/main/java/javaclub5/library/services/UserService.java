@@ -11,8 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,21 +30,31 @@ public class UserService {
     }
 
     public List<Book> getBookByTitle(String title) {
-        List<Book> booksByTitle = bookDao.readAll();
-        booksByTitle = booksByTitle.stream().filter(t -> t.getTitle()
-                .equalsIgnoreCase(title)).collect(Collectors.toList());
+        Pattern pattern = getPattern(title);
+        List<Book> books = bookDao.readAll();
+        List<Book> booksByTitle = new LinkedList<>();
+        for (Book book : books) {
+            Matcher matcher = pattern.matcher(book.getTitle().toLowerCase());
+            if (matcher.find()) {
+                booksByTitle.add(book);
+            }
+        }
+
         return booksByTitle;
     }
 
     public List<Book> getBookByAuthor(String name, String surname) {
         List<Book> booksByAuthor = new LinkedList<>();
         List<Book> books = bookDao.readAll();
+        Pattern namePattern = getPattern(name);
+        Pattern surnamePattern = getPattern(surname);
         for (Book book : books) {
             for (Author author : book.getAuthors()) {
-                boolean a1 = (author.getName().equalsIgnoreCase(name));
-                boolean a2 = (author.getSurname().equalsIgnoreCase(surname));
-                if ((author.getName().equalsIgnoreCase(name))
-                        && (author.getSurname().equalsIgnoreCase(surname))) {
+                Matcher nameMatcher = namePattern.matcher(author.getName().toLowerCase());
+                Matcher surnameMatcher = surnamePattern.matcher(author.getSurname().toLowerCase());
+                if ((nameMatcher.find() && surnameMatcher.find()) |
+                        (nameMatcher.find() && surname == null) |
+                        (surnameMatcher.find() && name == null)) {
                     booksByAuthor.add(book);
                     break;
                 }
@@ -83,5 +94,11 @@ public class UserService {
         else {
             return "unavailable";
         }
+    }
+
+    private Pattern getPattern(String title) {
+        title = title.toLowerCase().trim().replaceAll("\\s{2,}", " ");
+        Pattern pattern = Pattern.compile(title);
+        return pattern;
     }
 }

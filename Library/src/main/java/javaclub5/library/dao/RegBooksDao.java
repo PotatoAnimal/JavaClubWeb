@@ -25,7 +25,7 @@ public class RegBooksDao {
     @Transactional
     public List<RegBooks> readAll() {
         regBooks = (List<RegBooks>) sf.getCurrentSession().createQuery("select rb from RegBooks rb " +
-                "left join fetch rb.book b ").
+                        "left join fetch rb.book b ").
                 list().stream().distinct().collect(Collectors.toList());
         for (RegBooks regBook : regBooks) {
             regBook.getBook().getAuthors().stream().distinct().collect(Collectors.toList());
@@ -49,9 +49,6 @@ public class RegBooksDao {
         sf.getCurrentSession().update(regBooks);
     }
 
-    @Transactional
-    public void delete(RegBooks regBooks) {
-        sf.getCurrentSession().delete(regBooks);
-    }
+
 
 }
