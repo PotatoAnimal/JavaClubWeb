@@ -73,7 +73,7 @@ public class BookDAOImp implements BookDAO {
                 "         join Author a on b.idAuthor = a.id " +
                 "         join RegBook r on r.amount =b.id group by b.title, a.name,a.surname";
         Query query = session.createQuery(hql);
-        List<Book> availableBooks = query.list();
+        List<Book> availableBooks = (List<Book>) query.list();
         return availableBooks;
     }
 
