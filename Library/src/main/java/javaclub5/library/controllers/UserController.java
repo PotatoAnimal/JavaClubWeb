@@ -54,7 +54,8 @@ public class UserController {
                                    @RequestParam("secondDate")
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
                                    Model model) {
-        model.addAttribute("books", userService.getBookByDate(firstDate, secondDate));
+        model.addAttribute("books",
+                userService.findPopularBook(userService.getBookByDate(firstDate, secondDate)));
         model.addAttribute("userService", userService);
         return "books/bookslist";
     }

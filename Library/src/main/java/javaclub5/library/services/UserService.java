@@ -63,6 +63,33 @@ public class UserService {
         return booksByAuthor;
     }
 
+    public List<Book> findPopularBook(List<Book> books) {
+        List<Book> popularBooks = new LinkedList<>();
+        Map<Book, Integer> popular = new HashMap<>();
+        for (Book book: books) {
+            if (popular.containsKey(book)) {
+                int value = popular.get(book);
+                value++;
+                popular.put(book, value);
+            }
+            else {
+                popular.put(book, 1);
+            }
+        }
+
+        List<Integer> listValues = new ArrayList<>(popular.values());
+        Collections.sort(listValues);
+        if (!listValues.isEmpty()) {
+            int max = listValues.get(listValues.size() - 1);
+            for (Map.Entry<Book, Integer> entry : popular.entrySet()) {
+                if (entry.getValue() == max) {
+                    popularBooks.add(entry.getKey());
+                }
+            }
+        }
+        return popularBooks;
+    }
+
     public List<Book> getBookByDate(LocalDate firstDate, LocalDate secondDate) {
         List<Book> booksByDate = new LinkedList<>();
         List<LogBook> logBooks = logBookDao.readAll();
