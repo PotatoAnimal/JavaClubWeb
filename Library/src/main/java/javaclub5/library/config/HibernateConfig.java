@@ -1,7 +1,6 @@
 package javaclub5.library.config;
 
-import javaclub5.library.models.Role;
-import javaclub5.library.models.User;
+import javaclub5.library.models.*;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +13,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @Configuration
@@ -24,12 +24,14 @@ public class HibernateConfig {
     @Autowired
     private ApplicationContext context;
 
-
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setAnnotatedClasses(User.class, Role.class);
+        factoryBean.setAnnotatedClasses(User.class,
+                Role.class, LogBook.class,
+                Book.class, RegBooks.class,
+                Author.class);
         return factoryBean;
     }
 
@@ -48,5 +50,15 @@ public class HibernateConfig {
         dataSource.setUsername("postgres");
         dataSource.setPassword("1111");
         return dataSource;
+    }
+
+    final Properties hibernateProperties() {
+        final Properties hibernateProperties = new Properties();
+
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
+        hibernateProperties.setProperty("hibernate.show_sql", "true");
+
+        return hibernateProperties;
     }
 }

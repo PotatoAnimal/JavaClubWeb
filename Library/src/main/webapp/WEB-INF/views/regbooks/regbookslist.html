@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RegBooksList</title>
+</head>
+</head>
+<h2>
+    RegBooks
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Authors</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th>Donated</th>
+        <th>Operations</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="regbook : ${regbooks}">
+        <td th:text="${regbook.Id}">ID</td>
+        <td th:text="${regbook.getBook().booksToString(regbook.getBook())}">book</td>
+        <td th:text="${regbook.getBook().authorsToString(regbook.getBook().getAuthors())}">Authors</td>
+        <td th:text="${regbook.Amount}">count</td>
+        <td th:text="${regbook.Price}">price</td>
+        <td th:text="${regbook.Donated}">donated</td>
+        <td th:text="${regbook.Operations}">operations</td>
+    </tr>
+</table>
+</body>
+</html>

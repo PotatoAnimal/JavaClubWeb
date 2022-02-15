@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<h2>
+    Books
+</h2>
+<body>
+<form  th:action="@{/booksbytitle}" >
+    <table>
+        <tr>
+            <td>
+                <label for="title"> Title: </label>
+            </td>
+            <td>
+                <input type="text"  name="title" id="title"/>
+            </td>
+        </tr>
+        <td>
+            <input type="submit" value="Find by Title">
+        </td>
+        <td>
+            <input type="reset" value="Clear">
+        </td>
+    </table>
+</form>
+<form  th:action="@{/booksbyauthor}" >
+    <table>
+        <tr>
+            <td>
+                <label for="name"> Name: </label>
+            </td>
+            <td>
+                <input type="text"  name="name" id="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="surname"> Surname: </label>
+            </td>
+            <td>
+                <input type="text"  name="surname" id="surname"/>
+            </td>
+        </tr>
+        <td>
+            <input type="submit" value="Find by Author">
+        </td>
+        <td>
+            <input type="reset" value="Clear">
+        </td>
+    </table>
+</form>
+<form  th:action="@{/popularbooks}" >
+    <table>
+        <tr>
+            <td>
+                <label for="firstDate"> First Date: </label>
+            </td>
+            <td>
+                <input type="date"  name="firstDate" id="firstDate"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="secondDate"> Second Date: </label>
+            </td>
+            <td>
+                <input type="date"  name="secondDate" id="secondDate"/>
+            </td>
+        </tr>
+        <td>
+            <input type="submit" value="Find Popular Books">
+        </td>
+        <td>
+            <input type="reset" value="Clear">
+        </td>
+    </table>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>title</th>
+        <th>year production</th>
+        <th>Authors</th>
+        <th>Availability</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}">ID</td>
+        <td th:text="${book.title}">title</td>
+        <td th:text="${book.yearProduction}">year</td>
+        <td th:text="${book.authorsToString(book.authors)}">authors</td>
+        <td th:text="${userService.isAvailable(book)}">availibilty</td>
+    </tr>
+</table>
+
+
+
+</body>
+</html>

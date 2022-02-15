@@ -26,6 +26,10 @@ public class User {
     @Column(name = "surname", nullable = true, length = 20)
     private String surname;
 
+    public String userToString(User user) {
+        return name + " " + surname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,7 +47,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "\nUsers{" +
+        return "Users{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", login='" + login + '\'' +

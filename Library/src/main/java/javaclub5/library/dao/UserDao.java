@@ -29,9 +29,29 @@ public class UserDao {
 
     @Transactional
     public List<User> readAll() {
-        users =  sf.getCurrentSession().createQuery("select u FROM User u " +
-                            "join fetch Role r on u.role = r" ).list();
+        users =  sf.getCurrentSession().createQuery("from User").list();
         return users;
     }
 
+    @Transactional
+    public void create(User user) {
+        sf.getCurrentSession().save(user);
+    }
+
+    @Transactional
+    public User readByID(int id) {
+        User user = sf.getCurrentSession().get(User.class, id);
+        return user;
+    }
+
+    @Transactional
+    public void update(User user) {
+        sf.getCurrentSession().update(user);
+    }
+
+    @Transactional
+    public void delete(User user) {
+        sf.getCurrentSession().delete(user);
+
+    }
 }
