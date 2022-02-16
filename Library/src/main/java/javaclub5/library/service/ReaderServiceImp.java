@@ -42,4 +42,9 @@ public class ReaderServiceImp implements ReaderService{
     public List<Book> mostPopularAndUnpopular() {
         return this.bookDAO.mostPopularAndUnpopular();
     }
+
+    @Override
+    public List<Book> findByTitle(String title) {
+        return this.bookDAO.findByTitle(title);
+    }
 }

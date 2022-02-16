@@ -9,4 +9,5 @@ public interface ReaderService {
     public List<Book> findByAuthor(String authorName);
     public List<Book> availableBooks();
     public List<Book> mostPopularAndUnpopular();
+    public List<Book> findByTitle(String title);
 }

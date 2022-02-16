@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
     <title>Books</title>
@@ -8,6 +8,25 @@
     Books
 </h2>
 <body>
+<!--<a href="/books/list"> </a>-->
+<form method="get" th:action="@{/booksByTitle}">
+    <table>
+        <tr>
+            <td>
+                <label for="title"> Title: </label>
+            </td>
+            <td>
+                <input type="text" name="title" id="title"/>
+            </td>
+        </tr>
+        <td>
+            <input type="submit" value="Find by Title">
+        </td>
+        <td>
+            <input type="reset" value="Clear">
+        </td>
+    </table>
+</form>
 <table>
     <tr>
         <th>ID</th>
@@ -24,7 +43,7 @@
         <td th:text="${book.getId()}">ID</td>
         <td th:text="${book.getTitle()}">name</td>
         <td th:text="${book.getYearProduction()}">year</td>
-        <td th:text="${book.getAuthor()}">authors</td>
+        <td th:text="${book.getAuthor().toString()}">authors</td>
     </tr>
 </table>
 </body>

@@ -20,6 +20,6 @@ public class AuthorController {
     public String listAuthors(Model model) {
         model.addAttribute("authors", new Author());
         model.addAttribute("listAuthors", authorService.listAuthors());
-        return "authors/list";
+        return "authors/authorsList";
     }
 }

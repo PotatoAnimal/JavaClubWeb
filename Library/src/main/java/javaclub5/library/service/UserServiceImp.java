@@ -1,7 +1,9 @@
 package javaclub5.library.service;
 
 
+import javaclub5.library.dao.BookDAO;
 import javaclub5.library.dao.UserDAO;
+import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private BookDAO bookDAO;
 
     @Override
     @Transactional
@@ -44,6 +48,17 @@ public class UserServiceImp implements UserService {
     @Transactional
     public void removeUser(int id) {
         this.userDAO.removeUser(id);
+    }
+
+    @Override
+    @Transactional
+    public List<Book> readAll() {
+        return this.bookDAO.readAll();
+    }
+
+    @Override
+    public List<Book> findByTitle(String title) {
+        return this.bookDAO.findByTitle(title);
     }
 
 
