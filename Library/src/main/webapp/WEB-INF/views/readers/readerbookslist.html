@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <title>Books</title>
 </head>
+<body>
+<h2>
+    th:text
+</h2>
+<form th:method="POST" class="btn btn-success" th:action="@{/users/{idReader} (idReader = ${id})}">
+    <button>Edit profile</button>
+</form>
 <h2>
     Books
 </h2>
-<body>
+
 <form th:action="@{/booksbytitle}">
     <table>
         <tr>
@@ -85,6 +92,7 @@
         <th>year production</th>
         <th>Authors</th>
         <th>Availability</th>
+        <th>Action</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -97,6 +105,14 @@
         <td th:text="${book.yearProduction}">year</td>
         <td th:text="${book.authorsToString(book.authors)}">authors</td>
         <td th:text="${userService.isAvailable(book)}">availibilty</td>
+        <td>
+            <form th:method="POST" class="btn btn-success" action="@{/takeBook/{id} (id = ${book.getId()})">
+                <button>Order Book</button>
+            </form>
+            <form th:method="POST" class="btn btn-success" action="@{/returnBook/{id} (id = ${book.getId()})">
+                <button>Return Book</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>
