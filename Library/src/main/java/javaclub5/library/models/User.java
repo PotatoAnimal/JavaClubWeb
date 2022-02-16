@@ -1,6 +1,7 @@
 package javaclub5.library.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class User {
     private String login;
     @Column(name = "password", nullable = true, length = 20)
     private String password;
+    @Email
     @Column(name = "email", nullable = true, length = 30)
     private String email;
     @ManyToOne
