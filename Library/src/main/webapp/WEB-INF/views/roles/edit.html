@@ -6,22 +6,10 @@
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/roles/{id}(id=${role.getId()})}" th:object="${role}">
-    <div>
-        <label for="username">Click me</label>
-        <input type="text" id="username">
-    </div>
-<!--    <div>-->
-<!--        <label for="name">Enter name: </label>-->
-<!--        <input type="text" th:field="*{name}" id="name"/>-->
-<!--    </div>-->
-    <label>String:</label>
-    <div>
-        <input type="text" th:field="*{name}" placeholder="string" />
-        <input type="submit" value="Update"/>
-    </div>
-
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <input type="submit" value="Update!"/>
 </form>
-
-</div>
 </body>
 </html>
