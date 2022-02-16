@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Books</title>
+    <title>reader</title>
 </head>
 <body>
 <h2>
-    <p th:text="${user.name}">  </p>
-    <p th:text="${user.surname}">  </p>
+    <p th:text="${user.userToString(user)}">  </p>
 </h2>
 <form th:method="POST" class="btn btn-success" th:action="@{/users/{idReader} (idReader = ${id})}">
     <button>Edit profile</button>
@@ -109,9 +108,6 @@
         <td>
             <form th:method="POST" class="btn btn-success" action="@{/takeBook/{id} (id = ${book.getId()})">
                 <button>Order Book</button>
-            </form>
-            <form th:method="POST" class="btn btn-success" action="@{/returnBook/{id} (id = ${book.getId()})">
-                <button>Return Book</button>
             </form>
         </td>
     </tr>
