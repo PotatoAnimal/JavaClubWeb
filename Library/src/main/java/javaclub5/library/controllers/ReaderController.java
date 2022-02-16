@@ -45,4 +45,38 @@ public class ReaderController {
         userDao.update(oldUser);
         return "redirect: /readers/{id} ";
     }
+
+    @GetMapping("/readers/books")
+    public String findAllBooks(Model model) {
+        model.addAttribute("books", userService.getBookList());
+        model.addAttribute("userService", userService);
+        return "readers/readerbookslist";
+    }
+
+    @GetMapping("/readers/booksbytitle")
+    public String findBookByTitle(@RequestParam("title") String title, Model model) {
+        model.addAttribute("books", userService.getBookByTitle(title));
+        model.addAttribute("userService", userService);
+        return "readers/readerbookslist";
+    }
+
+    @GetMapping("/readers/booksbyauthor")
+    public String findBookByAuthor(@RequestParam("name") String name,
+                                   @RequestParam("surname") String surname, Model model) {
+        model.addAttribute("books", userService.getBookByAuthor(name, surname));
+        model.addAttribute("userService", userService);
+        return "readers/readerbookslist";
+    }
+
+    @GetMapping("/readers/popularbooks")
+    public String findPopularBooks(@RequestParam("firstDate")
+                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firstDate,
+                                   @RequestParam("secondDate")
+                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
+                                   Model model) {
+        model.addAttribute("books",
+                userService.findPopularBook(userService.getBookByDate(firstDate, secondDate)));
+        model.addAttribute("userService", userService);
+        return "readers/readerbookslist";
+    }
 }
