@@ -58,6 +58,7 @@ public class RolesController {
 
     @GetMapping("/edit/{id}")
     public String editRoleForm(@PathVariable("id") int id, Model model){
+//        Role role = this.roleService.getRoleById(id);
         model.addAttribute("role", this.roleService.getRoleById(id));
 //        model.addAttribute("listRoles", this.roleService.listRoles());
         return "roles/edit";
