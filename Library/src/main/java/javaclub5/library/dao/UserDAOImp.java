@@ -1,5 +1,6 @@
 package javaclub5.library.dao;
 
+import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -56,4 +57,5 @@ public class UserDAOImp implements UserDAO {
             session.delete(user);
         }
     }
+
 }

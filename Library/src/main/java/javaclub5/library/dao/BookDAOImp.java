@@ -68,14 +68,16 @@ public class BookDAOImp implements BookDAO {
 
     @Override
     @Transactional
-    public List<Book> findByAuthor(String author) {
+    public List<Book> findByAuthor(String author, String surname) {
         Session session = this.sf.getCurrentSession();
-        String hql = "select b from Book b join fetch Author a on b.id = a.id where a.name = :name";
+        String hql = "select b from Book b join fetch Author a on b.id = a.id where a.name = :name and a.surname = :surname";
         Query query = session.createQuery(hql);
         query.setParameter("name", author);
+        query.setParameter("surname", surname);
         List<Book> book = query.list();
         return book;
     }
+
 
     //need to fix //supposed already start to work.
     @Override

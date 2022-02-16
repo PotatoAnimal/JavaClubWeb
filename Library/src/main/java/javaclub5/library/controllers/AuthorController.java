@@ -22,4 +22,6 @@ public class AuthorController {
         model.addAttribute("listAuthors", authorService.listAuthors());
         return "authors/authorsList";
     }
+
+
 }

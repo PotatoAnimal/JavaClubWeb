@@ -15,4 +15,5 @@ public interface UserService {
     public void removeUser(int id);
     public List<Book> readAll();
     public List<Book> findByTitle(String title);
+    public List<Book> findByAuthor(String name, String surname);
 }

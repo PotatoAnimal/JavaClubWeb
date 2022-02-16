@@ -1,5 +1,6 @@
 package javaclub5.library.dao;
 
+import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 
 import java.util.List;

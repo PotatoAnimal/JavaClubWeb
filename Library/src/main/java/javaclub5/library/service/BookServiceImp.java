@@ -20,7 +20,7 @@ public class BookServiceImp implements BookService {
     @Override
     @Transactional
     public List<Book> readAll() {
-       return this.bookDAO.readAll();
+        return this.bookDAO.readAll();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class BookServiceImp implements BookService {
     @Override
     @Transactional
     public List<Book> listBook() {
-       return this.bookDAO.listBook();
+        return this.bookDAO.listBook();
     }
 
 //    @Override
@@ -46,7 +46,8 @@ public class BookServiceImp implements BookService {
     public void updateBook(Book book) {
         this.bookDAO.updateBook(book);
     }
-//
+
+    //
 //    @Override
 //    @Transactional
 //    public void deleteBookById(int bookId) {
@@ -55,8 +56,8 @@ public class BookServiceImp implements BookService {
 //
     @Override
     @Transactional
-    public List<Book> findBookByAuthor(String authorName) {
-        return this.bookDAO.findByAuthor(authorName);
+    public List<Book> findBookByAuthor(String authorName, String surname) {
+        return this.bookDAO.findByAuthor(authorName, surname);
     }
 
     @Override

@@ -21,7 +21,7 @@ public interface BookDAO {
     public void deleteBookById(int bookId);
 
 //    public Book findBookByAuthor(String authorName);
-    public List<Book> findByAuthor(String author);
+    public List<Book> findByAuthor(String name, String surname);
 
     public List<Book> availableBooks();
 

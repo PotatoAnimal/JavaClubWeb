@@ -6,7 +6,7 @@ import java.util.List;
 public interface ReaderService {
     public List<Book> listBook();
     List <Book> readAll();
-    public List<Book> findByAuthor(String authorName);
+    public List<Book> findByAuthor(String authorName, String surname);
     public List<Book> availableBooks();
     public List<Book> mostPopularAndUnpopular();
     public List<Book> findByTitle(String title);

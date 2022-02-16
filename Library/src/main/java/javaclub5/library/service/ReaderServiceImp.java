@@ -27,8 +27,8 @@ public class ReaderServiceImp implements ReaderService{
 
     @Override
     @Transactional
-    public List<Book> findByAuthor(String authorName) {
-        return this.bookDAO.findByAuthor(authorName);
+    public List<Book> findByAuthor(String authorName, String surname) {
+        return this.bookDAO.findByAuthor(authorName, surname);
     }
 
     @Override

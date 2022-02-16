@@ -9,7 +9,7 @@
 </h2>
 <body>
 <!--<a href="/books/list"> </a>-->
-<form method="get" th:action="@{/booksByTitle}">
+<form method="get" th:action="@{/books/booksByTitle}">
     <table>
         <tr>
             <td>
@@ -21,6 +21,32 @@
         </tr>
         <td>
             <input type="submit" value="Find by Title">
+        </td>
+        <td>
+            <input type="reset" value="Clear">
+        </td>
+    </table>
+</form>
+<form method="get" th:action="@{/books/booksByAuthor}">
+    <table>
+        <tr>
+            <td>
+                <label for="name"> Name: </label>
+            </td>
+            <td>
+                <input type="text" name="name" id="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="surname"> Surname: </label>
+            </td>
+            <td>
+                <input type="text" name="surname" id="surname"/>
+            </td>
+        </tr>
+        <td>
+            <input type="submit" value="Find by Author">
         </td>
         <td>
             <input type="reset" value="Clear">

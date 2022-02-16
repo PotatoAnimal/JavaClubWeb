@@ -56,9 +56,15 @@ public class UserServiceImp implements UserService {
         return this.bookDAO.readAll();
     }
 
+
     @Override
     public List<Book> findByTitle(String title) {
         return this.bookDAO.findByTitle(title);
+    }
+
+    @Override
+    public List<Book> findByAuthor(String name, String surname) {
+        return this.bookDAO.findByAuthor(name, surname);
     }
 
 
