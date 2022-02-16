@@ -35,16 +35,28 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public List<Role> listRoles() {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Role> rolesList = session.createQuery("from Role").list();
+        List<Role> rolesList = session.createQuery("from Role order by id").list();
         return rolesList;
     }
+
+    //    @Override
+//    public Role getRoleById(int id) {
+//        Session session = this.sessionFactory.getCurrentSession();
+//        Role role =  session.load(Role.class, id);
+////        return session.load(Role.class, id);
+//        return role;
+//    }
 
     @Override
     public Role getRoleById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-//        Role role =  session.load(Role.class, id);
-        return session.load(Role.class, id);
-//        return role;
+        String hql = "from Role WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id",id);
+        List<Role> rolesList = query.list();
+        if (rolesList.isEmpty())
+            return null;
+        else return rolesList.get(0);
     }
 
     @Override
