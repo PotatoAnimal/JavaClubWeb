@@ -42,8 +42,9 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
     public Role getRoleById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-//        Role role = (Role) session.load(Role.class, new Integer(id));
+//        Role role =  session.load(Role.class, id);
         return session.load(Role.class, id);
+//        return role;
     }
 
     @Override
