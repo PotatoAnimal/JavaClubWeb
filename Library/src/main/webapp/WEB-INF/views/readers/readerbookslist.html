@@ -6,7 +6,8 @@
 </head>
 <body>
 <h2>
-    th:text
+    <p th:text="${user.name}">  </p>
+    <p th:text="${user.surname}">  </p>
 </h2>
 <form th:method="POST" class="btn btn-success" th:action="@{/users/{idReader} (idReader = ${id})}">
     <button>Edit profile</button>
