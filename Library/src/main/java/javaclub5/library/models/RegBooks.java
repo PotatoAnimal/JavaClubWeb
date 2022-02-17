@@ -7,6 +7,7 @@ import java.util.Objects;
 @Table(name = "reg_books", schema = "library", catalog = "JavaClubWeb")
 public class RegBooks {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "amount", nullable = true)

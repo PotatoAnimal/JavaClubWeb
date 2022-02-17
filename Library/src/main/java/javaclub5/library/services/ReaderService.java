@@ -5,12 +5,13 @@ import javaclub5.library.models.Book;
 import javaclub5.library.models.LogBook;
 import javaclub5.library.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
 public class ReaderService extends UserService{
     @Autowired
     private LogBookDao logBookDao;

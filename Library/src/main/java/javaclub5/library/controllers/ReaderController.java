@@ -3,21 +3,21 @@ package javaclub5.library.controllers;
 import javaclub5.library.dao.LogBookDao;
 import javaclub5.library.dao.UserDao;
 import javaclub5.library.models.Book;
+import javaclub5.library.models.LogBook;
 import javaclub5.library.models.User;
+import javaclub5.library.services.ReaderService;
 import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 
 @Controller
-
 public class ReaderController {
     @Autowired
-    private UserService userService;
+    private ReaderService userService;
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -84,13 +84,26 @@ public class ReaderController {
      * @param id Reader ID
      * @param book Ordered Book
      * @param model
-     * @return
+     * @return redirect to List of Odered Books
      */
-    @PostMapping(" @{reader/{id}/orderbook/")
+    @PostMapping("/readers/{id}/orderbook")
     public String orderBook(@PathVariable("id") int id, @ModelAttribute("book") Book book, Model model) {
         User user = userDao.readByID(id);
-        model.addAttribute("userLogBook", logBookDao.getUserStatistic(user));
+        LogBook logBook = new LogBook();
+        logBook.setBook(book);
+        logBook.setUser(user);
+        logBookDao.create(logBook);
         model.addAttribute("user",user);
+        model.addAttribute("id", id);
+        return "redirect:/readers/{id}/orderedbook";
+    }
+
+
+    @GetMapping("/readers/{id}/orderedbook")
+    public String showOrderedBooks(@PathVariable("id") int id, Model model) {
+        User user = userDao.readByID(id);
+        model.addAttribute("logBooks", userService.getOrderedBooks(userDao.readByID(id)));
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "readers/readerorder";
     }
