@@ -84,7 +84,7 @@ public class NewBookDTO {
         Book book = new Book();
         book.setTitle(this.title);
         book.setYearProduction(this.yearProduction);
-        return book;
+        return book; //  need to finish with (Register book with copies)
     }
 
     @Override

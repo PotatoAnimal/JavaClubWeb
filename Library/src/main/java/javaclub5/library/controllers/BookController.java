@@ -51,6 +51,6 @@ public class BookController {
     @PostMapping("/save")
     public String create(@ModelAttribute("book") NewBookDTO newBookDTO) {
         bookService.addBook(newBookDTO);
-        return "books/booksList";
+        return "books/booksList"; //need to finish
     }
 }
