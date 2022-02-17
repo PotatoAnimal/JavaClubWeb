@@ -20,7 +20,7 @@ public class Book {
     private int idAuthor;
 
     @ManyToOne
-    @JoinColumn(name = "id_author", insertable = false,updatable = false)
+    @JoinColumn(name = "id_author", insertable = false, updatable = false)
     private Author author;
 
     @ManyToMany
@@ -44,19 +44,19 @@ public class Book {
 
     }
 
-//    public List<Author> getAuthors() {
-//        return authors;
-//    }
-//
-//    public void setAuthors(List<Author> authors) {
-//        this.authors = authors;
-//    }
+    public Book(String title, int yearProduction, int idAuthor, Author author, List<User> users) {
+        this.title = title;
+        this.yearProduction = yearProduction;
+        this.idAuthor = idAuthor;
+        this.author = author;
+        this.users = users;
+    }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -68,30 +68,29 @@ public class Book {
         this.title = title;
     }
 
-    public Integer getYearProduction() {
+    public int getYearProduction() {
         return yearProduction;
     }
 
-    public void setYearProduction(Integer yearProduction) {
+    public void setYearProduction(int yearProduction) {
         this.yearProduction = yearProduction;
     }
 
-    public Integer getIdAuthor() {
+    public int getIdAuthor() {
         return idAuthor;
     }
 
-    public void setIdAuthor(Integer idAuthor) {
+    public void setIdAuthor(int idAuthor) {
         this.idAuthor = idAuthor;
     }
 
-//
-//    public List<Author> getAuthors() {
-//        return authors;
-//    }
-//
-//    public void setAuthors(List<Author> authors) {
-//        this.authors = authors;
-//    }
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     @Override
     public String toString() {

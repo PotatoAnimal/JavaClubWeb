@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
     <title>LogBooks</title>
@@ -26,9 +26,6 @@
         <td th:text="${logBook.getId()}">ID</td>
         <td th:text="${logBook.getDataOut}">dataout</td>
         <td th:text="${logBook.getDateIn}">datein</td>
-        <td th:text="${logBook.getBook().booksToString(logBook.getBook())}">book</td>
-        <td th:text="${logBook.getBook().authorsToString(logBook.getBook().getAuthors())}">Authors</td>
-        <td th:text="${logBook.User.userToString(User)}">user</td>
     </tr>
 </table>
 </body>

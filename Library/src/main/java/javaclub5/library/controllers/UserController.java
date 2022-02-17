@@ -2,6 +2,7 @@ package javaclub5.library.controllers;
 
 import javaclub5.library.dao.UserDAO;
 import javaclub5.library.dao.UserDAOImp;
+import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.User;
 import javaclub5.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +39,17 @@ public class UserController {
 //        return "users/new";
 //    }
 
-//    @GetMapping("/new")
-//    public String addUser(Model model) {
-//        model.addAttribute("user", new User());
-//        return "users/new";
-//    }
-//
-//    @PostMapping("/save")
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.addUser(user);
-//        return"redirect:/users";
-//    }
+    @GetMapping("/new")
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
+        return "users/new";
+    }
+
+    @PostMapping("/save")
+    public String create(@ModelAttribute("user") UserDTO userDTO) {
+        userService.addUser(userDTO.convertToUser());
+        return"redirect:/users";
+    }
 
     @GetMapping("/users")
     public String index(Model model) {

@@ -39,21 +39,18 @@ public class Author {
         return Objects.hash(getId(), getName(), getSurname(), getBirthDay());
     }
 
-//    public List<Book> getBooks() {
-//        return books;
-//    }
-//
-//    public void setBooks(List<Book> books) {
-//        this.books = books;
-//    }
 
-//    public List<Book> getBooksAuthors() {
-//        return booksAuthors;
-//    }
-//
-//    public void setBooksAuthors(List<Book> booksAuthors) {
-//        this.booksAuthors = booksAuthors;
-//    }
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public String authorToString(Author author) {
+        return this.surname + " " + this.name;
+    }
 
     public int getId() {
         return id;

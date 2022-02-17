@@ -24,6 +24,14 @@ public class RegBook {
     @Column
     private int operations;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Book getBook() {
         return book;
     }

@@ -16,9 +16,11 @@ public class LogBookDAOImp implements LogBookDAO {
     @Override
     @Transactional
     public List<LogBook> readAll() {
+//        List<LogBook> logBooks = sf.getCurrentSession().createQuery("select lb from LogBook lb " +
+//                        "left join fetch lb.idBook b")
+//                .list();
         List<LogBook> logBooks = sf.getCurrentSession().createQuery("select lb from LogBook lb " +
-                        "left join fetch lb.idBook b")
-                .list();
+                "join fetch lb.idBook b  join fetch lb.idUser u").list();
 
         return logBooks;
     }

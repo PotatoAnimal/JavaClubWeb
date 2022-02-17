@@ -19,7 +19,8 @@ public class RegBookDAOImp implements RegBookDAO {
     @Transactional
     public List<RegBook> readAll() {
         Session session = this.sf.getCurrentSession();
-        List<RegBook> regBooks = session.createQuery("FROM RegBook join fetch Book ").list();
+        List<RegBook> regBooks = session.createQuery("SELECT r FROM RegBook r ").list();
+
         return regBooks;
     }
 

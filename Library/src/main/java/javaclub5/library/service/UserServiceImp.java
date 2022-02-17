@@ -2,6 +2,7 @@ package javaclub5.library.service;
 
 
 import javaclub5.library.dao.BookDAO;
+import javaclub5.library.dao.RoleDAO;
 import javaclub5.library.dao.UserDAO;
 import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -19,10 +21,14 @@ public class UserServiceImp implements UserService {
     private UserDAO userDAO;
     @Autowired
     private BookDAO bookDAO;
+    @Autowired
+    private RoleDAO roleDAO;
 
     @Override
     @Transactional
     public void addUser(User user) {
+        user.setRole(roleDAO.findRoleById(2));
+//        user.setBirthday(LocalDate.now());
         this.userDAO.addUser(user);
     }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
     <title>RegBooks</title>
@@ -13,9 +13,9 @@
         <th>ID</th>
         <th>amount</th>
         <th>price</th>
-        <th>book</th>
         <th>donated</th>
         <th>operations</th>
+        <th>book</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -26,9 +26,7 @@
         <td th:text="${regBook.getId()}">ID</td>
         <td th:text="${regBook.getAmount()}">amount</td>
         <td th:text="${regBook.getPrice()}">price</td>
-        <td th:text="${regBook.getBook().booksToString(regBook.getBook())}">book</td>
-<!--        <td th:text="${regbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>-->
-        <td th:text="${regBook.getDonated()}">donated</td>
+        <td th:text="${regBook.isDonated()}">donated</td>
         <td th:text="${regBook.getOperations()}">operations</td>
     </tr>
 </table>
