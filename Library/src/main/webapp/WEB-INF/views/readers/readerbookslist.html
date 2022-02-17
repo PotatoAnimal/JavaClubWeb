@@ -97,9 +97,9 @@
         <th>Availability</th>
         <th>Action</th>
         <td>
-            <form class="btn btn-success" action="/home">
-                <button>home</button>
-            </form>
+            <<form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
+            <button>return</button>
+        </form>
         </td>
     </tr>
     <tr th:each="book : ${books}">

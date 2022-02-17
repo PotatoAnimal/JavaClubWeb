@@ -29,8 +29,10 @@
                 <button>Cancel order</button>
             </form>
         </td>
-
     </tr>
 </table>
+<form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
+    <button>return</button>
+</form>
 </body>
 </html>
