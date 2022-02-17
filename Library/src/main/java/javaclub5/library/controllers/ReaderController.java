@@ -87,7 +87,7 @@ public class ReaderController {
      * @param id Reader ID
      * @param idBook Book ID
      * @param model
-     * @return redirect to List of Odered Books
+     * @return redirect to List of Ordered Books
      */
     @PostMapping("/readers/{id}/orderbook/{idBook}")
     public String orderBook(@PathVariable("id") int id,
@@ -138,13 +138,32 @@ public class ReaderController {
         return "redirect:/readers/{id}/orderedbook";
     }
 
+    /**
+     *
+     * @param id Reader ID
+     * @param model
+     * @return List of Books that are reading now
+     */
     @GetMapping("/readers/{id}/readingbook")
     public String showReadingBooks(@PathVariable("id") int id, Model model) {
         User user = userDao.readByID(id);
-        model.addAttribute("logBooks", userService.getOrderedBooks(userDao.readByID(id)));
+        model.addAttribute("logBooks", userService.getReadingBooks(userDao.readByID(id)));
         model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "readers/readerreadingbook";
+    }
+
+    @PostMapping("/readers/{id}/return/{idLogBook}")
+    public String returnBook(@PathVariable("id") int id,
+                                    @PathVariable("idLogBook") int idLogBook,
+                                    Model model) {
+        LogBook logBook = logBookDao.readByID(idLogBook);
+        logBook.setDateIn(LocalDate.now());
+        logBookDao.update(logBook);
+        User user = userDao.readByID(id);
+        model.addAttribute("user",user);
+        model.addAttribute("id", id);
+        return "redirect:/readers/{id}/readingbook";
     }
 
    /* @GetMapping("/readers/books")

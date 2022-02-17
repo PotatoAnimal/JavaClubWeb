@@ -25,7 +25,7 @@
         <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
         <td>
             <form th:method="POST" class="btn btn-success"
-                  th:action="@{/readers/{idReader}/cancel/{idLogBook} (idReader = ${id}, idLogBook = ${logbook.getId()})}">
+                  th:action="@{/readers/{idReader}/return/{idLogBook} (idReader = ${id}, idLogBook = ${logbook.getId()})}">
                 <button>Return Book</button>
             </form>
         </td>

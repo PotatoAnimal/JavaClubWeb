@@ -139,8 +139,8 @@ public class UserService {
                 regBooksAmount += regBook.getAmount() * regBook.getOperations();
         }
         for (LogBook logBook: logBooks) {
-            if ((logBook.getBook().getId() == book.getId() &&
-            logBook.getDateIn() != null) || logBook.getDataOut() == null)
+            if (logBook.getBook().getId() == book.getId() &&
+            logBook.getDateIn() == null && logBook.getDataOut() != null)
                 logBookAmount ++;
         }
         if (regBooksAmount - logBookAmount > 0) {
