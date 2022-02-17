@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>You are reading:</title>
+</head>
+<body>
+<h2>
+    <p th:text="${user.userToString(user)}"> </p>
+</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Authors</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="logbook : ${logBooks}">
+        <td th:text="${logbook.id}">ID</td>
+        <td th:text="${logbook.getBook().booksToString(logbook.getBook())}">book</td>
+        <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
+        <td>
+            <form th:method="POST" class="btn btn-success"
+                  th:action="@{/readers/{idReader}/return/{idLogBook} (idReader = ${id}, idLogBook = ${logbook.getId()})}">
+                <button>Return Book</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
+    <button>return</button>
+</form>
+</body>
+</html>
