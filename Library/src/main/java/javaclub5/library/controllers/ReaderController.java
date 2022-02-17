@@ -1,6 +1,8 @@
 package javaclub5.library.controllers;
 
+import javaclub5.library.dao.LogBookDao;
 import javaclub5.library.dao.UserDao;
+import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,14 @@ public class ReaderController {
     private UserService userService;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private LogBookDao logBookDao;
 
+    /**
+     * @param id Reader ID
+     * @param model
+     * @return main menu Reader
+     */
     @GetMapping("/readers/{id}")
     public String goToReader(@PathVariable("id") int id, Model model) {
         model.addAttribute("books", userService.getBookList());
@@ -28,6 +37,11 @@ public class ReaderController {
         return "readers/readerbookslist";
     }
 
+    /**
+     * @param id Reader ID
+     * @param model
+     * @return edit menu of Reader
+     */
     @PostMapping("/users/{id}")
     public String editReader(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userDao.readByID(id));
@@ -35,6 +49,12 @@ public class ReaderController {
         return "readers/readersedit";
     }
 
+    /**
+     *
+     * @param id Reader ID
+     * @param user
+     * @return updated Reader menu after reader edit
+     */
     @GetMapping("/reader/{id}/update")
     public String update(@PathVariable("id") int id,
                          @ModelAttribute("user") User user) {
@@ -46,30 +66,85 @@ public class ReaderController {
         return "redirect: /readers/{id} ";
     }
 
-    @GetMapping("/readers/books")
+    /**
+     * @param id Reader ID
+     * @param model
+     * @return Reader statistics
+     */
+    @PostMapping("/readers/{id}/stat")
+    public String getStatistics(@PathVariable("id") int id, Model model) {
+        User user = userDao.readByID(id);
+        model.addAttribute("userLogBook", logBookDao.getUserStatistic(user));
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "readers/readerstat";
+    }
+
+    /**
+     * @param id Reader ID
+     * @param book Ordered Book
+     * @param model
+     * @return
+     */
+    @PostMapping(" @{reader/{id}/orderbook/")
+    public String orderBook(@PathVariable("id") int id, @ModelAttribute("book") Book book, Model model) {
+        User user = userDao.readByID(id);
+        model.addAttribute("userLogBook", logBookDao.getUserStatistic(user));
+        model.addAttribute("user",user);
+        model.addAttribute("id", id);
+        return "readers/readerorder";
+    }
+
+
+   /* @GetMapping("/readers/books")
     public String findAllBooks(Model model) {
         model.addAttribute("books", userService.getBookList());
         model.addAttribute("userService", userService);
         return "readers/readerbookslist";
-    }
+    }*/
 
-    @GetMapping("/readers/booksbytitle")
-    public String findBookByTitle(@RequestParam("title") String title, Model model) {
+
+    /**
+     * @param title Title of Book
+     * @param id Reader ID
+     * @param model
+     * @return sorted book title Reader's menu
+     */
+    @GetMapping("/readers/{id}/booksbytitle")
+    public String findBookByTitle(@RequestParam("title") String title,@PathVariable("id") int id, Model model) {
         model.addAttribute("books", userService.getBookByTitle(title));
         model.addAttribute("userService", userService);
+        model.addAttribute("user", userDao.readByID(id));
+        model.addAttribute("id", id);
         return "readers/readerbookslist";
     }
 
-    @GetMapping("/readers/booksbyauthor")
-    public String findBookByAuthor(@RequestParam("name") String name,
+    /**
+     * @param name Author's name of Book
+     * @param id Reader ID
+     * @param model
+     * @return sorted book Author Reader's menu
+     */
+    @GetMapping("/readers/{id}/booksbyauthor")
+    public String findBookByAuthor(@PathVariable("id") int id, @RequestParam("name") String name,
                                    @RequestParam("surname") String surname, Model model) {
         model.addAttribute("books", userService.getBookByAuthor(name, surname));
         model.addAttribute("userService", userService);
+        model.addAttribute("user", userDao.readByID(id));
+        model.addAttribute("id", id);
         return "readers/readerbookslist";
     }
 
-    @GetMapping("/readers/popularbooks")
-    public String findPopularBooks(@RequestParam("firstDate")
+    /**
+     *
+     * @param id Reader ID
+     * @param firstDate
+     * @param secondDate
+     * @param model
+     * @return return popular book between firstDate and secondDate
+     */
+    @GetMapping("/readers/{id}/popularbooks")
+    public String findPopularBooks(@PathVariable("id") int id, @RequestParam("firstDate")
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firstDate,
                                    @RequestParam("secondDate")
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
@@ -77,6 +152,8 @@ public class ReaderController {
         model.addAttribute("books",
                 userService.findPopularBook(userService.getBookByDate(firstDate, secondDate)));
         model.addAttribute("userService", userService);
+        model.addAttribute("user", userDao.readByID(id));
+        model.addAttribute("id", id);
         return "readers/readerbookslist";
     }
 }

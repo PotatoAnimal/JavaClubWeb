@@ -2,6 +2,7 @@ package javaclub5.library.dao;
 
 import javaclub5.library.models.LogBook;
 import javaclub5.library.models.RegBooks;
+import javaclub5.library.models.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,7 @@ public class LogBookDao {
     @Autowired
     private SessionFactory sf;
     private List<LogBook> logBooks = new LinkedList<>();
+
     public LogBookDao() {
 
     }
@@ -23,7 +25,7 @@ public class LogBookDao {
     @Transactional
     public List<LogBook> readAll() {
         logBooks = (List<LogBook>) sf.getCurrentSession().createQuery("select lb from LogBook lb " +
-                "left join fetch lb.book b")
+                        "left join fetch lb.book b")
                 .list().stream().distinct().collect(Collectors.toList());
         for (LogBook logBook : logBooks) {
             logBook.getBook().getAuthors().stream().distinct().collect(Collectors.toList());
@@ -52,6 +54,14 @@ public class LogBookDao {
         sf.getCurrentSession().delete(logBook);
     }
 
+    @Transactional
+    public List<LogBook> getUserStatistic(User user) {
+        List<LogBook> usersLogBooks = (List<LogBook>) sf.getCurrentSession()
+                .createQuery("select lb from LogBook lb " +
+                        "left join fetch lb.book bk join fetch bk.Authors where lb.user.id = :Id").setParameter("Id", user.getId())
+                .list().stream().distinct().collect(Collectors.toList());
+        return usersLogBooks;
+    }
 
 
 }

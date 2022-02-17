@@ -29,6 +29,11 @@ public class UserService {
         return bookDao.readAll();
     }
 
+    /**
+     *
+     * @param title Book's title
+     * @return List of Books by Title
+     */
     public List<Book> getBookByTitle(String title) {
         Pattern pattern = getPattern(title);
         List<Book> books = bookDao.readAll();
@@ -43,6 +48,12 @@ public class UserService {
         return booksByTitle;
     }
 
+    /**
+     *
+     * @param name Author's name
+     * @param surname Author's surname
+     * @return List of Books by Author
+     */
     public List<Book> getBookByAuthor(String name, String surname) {
         List<Book> booksByAuthor = new LinkedList<>();
         List<Book> books = bookDao.readAll();
@@ -63,6 +74,11 @@ public class UserService {
         return booksByAuthor;
     }
 
+    /**
+     *
+     * @param books List of books
+     * @return most popular book
+     */
     public List<Book> findPopularBook(List<Book> books) {
         List<Book> popularBooks = new LinkedList<>();
         Map<Book, Integer> popular = new HashMap<>();
@@ -90,6 +106,12 @@ public class UserService {
         return popularBooks;
     }
 
+    /**
+     *
+     * @param firstDate
+     * @param secondDate
+     * @return return list of Books between firstDate and secondDate
+     */
     public List<Book> getBookByDate(LocalDate firstDate, LocalDate secondDate) {
         List<Book> booksByDate = new LinkedList<>();
         List<LogBook> logBooks = logBookDao.readAll();
@@ -102,6 +124,11 @@ public class UserService {
         return booksByDate;
     }
 
+    /**
+     *
+     * @param book
+     * @return availability of book
+     */
     public String isAvailable(Book book) {
         List<RegBooks> regBooks = regBooksDao.readAll();
         List<LogBook> logBooks = logBookDao.readAll();
@@ -123,6 +150,11 @@ public class UserService {
         }
     }
 
+    /**
+     *
+     * @param title
+     * @return pattern for sorting books, authors etc.
+     */
     private Pattern getPattern(String title) {
         title = title.toLowerCase().trim().replaceAll("\\s{2,}", " ");
         Pattern pattern = Pattern.compile(title);
