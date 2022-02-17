@@ -33,6 +33,10 @@
       th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
     <button>View Ordered Books</button>
 </form>
+<form class="btn btn-success"
+      th:action="@{/readers/{id}/readingbook (id = ${user.getId()})}">
+    <button>Is Reading Now</button>
+</form>
 <form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
     <button>return</button>
 </form>
