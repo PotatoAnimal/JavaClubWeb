@@ -8,6 +8,9 @@
     Books
 </h2>
 <body>
+<form class="btn btn-success" action="/books/addBook">
+    <button>Press to add new book</button>
+</form>
 <!--<a href="/books/list"> </a>-->
 <form method="get" th:action="@{/books/booksByTitle}">
     <table>

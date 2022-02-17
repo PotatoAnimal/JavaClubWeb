@@ -19,26 +19,6 @@ public class UserController {
     private UserService userService;
     String title = "";
 
-
-//    @PostMapping("/new")
-//    public String addUser(@RequestParam("name") String name, @RequestParam("surname") String surname,
-//                          @RequestParam("login") String login, @RequestParam("password") String password,
-//                          @RequestParam("email") String email, @RequestParam("birthdate") LocalDate date,
-//                          Model model) {
-//        User user = new User();
-//
-//        user.setName(name);
-//        user.setSurname(surname);
-//        user.setLogin(login);
-//        user.setPassword(password);
-//        user.setEmail(email);
-//        user.setBirthday(date);
-//
-//        model.addAttribute("users", user);
-//
-//        return "users/new";
-//    }
-
     @GetMapping("/new")
     public String addUser(Model model) {
         model.addAttribute("user", new User());

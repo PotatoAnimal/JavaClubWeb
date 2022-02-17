@@ -42,4 +42,10 @@ public class AuthorServiceImp implements AuthorService {
     public void removeAuthor(int id) {
         this.authorDAO.removeAuthor(id);
     }
+
+    @Override
+    @Transactional
+    public Author findAuthorByNameAndSurname(String name, String surname) {
+        return this.authorDAO.findAuthorByNameAndSurname(name,surname);
+    }
 }

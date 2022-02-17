@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Adding new book</title>
+
+</head>
+<body>
+<!--/*@thymesVar id="user" type=""*/-->
+<form th:method="POST" th:action="@{/books/save}" th:object="${book}">
+    <label for="title">Title:</label>
+    <input type="text" th:field="*{title}" id="title"/>
+
+    <br>
+
+    <label for="authorName">Author name:</label>
+    <input type="text" th:field="*{authorName}" id="authorName"/>
+
+    <br>
+
+    <label for="authorSurname">Author surname:</label>
+    <input type="text" th:field="*{authorSurname}" id="authorSurname"/>
+
+    <br>
+
+    <label for="yearProduction">Year Production:</label>
+    <input type="number" th:field="*{yearProduction}" id="yearProduction">
+
+    <br>
+
+
+    <label for="amount">Amount:</label>
+    <input type="number" th:field="*{amount}" id="amount">
+
+    <br>
+
+    <label for="price">Price:</label>
+    <input type="number" th:field="*{price}" id="price">
+
+    <br>
+
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>

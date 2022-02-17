@@ -1,6 +1,9 @@
 package javaclub5.library.service;
 
+import javaclub5.library.dao.AuthorDAO;
 import javaclub5.library.dao.BookDAO;
+import javaclub5.library.dto.NewBookDTO;
+import javaclub5.library.models.Author;
 import javaclub5.library.models.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,8 @@ public class BookServiceImp implements BookService {
 
     @Autowired
     private BookDAO bookDAO;
-    private List<Book> books = new LinkedList<>();
+    @Autowired
+    private AuthorDAO authorDAO;
 
 
     @Override
@@ -25,8 +29,10 @@ public class BookServiceImp implements BookService {
 
     @Override
     @Transactional
-    public void addBook(Book book) {
-        this.bookDAO.addBook(book);
+    public void addBook(NewBookDTO newBookDTO) {
+
+        Author author = authorDAO.findAuthorByNameAndSurname(newBookDTO.getAuthorName(), newBookDTO.getAuthorSurname());
+//        this.bookDAO.addBook(newBookDTO);
     }
 
     @Override

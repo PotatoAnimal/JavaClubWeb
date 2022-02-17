@@ -1,5 +1,6 @@
 package javaclub5.library.service;
 
+import javaclub5.library.dto.NewBookDTO;
 import javaclub5.library.models.Book;
 import javaclub5.library.models.User;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public interface BookService {
     List <Book> readAll();
     // save operation
-    public void addBook(Book book);
+    public void addBook(NewBookDTO newBookDTO);
 
     // read operation
     public List<Book> listBook();

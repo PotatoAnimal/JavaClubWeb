@@ -10,4 +10,5 @@ public interface AuthorDAO {
     public List<Author> listAuthors();
     public Author findAuthorById(int id);
     public void removeAuthor(int id);
+    public Author findAuthorByNameAndSurname(String name, String surname );
 }
