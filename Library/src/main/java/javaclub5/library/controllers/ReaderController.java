@@ -104,7 +104,12 @@ public class ReaderController {
         return "redirect:/readers/{id}/orderedbook";
     }
 
-
+    /**
+     *
+     * @param id Reader ID
+     * @param model
+     * @return Table with ordered books
+     */
     @GetMapping("/readers/{id}/orderedbook")
     public String showOrderedBooks(@PathVariable("id") int id, Model model) {
         User user = userDao.readByID(id);
@@ -112,6 +117,25 @@ public class ReaderController {
         model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "readers/readerorder";
+    }
+
+    /**
+     *
+     * @param id Reader ID
+     * @param idLogBook LogBook ID
+     * @param model
+     * @return Cancel Book Order
+     */
+    @PostMapping("/readers/{id}/cancel/{idLogBook}")
+    public String cancelOrderedBook(@PathVariable("id") int id,
+                            @PathVariable("idLogBook") int idLogBook,
+                            Model model) {
+        LogBook logBook = logBookDao.readByID(idLogBook);
+        logBookDao.delete(logBook);
+        User user = userDao.readByID(id);
+        model.addAttribute("user",user);
+        model.addAttribute("id", id);
+        return "redirect:/readers/{id}/orderedbook";
     }
 
 

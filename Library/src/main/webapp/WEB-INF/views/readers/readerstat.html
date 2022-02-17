@@ -29,6 +29,10 @@
         <td th:text="${logbook.DateIn}">dateIn</td>
     </tr>
 </table>
+<form class="btn btn-success"
+      th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
+    <button>View Ordered Books</button>
+</form>
 
 </body>
 </html>
