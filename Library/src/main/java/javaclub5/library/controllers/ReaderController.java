@@ -1,5 +1,6 @@
 package javaclub5.library.controllers;
 
+import javaclub5.library.dao.BookDao;
 import javaclub5.library.dao.LogBookDao;
 import javaclub5.library.dao.UserDao;
 import javaclub5.library.models.Book;
@@ -22,6 +23,8 @@ public class ReaderController {
     private UserDao userDao;
     @Autowired
     private LogBookDao logBookDao;
+    @Autowired
+    private BookDao bookDao;
 
     /**
      * @param id Reader ID
@@ -82,12 +85,15 @@ public class ReaderController {
 
     /**
      * @param id Reader ID
-     * @param book Ordered Book
+     * @param idBook Book ID
      * @param model
      * @return redirect to List of Odered Books
      */
-    @PostMapping("/readers/{id}/orderbook")
-    public String orderBook(@PathVariable("id") int id, @ModelAttribute("book") Book book, Model model) {
+    @PostMapping("/readers/{id}/orderbook/{idBook}")
+    public String orderBook(@PathVariable("id") int id,
+                            @PathVariable("idBook") int idBook,
+                            Model model) {
+        Book book = bookDao.readByID(idBook);
         User user = userDao.readByID(id);
         LogBook logBook = new LogBook();
         logBook.setBook(book);

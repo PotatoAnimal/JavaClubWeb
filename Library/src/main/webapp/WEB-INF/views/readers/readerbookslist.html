@@ -110,7 +110,7 @@
         <td th:text="${userService.isAvailable(book)}">availibilty</td>
         <td>
             <form th:method="POST" class="btn btn-success"
-                  th:action="@{/readers/{idReader}/orderbook (idReader = ${id})}">
+                  th:action="@{/readers/{idReader}/orderbook/{idBook} (idReader = ${id}, idBook = ${book.getId()})}">
                 <button>Order Book</button>
             </form>
         </td>
