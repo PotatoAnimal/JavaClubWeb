@@ -17,7 +17,6 @@ public class ReaderService extends UserService{
     private LogBookDao logBookDao;
 
     /**
-     *
      * @param user Reader
      * @return List of ordered books by Reader
      */
@@ -25,5 +24,17 @@ public class ReaderService extends UserService{
         List<LogBook> orderedBooks = logBookDao.getUserStatistic(user);
         orderedBooks = orderedBooks.stream().filter(t -> t.getDataOut() == null).collect(Collectors.toList());
         return orderedBooks;
+    }
+
+    /**
+     *
+     * @param user Reader
+     * @return List of Books, that are reading now
+     */
+    public List<LogBook> getReadingBooks(User user) {
+        List<LogBook> readingBooks = logBookDao.getUserStatistic(user);
+        readingBooks = readingBooks.stream()
+                .filter(t -> (t.getDataOut() != null && t.getDateIn() == null)).collect(Collectors.toList());
+        return readingBooks;
     }
 }

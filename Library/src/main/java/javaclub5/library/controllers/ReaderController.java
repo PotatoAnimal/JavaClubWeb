@@ -138,6 +138,14 @@ public class ReaderController {
         return "redirect:/readers/{id}/orderedbook";
     }
 
+    @GetMapping("/readers/{id}/readingbook")
+    public String showReadingBooks(@PathVariable("id") int id, Model model) {
+        User user = userDao.readByID(id);
+        model.addAttribute("logBooks", userService.getOrderedBooks(userDao.readByID(id)));
+        model.addAttribute("user", user);
+        model.addAttribute("id", id);
+        return "readers/readerreadingbook";
+    }
 
    /* @GetMapping("/readers/books")
     public String findAllBooks(Model model) {
