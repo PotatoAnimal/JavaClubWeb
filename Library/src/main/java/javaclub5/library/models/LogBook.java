@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "log_book", schema = "library", catalog = "JavaClubWeb")
 public class LogBook {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "data_out", nullable = true)

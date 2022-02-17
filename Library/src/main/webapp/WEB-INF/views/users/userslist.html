@@ -33,6 +33,11 @@
         <td th:text="${user.getRole().toString()}">role</td>
         <td th:text="${user.getEmail()}">email</td>
         <td th:text="${user.getBirthday}">birthday</td>
+        <td>
+            <form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
+                <button>Goto</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>

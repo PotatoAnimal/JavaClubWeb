@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Order</title>
+</head>
+<body>
+<h2>
+    <p th:text="${user.userToString(user)}"> </p>
+</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Authors</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="logbook : ${logBooks}">
+        <td th:text="${logbook.id}">ID</td>
+        <td th:text="${logbook.getBook().booksToString(logbook.getBook())}">book</td>
+        <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
+        <td>
+            <form th:method="POST" class="btn btn-success"
+                  th:action="@{/readers/{idReader}/cancel/{idLogBook} (idReader = ${id}, idLogBook = ${logbook.getId()})}">
+                <button>Cancel order</button>
+            </form>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

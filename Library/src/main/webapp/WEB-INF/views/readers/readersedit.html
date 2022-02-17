@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>edit</title>
+</head>
+<h2>
+    Edit profile
+</h2>
+<body>
+<form th:method="GET" th:action="@{/reader/{id}/update (id = ${id})}" th:object="${user}">
+    <table>
+        <tr>
+            <td>
+                <label for="name"> Name: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "*{name}" th:value="${user.name}" id="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="surname"> Surname: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "*{surname}" th:value="${user.surname}" id="surname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="birthday"> Date of Birth: </label>
+            </td>
+            <td>
+                <input type="date" th:field = "*{birthday}" th:value="${user.birthday}" id="birthday"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Update">
+            </td>
+            <td>
+                <input type="reset" value="Clear">
+            </td>
+
+        </tr>
+    </table>
+</form>
+<form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
+    <button>return</button>
+</form>
+
+</body>
+</html>

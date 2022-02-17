@@ -27,7 +27,6 @@ public class UserController {
 
     @GetMapping("/books")
     public String findAllBooks(Model model) {
-        this.title = "abc";
         model.addAttribute("books", userService.getBookList());
         model.addAttribute("userService", userService);
         return "books/bookslist";

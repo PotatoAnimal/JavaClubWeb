@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8 ">
+    <title>Statistics</title>
+</head>
+<body>
+<h2>
+    <p th:text="${user.userToString(user)}"> </p>
+</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Authors</th>
+        <th>Date Out</th>
+        <th>Date In</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="logbook : ${userLogBook}">
+        <td th:text="${logbook.id}">ID</td>
+        <td th:text="${logbook.getBook().booksToString(logbook.getBook())}">book</td>
+        <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
+        <td th:text="${logbook.DataOut}">dateOut</td>
+        <td th:text="${logbook.DateIn}">dateIn</td>
+    </tr>
+</table>
+<form class="btn btn-success"
+      th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
+    <button>View Ordered Books</button>
+</form>
+
+</body>
+</html>

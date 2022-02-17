@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "authors", schema = "library", catalog = "JavaClubWeb")
 public class Author {
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "name", nullable = true, length = 20)

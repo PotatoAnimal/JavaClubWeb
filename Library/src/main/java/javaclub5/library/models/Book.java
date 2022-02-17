@@ -10,6 +10,7 @@ import java.util.Objects;
 public class Book {
 
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "title", nullable = true, length = 50)

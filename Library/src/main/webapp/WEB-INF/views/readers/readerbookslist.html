@@ -2,13 +2,23 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Books</title>
+    <title>reader</title>
 </head>
+<body>
+<h2>
+    <p th:text="${user.userToString(user)}">  </p>
+</h2>
+<form th:method="POST" class="btn btn-success" th:action="@{/users/{idReader} (idReader = ${id})}">
+    <button>Edit profile</button>
+</form>
+<form th:method="POST" class="btn btn-success" th:action="@{/readers/{idReader}/stat (idReader = ${id})}">
+    <button>Get statistics</button>
+</form>
 <h2>
     Books
 </h2>
-<body>
-<form th:action="@{/booksbytitle}">
+
+<form th:action="@{/readers/{id}/booksbytitle (id = ${id})}">
     <table>
         <tr>
             <td>
@@ -26,7 +36,7 @@
         </td>
     </table>
 </form>
-<form th:action="@{/booksbyauthor}">
+<form th:action="@{/readers/{id}/booksbyauthor (id = ${id})}">
     <table>
         <tr>
             <td>
@@ -52,7 +62,7 @@
         </td>
     </table>
 </form>
-<form th:action="@{/popularbooks}">
+<form th:action="@{/readers/{id}/popularbooks (id = ${id})}">
     <table>
         <tr>
             <td>
@@ -85,6 +95,7 @@
         <th>year production</th>
         <th>Authors</th>
         <th>Availability</th>
+        <th>Action</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -97,6 +108,12 @@
         <td th:text="${book.yearProduction}">year</td>
         <td th:text="${book.authorsToString(book.authors)}">authors</td>
         <td th:text="${userService.isAvailable(book)}">availibilty</td>
+        <td>
+            <form th:method="POST" class="btn btn-success"
+                  th:action="@{/readers/{idReader}/orderbook/{idBook} (idReader = ${id}, idBook = ${book.getId()})}">
+                <button>Order Book</button>
+            </form>
+        </td>
     </tr>
 </table>
 </body>
