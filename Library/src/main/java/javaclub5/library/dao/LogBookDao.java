@@ -58,7 +58,7 @@ public class LogBookDao {
     public List<LogBook> getUserStatistic(User user) {
         List<LogBook> usersLogBooks = (List<LogBook>) sf.getCurrentSession()
                 .createQuery("select lb from LogBook lb " +
-                        "left join fetch lb.book bk join fetch bk.Authors where lb.user.id = :Id").setParameter("Id", user.getId())
+                        "left join fetch lb.book bk left join fetch bk.Authors where lb.user.id = :Id").setParameter("Id", user.getId())
                 .list().stream().distinct().collect(Collectors.toList());
         return usersLogBooks;
     }
