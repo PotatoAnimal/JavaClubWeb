@@ -23,7 +23,7 @@ public class ReaderService extends UserService{
      */
     public List<LogBook> getOrderedBooks(User user) {
         List<LogBook> orderedBooks = logBookDao.getUserStatistic(user);
-        orderedBooks.stream().filter(t -> t.getDataOut() == null).collect(Collectors.toList());
+        orderedBooks = orderedBooks.stream().filter(t -> t.getDataOut() == null).collect(Collectors.toList());
         return orderedBooks;
     }
 }
