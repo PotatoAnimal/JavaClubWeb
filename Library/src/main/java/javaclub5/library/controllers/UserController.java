@@ -1,7 +1,5 @@
 package javaclub5.library.controllers;
 
-import javaclub5.library.dao.UserDAO;
-import javaclub5.library.dao.UserDAOImp;
 import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.User;
 import javaclub5.library.service.UserService;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 
 @Controller
 //@RequestMapping("/users")
