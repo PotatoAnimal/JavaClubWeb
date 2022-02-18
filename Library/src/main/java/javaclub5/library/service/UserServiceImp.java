@@ -28,7 +28,6 @@ public class UserServiceImp implements UserService {
     @Transactional
     public void addUser(User user) {
         user.setRole(roleDAO.findRoleById(2));
-//        user.setBirthday(LocalDate.now());
         this.userDAO.addUser(user);
     }
 
