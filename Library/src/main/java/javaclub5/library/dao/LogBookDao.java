@@ -1,13 +1,15 @@
 package javaclub5.library.dao;
 
 import javaclub5.library.models.LogBook;
-import javaclub5.library.models.RegBooks;
 import javaclub5.library.models.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,5 +65,18 @@ public class LogBookDao {
         return usersLogBooks;
     }
 
+    @Transactional
+    public long countGivenBooksByPeriod(LocalDate dataFrom, LocalDate dataTo){
+        Session session = sf.getCurrentSession();
+//        dataFrom=LocalDate.of(2022,1,1);
+//        dataTo=LocalDate.of(2022, 1, 5);
+        String hqlString = "select count(*) from LogBook as lb " +
+                "where lb.dataOut>= :dataFrom and lb.dataOut< :dataTo";
+        Query query = session.createQuery(hqlString)
+                .setParameter("dataFrom", dataFrom)
+                .setParameter("dataTo", dataTo);
+        long cntRec = (long)query.uniqueResult();
+        return cntRec;
+    }
 
 }
