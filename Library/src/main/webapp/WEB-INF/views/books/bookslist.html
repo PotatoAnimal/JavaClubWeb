@@ -88,6 +88,9 @@
         <th>year production</th>
         <th>Authors</th>
         <th>Availability</th>
+        <th>TotalBooks</th>
+        <th>IsReading</th>
+        <th>AvailBooks</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -100,6 +103,9 @@
         <td th:text="${book.yearProduction}">year</td>
         <td th:text="${book.authorsToString(book.authors)}">authors</td>
         <td th:text="${userService.isAvailable(book)}">availibilty</td>
+        <td th:text="${userService.getCountBook(book.id)}">TotalBooks</td>
+        <td th:text="${userService.getCountReadingBook(book.id)}">IsReading</td>
+        <td th:text="${userService.getCountAvailableBook(book.id)}">AvailBooks</td>
     </tr>
 </table>
 </body>

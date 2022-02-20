@@ -162,4 +162,16 @@ public class UserService {
         Pattern pattern = Pattern.compile(title);
         return pattern;
     }
+
+    public long getCountReadingBook(int id) {
+        return this.bookDao.getCountReadingBook(id);
+    }
+
+    public long getCountBook(int id) {
+        return this.bookDao.getCountBook(id);
+    }
+
+    public long getCountAvailableBook(int id) {
+        return this.bookDao.getCountAvailableBook(id);
+    }
 }

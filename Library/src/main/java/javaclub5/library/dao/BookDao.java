@@ -63,8 +63,34 @@ public class BookDao {
     public long getCountReadingBook(int idBook) {
         Session session = sf.getCurrentSession();
         String hqlCountBooksAreReading = "select count(*) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is null";
-        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",3);
-        long countBook = (long) cntBooksAreReading.uniqueResult();
+        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",idBook);
+        long countBook = 0;
+        try {
+            countBook = (long) cntBooksAreReading.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
         return countBook;
+    }
+
+    /*
+     * Count how many some book is in library
+     * */
+    @Transactional
+    public long getCountBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hqlCountBooksAreReading = "select sum(rb.amount*rb.operations) from RegBooks rb where rb.book.id = :id";
+        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",idBook);
+        long countBook = 0;
+        try {
+            countBook = (long) cntBooksAreReading.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
+        return countBook;
+    }
+    @Transactional
+    public long getCountAvailableBook(int idBook) {
+        return getCountBook(idBook) - getCountReadingBook(idBook);
     }
 }
