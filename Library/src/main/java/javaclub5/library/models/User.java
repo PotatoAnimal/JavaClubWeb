@@ -1,5 +1,7 @@
 package javaclub5.library.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -23,6 +25,7 @@ public class User {
     @JoinColumn(name = "id_role")
     private Role role;
     @Column(name = "birthday", nullable = true)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     @Column(name = "surname", nullable = true, length = 20)
     private String surname;

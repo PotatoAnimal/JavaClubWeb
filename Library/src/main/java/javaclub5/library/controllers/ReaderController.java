@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 
 @Controller
@@ -27,7 +28,7 @@ public class ReaderController {
     private BookDao bookDao;
 
     /**
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return main menu Reader
      */
@@ -41,7 +42,7 @@ public class ReaderController {
     }
 
     /**
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return edit menu of Reader
      */
@@ -53,24 +54,23 @@ public class ReaderController {
     }
 
     /**
-     *
-     * @param id Reader ID
+     * @param id   Reader ID
      * @param user
      * @return updated Reader menu after reader edit
      */
     @GetMapping("/reader/{id}/update")
-    public String update(@PathVariable("id") int id,
-                         @ModelAttribute("user") User user) {
+    public String update(@PathVariable("id") int id, @ModelAttribute("user") User user, Model model) {
         User oldUser = userDao.readByID(id);
         oldUser.setName(user.getName());
         oldUser.setSurname(user.getSurname());
         oldUser.setBirthday(user.getBirthday());
         userDao.update(oldUser);
+        model.addAttribute("user", oldUser);
         return "redirect: /readers/{id} ";
     }
 
     /**
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return Reader statistics
      */
@@ -84,7 +84,7 @@ public class ReaderController {
     }
 
     /**
-     * @param id Reader ID
+     * @param id     Reader ID
      * @param idBook Book ID
      * @param model
      * @return redirect to List of Ordered Books
@@ -99,14 +99,13 @@ public class ReaderController {
         logBook.setBook(book);
         logBook.setUser(user);
         logBookDao.create(logBook);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "redirect:/readers/{id}/orderedbook";
     }
 
     /**
-     *
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return Table with ordered books
      */
@@ -120,27 +119,25 @@ public class ReaderController {
     }
 
     /**
-     *
-     * @param id Reader ID
+     * @param id        Reader ID
      * @param idLogBook LogBook ID
      * @param model
      * @return Cancel Book Order
      */
     @PostMapping("/readers/{id}/cancel/{idLogBook}")
     public String cancelOrderedBook(@PathVariable("id") int id,
-                            @PathVariable("idLogBook") int idLogBook,
-                            Model model) {
+                                    @PathVariable("idLogBook") int idLogBook,
+                                    Model model) {
         LogBook logBook = logBookDao.readByID(idLogBook);
         logBookDao.delete(logBook);
         User user = userDao.readByID(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "redirect:/readers/{id}/orderedbook";
     }
 
     /**
-     *
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return List of Books that are reading now
      */
@@ -155,13 +152,13 @@ public class ReaderController {
 
     @PostMapping("/readers/{id}/return/{idLogBook}")
     public String returnBook(@PathVariable("id") int id,
-                                    @PathVariable("idLogBook") int idLogBook,
-                                    Model model) {
+                             @PathVariable("idLogBook") int idLogBook,
+                             Model model) {
         LogBook logBook = logBookDao.readByID(idLogBook);
         logBook.setDateIn(LocalDate.now());
         logBookDao.update(logBook);
         User user = userDao.readByID(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "redirect:/readers/{id}/readingbook";
     }
@@ -176,12 +173,12 @@ public class ReaderController {
 
     /**
      * @param title Title of Book
-     * @param id Reader ID
+     * @param id    Reader ID
      * @param model
      * @return sorted book title Reader's menu
      */
     @GetMapping("/readers/{id}/booksbytitle")
-    public String findBookByTitle(@RequestParam("title") String title,@PathVariable("id") int id, Model model) {
+    public String findBookByTitle(@RequestParam("title") String title, @PathVariable("id") int id, Model model) {
         model.addAttribute("books", userService.getBookByTitle(title));
         model.addAttribute("userService", userService);
         model.addAttribute("user", userDao.readByID(id));
@@ -190,8 +187,8 @@ public class ReaderController {
     }
 
     /**
-     * @param name Author's name of Book
-     * @param id Reader ID
+     * @param name  Author's name of Book
+     * @param id    Reader ID
      * @param model
      * @return sorted book Author Reader's menu
      */
@@ -206,8 +203,7 @@ public class ReaderController {
     }
 
     /**
-     *
-     * @param id Reader ID
+     * @param id         Reader ID
      * @param firstDate
      * @param secondDate
      * @param model
@@ -215,7 +211,7 @@ public class ReaderController {
      */
     @GetMapping("/readers/{id}/popularbooks")
     public String findPopularBooks(@PathVariable("id") int id, @RequestParam("firstDate")
-                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firstDate,
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate firstDate,
                                    @RequestParam("secondDate")
                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate secondDate,
                                    Model model) {
