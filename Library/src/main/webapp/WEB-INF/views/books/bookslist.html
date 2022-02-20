@@ -91,6 +91,7 @@
         <th>TotalBooks</th>
         <th>IsReading</th>
         <th>AvailBooks</th>
+        <th>AvrTimeReadingBook</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
@@ -106,6 +107,7 @@
         <td th:text="${userService.getCountBook(book.id)}">TotalBooks</td>
         <td th:text="${userService.getCountReadingBook(book.id)}">IsReading</td>
         <td th:text="${userService.getCountAvailableBook(book.id)}">AvailBooks</td>
+        <td th:text="${userService.getAverageDaysReadingBook(book.id)}">AvrTimeReadingBook</td>
     </tr>
 </table>
 </body>

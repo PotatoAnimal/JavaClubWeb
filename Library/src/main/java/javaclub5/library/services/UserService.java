@@ -174,4 +174,8 @@ public class UserService {
     public long getCountAvailableBook(int id) {
         return this.bookDao.getCountAvailableBook(id);
     }
+
+    public double getAverageDaysReadingBook(int id) {
+        return this.bookDao.getAverageDaysReadingBook(id);
+    }
 }

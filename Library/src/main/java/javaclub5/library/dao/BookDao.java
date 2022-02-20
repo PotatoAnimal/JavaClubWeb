@@ -62,11 +62,11 @@ public class BookDao {
     @Transactional
     public long getCountReadingBook(int idBook) {
         Session session = sf.getCurrentSession();
-        String hqlCountBooksAreReading = "select count(*) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is null";
-        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",idBook);
+        String hql = "select count(*) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is null";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
         long countBook = 0;
         try {
-            countBook = (long) cntBooksAreReading.uniqueResult();
+            countBook = (long) cnt.uniqueResult();
         } catch (NullPointerException e) {
 //            e.printStackTrace();
         }
@@ -79,11 +79,11 @@ public class BookDao {
     @Transactional
     public long getCountBook(int idBook) {
         Session session = sf.getCurrentSession();
-        String hqlCountBooksAreReading = "select sum(rb.amount*rb.operations) from RegBooks rb where rb.book.id = :id";
-        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",idBook);
+        String hql = "select sum(rb.amount*rb.operations) from RegBooks rb where rb.book.id = :id";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
         long countBook = 0;
         try {
-            countBook = (long) cntBooksAreReading.uniqueResult();
+            countBook = (long) cnt.uniqueResult();
         } catch (NullPointerException e) {
 //            e.printStackTrace();
         }
@@ -92,5 +92,18 @@ public class BookDao {
     @Transactional
     public long getCountAvailableBook(int idBook) {
         return getCountBook(idBook) - getCountReadingBook(idBook);
+    }
+    @Transactional
+    public double getAverageDaysReadingBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hql = "select avg(lb.dateIn-lb.dataOut) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is not null";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
+        double daysReadingBook = 0;
+        try {
+            daysReadingBook = (double) cnt.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
+        return daysReadingBook;
     }
 }
