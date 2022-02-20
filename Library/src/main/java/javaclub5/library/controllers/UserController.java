@@ -35,8 +35,8 @@ public class UserController {
 
     @PostMapping("/save")
     public String create(@ModelAttribute("user") UserDTO userDTO) {
-        userService.addUser(userDTO.convertToUser());
-        return "redirect:/users";
+        userService.addUser(userDTO);
+        return "redirect:readers/" + userDTO.getId();
     }
 
     @GetMapping("/books")

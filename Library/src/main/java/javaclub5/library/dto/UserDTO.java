@@ -1,10 +1,8 @@
 package javaclub5.library.dto;
 
-import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 public class UserDTO {

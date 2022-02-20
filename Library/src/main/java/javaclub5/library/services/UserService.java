@@ -1,6 +1,7 @@
 package javaclub5.library.services;
 
 import javaclub5.library.dao.*;
+import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,9 +31,11 @@ public class UserService {
     }
 
 
-    public void addUser(User user) {
+    public void addUser(UserDTO userDTO) {
+        User user = userDTO.convertToUser();
         user.setRole(roleDao.readByID(2));
-        this.userDao.addUser(user);
+        userDao.addUser(user);
+        userDTO.setId(user.getId());
     }
 
     /**
