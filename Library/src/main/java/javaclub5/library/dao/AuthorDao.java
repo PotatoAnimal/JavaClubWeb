@@ -1,7 +1,9 @@
 package javaclub5.library.dao;
 
 import javaclub5.library.models.Author;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +24,7 @@ public class AuthorDao {
 
     @Transactional
     public List<Author> readAll() {
-        authors =  sf.getCurrentSession().createQuery("from Author").list();
+        authors = sf.getCurrentSession().createQuery("from Author").list();
         authors = authors.stream().distinct().collect(Collectors.toList());
         return authors;
     }
@@ -46,6 +48,18 @@ public class AuthorDao {
     @Transactional
     public void delete(Author author) {
         sf.getCurrentSession().delete(author);
+    }
+
+    @Transactional
+    public Author findAuthorByNameAndSurname(String name, String surname) {
+        Session session = this.sf.getCurrentSession();
+        String hql = "select a from Author a where a.name = :name AND a.surname = :surname";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        query.setParameter("surname", surname);
+        return (query.getMaxResults() == 0)
+                ? null
+                : (Author) query.getSingleResult();
     }
 
 }

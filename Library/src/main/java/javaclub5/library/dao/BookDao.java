@@ -1,6 +1,7 @@
 package javaclub5.library.dao;
 
 import javaclub5.library.models.Book;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,12 @@ public class BookDao {
 
     public BookDao() {
 
+    }
+
+    @Transactional
+    public void addBook(Book book){
+        Session session = this.sf.getCurrentSession();
+        session.persist(book);
     }
 
     @Transactional
