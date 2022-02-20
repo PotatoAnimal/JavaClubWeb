@@ -25,7 +25,7 @@ public class BookDao {
     public void addBook(Book book){
         Session session = this.sf.getCurrentSession();
         session.persist(book);
-    }
+     }
 
     @Transactional
     public List<Book> readAll() {

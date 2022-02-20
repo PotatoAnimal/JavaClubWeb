@@ -28,7 +28,6 @@
 
   <br>
 
-
   <label for="amount">Amount:</label>
   <input type="number" th:field="*{amount}" id="amount">
 
@@ -38,6 +37,11 @@
   <input type="number" th:field="*{price}" id="price">
 
   <br>
+
+  <div>
+    <input type="checkbox" th:field="*{donated}" id="donated">
+    <label for="donated">Donated</label>
+  </div>
 
   <input type="submit" value="Create">
 </form>

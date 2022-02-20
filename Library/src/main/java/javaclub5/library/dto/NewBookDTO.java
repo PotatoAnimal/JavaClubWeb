@@ -1,6 +1,8 @@
 package javaclub5.library.dto;
 
+import javaclub5.library.dao.RegBooksDao;
 import javaclub5.library.models.Book;
+import javaclub5.library.models.RegBooks;
 
 public class NewBookDTO {
     private int id;
@@ -8,19 +10,31 @@ public class NewBookDTO {
     private int yearProduction;
     private int amount;
     private int price;
+    private boolean donated;
     private String authorSurname;
     private String authorName;
+    private int operations;
 
     public NewBookDTO() {
     }
 
-    public NewBookDTO(String title, int yearProduction, int amount, int price, String surname, String name) {
+    public NewBookDTO(String title, int yearProduction, int amount, int price, boolean donated, String authorSurname, String authorName,int operations) {
         this.title = title;
         this.yearProduction = yearProduction;
         this.amount = amount;
         this.price = price;
-        this.authorSurname = surname;
-        this.authorName = name;
+        this.donated = donated;
+        this.authorSurname = authorSurname;
+        this.authorName = authorName;
+        this.operations = operations;
+    }
+
+    public boolean isDonated() {
+        return donated;
+    }
+
+    public void setDonated(boolean donated) {
+        this.donated = donated;
     }
 
     public String getAuthorSurname() {
@@ -63,7 +77,6 @@ public class NewBookDTO {
         this.yearProduction = yearProduction;
     }
 
-
     public int getAmount() {
         return amount;
     }
@@ -80,11 +93,20 @@ public class NewBookDTO {
         this.price = price;
     }
 
-    public Book convertToBook(){
+    public Book convertToBook() {
         Book book = new Book();
         book.setTitle(this.title);
         book.setYearProduction(this.yearProduction);
-        return book; //  need to finish with (Register book with copies)
+        return book;
+    }
+
+    public RegBooks convertToRegBook(){
+        RegBooks regBooks = new RegBooks();
+        regBooks.setPrice(this.price);
+        regBooks.setAmount(this.amount);
+        regBooks.setDonated(this.donated);
+        regBooks.setOperations(1);
+        return regBooks;
     }
 
     @Override

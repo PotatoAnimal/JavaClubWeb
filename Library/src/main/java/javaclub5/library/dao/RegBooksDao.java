@@ -2,8 +2,11 @@ package javaclub5.library.dao;
 
 
 import javaclub5.library.models.Author;
+import javaclub5.library.models.Book;
 import javaclub5.library.models.RegBooks;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -48,7 +51,5 @@ public class RegBooksDao {
     public void update(RegBooks regBooks) {
         sf.getCurrentSession().update(regBooks);
     }
-
-
 
 }
