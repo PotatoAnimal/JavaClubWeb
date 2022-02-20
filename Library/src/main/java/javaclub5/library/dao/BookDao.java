@@ -3,6 +3,7 @@ package javaclub5.library.dao;
 import javaclub5.library.models.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,5 +54,17 @@ public class BookDao {
     @Transactional
     public void delete(Book book) {
         sf.getCurrentSession().delete(book);
+    }
+
+    /*
+    * Count how many some book is reading now
+    * */
+    @Transactional
+    public long getCountReadingBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hqlCountBooksAreReading = "select count(*) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is null";
+        Query cntBooksAreReading = session.createQuery(hqlCountBooksAreReading).setParameter("id",3);
+        long countBook = (long) cntBooksAreReading.uniqueResult();
+        return countBook;
     }
 }
