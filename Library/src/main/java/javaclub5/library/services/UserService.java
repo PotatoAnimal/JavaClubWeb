@@ -1,15 +1,11 @@
 package javaclub5.library.services;
 
-import javaclub5.library.dao.BookDao;
-import javaclub5.library.dao.LogBookDao;
-import javaclub5.library.dao.RegBooksDao;
-import javaclub5.library.models.Author;
-import javaclub5.library.models.Book;
-import javaclub5.library.models.LogBook;
-import javaclub5.library.models.RegBooks;
+import javaclub5.library.dao.*;
+import javaclub5.library.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -24,13 +20,22 @@ public class UserService {
     private LogBookDao logBookDao;
     @Autowired
     private RegBooksDao regBooksDao;
+    @Autowired
+    private RoleDao roleDao;
+    @Autowired
+    private UserDao userDao;
 
     public List<Book> getBookList() {
         return bookDao.readAll();
     }
 
+
+    public void addUser(User user) {
+        user.setRole(roleDao.readByID(2));
+        this.userDao.addUser(user);
+    }
+
     /**
-     *
      * @param title Book's title
      * @return List of Books by Title
      */
@@ -49,8 +54,7 @@ public class UserService {
     }
 
     /**
-     *
-     * @param name Author's name
+     * @param name    Author's name
      * @param surname Author's surname
      * @return List of Books by Author
      */
@@ -75,20 +79,18 @@ public class UserService {
     }
 
     /**
-     *
      * @param books List of books
      * @return most popular book
      */
     public List<Book> findPopularBook(List<Book> books) {
         List<Book> popularBooks = new LinkedList<>();
         Map<Book, Integer> popular = new HashMap<>();
-        for (Book book: books) {
+        for (Book book : books) {
             if (popular.containsKey(book)) {
                 int value = popular.get(book);
                 value++;
                 popular.put(book, value);
-            }
-            else {
+            } else {
                 popular.put(book, 1);
             }
         }
@@ -107,7 +109,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param firstDate
      * @param secondDate
      * @return return list of Books between firstDate and secondDate
@@ -115,8 +116,8 @@ public class UserService {
     public List<Book> getBookByDate(LocalDate firstDate, LocalDate secondDate) {
         List<Book> booksByDate = new LinkedList<>();
         List<LogBook> logBooks = logBookDao.readAll();
-        for (LogBook logBook: logBooks) {
-            if (logBook.getDataOut().compareTo(firstDate) >=0
+        for (LogBook logBook : logBooks) {
+            if (logBook.getDataOut().compareTo(firstDate) >= 0
                     && logBook.getDataOut().compareTo(secondDate) <= 0) {
                 booksByDate.add(logBook.getBook());
             }
@@ -125,7 +126,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param book
      * @return availability of book
      */
@@ -134,25 +134,23 @@ public class UserService {
         List<LogBook> logBooks = logBookDao.readAll();
         int regBooksAmount = 0;
         int logBookAmount = 0;
-        for (RegBooks regBook: regBooks) {
+        for (RegBooks regBook : regBooks) {
             if (regBook.getBook().getId() == book.getId())
                 regBooksAmount += regBook.getAmount() * regBook.getOperations();
         }
-        for (LogBook logBook: logBooks) {
+        for (LogBook logBook : logBooks) {
             if (logBook.getBook().getId() == book.getId() &&
-            logBook.getDateIn() == null && logBook.getDataOut() != null)
-                logBookAmount ++;
+                    logBook.getDateIn() == null && logBook.getDataOut() != null)
+                logBookAmount++;
         }
         if (regBooksAmount - logBookAmount > 0) {
             return "available";
-        }
-        else {
+        } else {
             return "unavailable";
         }
     }
 
     /**
-     *
      * @param title
      * @return pattern for sorting books, authors etc.
      */

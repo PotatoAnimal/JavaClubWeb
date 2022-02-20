@@ -28,8 +28,14 @@ public class UserDao {
     }
 
     @Transactional
+    public void addUser(User user) {
+        Session session = this.sf.getCurrentSession();
+        session.persist(user);
+    }
+
+    @Transactional
     public List<User> readAll() {
-        users =  sf.getCurrentSession().createQuery("from User").list();
+        users = sf.getCurrentSession().createQuery("from User").list();
         return users;
     }
 

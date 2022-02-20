@@ -1,6 +1,8 @@
 package javaclub5.library.controllers;
 
 import javaclub5.library.dao.UserDao;
+import javaclub5.library.dto.UserDTO;
+import javaclub5.library.models.User;
 import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +25,18 @@ public class UserController {
     public String index(Model model) {
         model.addAttribute("users", userDao.readAll());
         return "users/userslist";
+    }
+
+    @GetMapping("/registerNewUser")
+    public String addUser(Model model) {
+        model.addAttribute("user", new UserDTO());
+        return "users/registerNewUser";
+    }
+
+    @PostMapping("/save")
+    public String create(@ModelAttribute("user") UserDTO userDTO) {
+        userService.addUser(userDTO.convertToUser());
+        return "redirect:/users";
     }
 
     @GetMapping("/books")
