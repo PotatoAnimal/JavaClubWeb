@@ -38,7 +38,7 @@ public class UserService {
 
     public void addUser(UserDTO userDTO) {
         User user = userDTO.convertToUser();
-        user.setRole(userDTO.convertToRole());
+        user.setRole(roleDao.readByID(2));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
         userDTO.setId(user.getId());

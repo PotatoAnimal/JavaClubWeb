@@ -1,9 +1,6 @@
 package javaclub5.library.controllers;
 
-import javaclub5.library.dao.UserDao;
 import javaclub5.library.dto.UserDTO;
-import javaclub5.library.models.User;
-import javaclub5.library.services.RoleService;
 import javaclub5.library.services.UserService;
 import javaclub5.library.userLoginService.SecurityService;
 import javaclub5.library.userLoginService.UserValidator;
@@ -13,15 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private RoleService roleService;
 
     @Autowired
     private SecurityService securityService;
@@ -42,6 +36,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "users/registerNewUser";
         }
+
         userService.addUser(userDto);
         securityService.autoLogin(userDto.getLogin(), userDto.getPassword());
         return "redirect:/readers/" + userDto.getId();
@@ -54,6 +49,7 @@ public class LoginController {
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
+
 
         return "users/login";
     }
