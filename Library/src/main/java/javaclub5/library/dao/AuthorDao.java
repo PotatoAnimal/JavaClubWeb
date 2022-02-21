@@ -57,7 +57,7 @@ public class AuthorDao {
         Query query = session.createQuery(hql);
         query.setParameter("name", name);
         query.setParameter("surname", surname);
-        return (query.getMaxResults() == 0)
+        return (query.list().isEmpty())
                 ? null
                 : (Author) query.getSingleResult();
     }

@@ -4,10 +4,13 @@ import javaclub5.library.dao.UserDao;
 import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.User;
 import javaclub5.library.services.UserService;
+import javaclub5.library.userLoginService.SecurityService;
+import javaclub5.library.userLoginService.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -18,8 +21,11 @@ public class UserController {
     UserDao userDao;
     @Autowired
     UserService userService;
+    @Autowired
+    private SecurityService securityService;
+    @Autowired
+    private UserValidator userValidator;
     String title = "";
-
 
     @GetMapping("/users")
     public String index(Model model) {
@@ -27,17 +33,17 @@ public class UserController {
         return "users/userslist";
     }
 
-    @GetMapping("/registerNewUser")
-    public String addUser(Model model) {
-        model.addAttribute("user", new UserDTO());
-        return "users/registerNewUser";
-    }
-
-    @PostMapping("/save")
-    public String create(@ModelAttribute("user") UserDTO userDTO) {
-        userService.addUser(userDTO);
-        return "redirect:readers/" + userDTO.getId();
-    }
+//    @GetMapping("/registerNewUser")
+//    public String addUser(Model model) {
+//        model.addAttribute("user", new UserDTO());
+//        return "users/registerNewUser";
+//    }
+//
+//    @PostMapping("/save")
+//    public String create(@ModelAttribute("user") UserDTO userDTO) {
+//        userService.addUser(userDTO);
+//        return "redirect:readers/" + userDTO.getId();
+//    }
 
     @GetMapping("/books")
     public String findAllBooks(Model model) {
@@ -72,6 +78,7 @@ public class UserController {
         model.addAttribute("userService", userService);
         return "books/bookslist";
     }
+
 
     public String getTitle() {
         return title;

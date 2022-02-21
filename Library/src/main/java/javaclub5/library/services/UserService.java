@@ -4,6 +4,10 @@ import javaclub5.library.dao.*;
 import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -25,15 +29,17 @@ public class UserService {
     private RoleDao roleDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<Book> getBookList() {
         return bookDao.readAll();
     }
 
-
     public void addUser(UserDTO userDTO) {
         User user = userDTO.convertToUser();
         user.setRole(roleDao.readByID(2));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
         userDTO.setId(user.getId());
     }

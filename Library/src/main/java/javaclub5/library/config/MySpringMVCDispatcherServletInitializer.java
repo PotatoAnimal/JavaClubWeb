@@ -1,5 +1,7 @@
 package javaclub5.library.config;
 
+import javaclub5.library.userLoginService.WebSecurityConfig;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -9,7 +11,7 @@ import javax.servlet.ServletException;
 public class MySpringMVCDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {HibernateConfig.class};
+        return new Class[] {HibernateConfig.class, WebSecurityConfig.class};
     }
 
     @Override
@@ -26,6 +28,9 @@ public class MySpringMVCDispatcherServletInitializer extends AbstractAnnotationC
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         registerHiddenFieldFilter(servletContext);
+        servletContext
+                .addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"))
+                .addMappingForUrlPatterns(null, false, "/*");
     }
 
     private void registerHiddenFieldFilter(ServletContext context){

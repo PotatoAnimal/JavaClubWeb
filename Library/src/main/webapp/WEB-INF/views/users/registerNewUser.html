@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--/*@thymesVar id="user" type=""*/-->
-<form th:method="POST" th:action="@{/save}" th:object="${user}">
+<form th:method="POST" th:action="@{/registerNewUser}" th:object="${user}">
     <label for="name">Name:</label>
     <input type="text" th:field="*{name}" id="name"/>
 
