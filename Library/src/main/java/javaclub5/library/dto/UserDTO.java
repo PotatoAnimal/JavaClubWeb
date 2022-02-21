@@ -1,5 +1,6 @@
 package javaclub5.library.dto;
 
+import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
 
 import java.time.LocalDate;
@@ -14,18 +15,28 @@ public class UserDTO {
     private String email;
     private String birthday;
     private String surname;
+    private boolean isreader;
 
 
     public UserDTO() {
     }
 
-    public UserDTO(String name, String login, String password, String email, String birthday, String surname) {
+    public UserDTO(String name, String login, String password, String email, String birthday, String surname, boolean isReader) {
         this.name = name;
         this.login = login;
         this.password = password;
         this.email = email;
         this.birthday = birthday;
         this.surname = surname;
+        this.isreader = isReader;
+    }
+
+    public boolean isIsreader() {
+        return isreader;
+    }
+
+    public void setIsreader(boolean isreader) {
+        this.isreader = isreader;
     }
 
     public int getId() {
@@ -93,6 +104,16 @@ public class UserDTO {
         user.setPassword(this.password);
         user.setBirthday(LocalDate.parse(this.birthday));
         return user;
+    }
+
+    public Role convertToRole() {
+        Role role = new Role();
+        if(isreader) {
+            role.setId(2);
+        } else {
+            role.setId(1);
+        }
+        return role;
     }
 
     @Override

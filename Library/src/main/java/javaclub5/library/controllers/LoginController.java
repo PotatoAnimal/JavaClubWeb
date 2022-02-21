@@ -3,6 +3,7 @@ package javaclub5.library.controllers;
 import javaclub5.library.dao.UserDao;
 import javaclub5.library.dto.UserDTO;
 import javaclub5.library.models.User;
+import javaclub5.library.services.RoleService;
 import javaclub5.library.services.UserService;
 import javaclub5.library.userLoginService.SecurityService;
 import javaclub5.library.userLoginService.UserValidator;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private SecurityService securityService;
