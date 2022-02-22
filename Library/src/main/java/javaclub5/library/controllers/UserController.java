@@ -33,18 +33,6 @@ public class UserController {
         return "users/userslist";
     }
 
-//    @GetMapping("/registerNewUser")
-//    public String addUser(Model model) {
-//        model.addAttribute("user", new UserDTO());
-//        return "users/registerNewUser";
-//    }
-//
-//    @PostMapping("/save")
-//    public String create(@ModelAttribute("user") UserDTO userDTO) {
-//        userService.addUser(userDTO);
-//        return "redirect:readers/" + userDTO.getId();
-//    }
-
     @GetMapping("/books")
     public String findAllBooks(Model model) {
         model.addAttribute("books", userService.getBookList());
