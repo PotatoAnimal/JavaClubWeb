@@ -1,16 +1,25 @@
 package javaclub5.library.controllers;
 
 import javaclub5.library.dto.UserDTO;
+import javaclub5.library.models.User;
 import javaclub5.library.services.UserService;
 import javaclub5.library.userLoginService.SecurityService;
+import javaclub5.library.userLoginService.UserDetailsServiceImpl;
 import javaclub5.library.userLoginService.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -22,6 +31,7 @@ public class LoginController {
 
     @Autowired
     private UserValidator userValidator;
+
 
     @GetMapping("/registerNewUser")
     public String registration(Model model) {
@@ -43,15 +53,45 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-
-
+    public String login() {
         return "users/login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPage(@RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "logout", required = false) String logout,
+                            Model model, UserDTO userDTO) {
+        String errorMessge = null;
+        if (error != null) {
+            errorMessge = "Username or Password is incorrect !!";
+        }
+        if (logout != null) {
+            errorMessge = "You have been successfully logged out !!";
+        }
+        model.addAttribute("errorMessage", errorMessge);
+        return "redirect: /readers/" + userDTO.getId();
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login?logout=true";
+    }
+
+    @GetMapping("/loginRedirect")
+    public String loginRedirect() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        User user = userService.findUserByLogin(username);
+        return "redirect:/readers/" + user.getId();
     }
 
 }

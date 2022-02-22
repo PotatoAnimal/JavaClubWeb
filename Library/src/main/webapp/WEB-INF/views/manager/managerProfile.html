@@ -2,29 +2,15 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Books</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
+    <title>Manager Profile</title>
 </head>
 <h2>
     Books
 </h2>
 <body>
+<form class="btn btn-success" action="/books/addBook">
+    <button>Add new book</button>
+</form>
 <form th:action="@{/booksbytitle}">
     <table>
         <tr>
@@ -94,6 +80,18 @@
             <input type="reset" value="Clear">
         </td>
     </table>
+</form>
+<form class="btn btn-success" action="/authors">
+    <button>Authors</button>
+</form>
+<form class="btn btn-success" action="/logbook">
+    <button>LogBooks</button>
+</form>
+<form class="btn btn-success" action="/roles">
+    <button>Roles</button>
+</form>
+<form class="btn btn-success" action="/regbooks">
+    <button>RegBooks</button>
 </form>
 <table>
     <tr>

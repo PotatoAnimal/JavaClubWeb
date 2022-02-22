@@ -44,6 +44,10 @@ public class UserService {
         userDTO.setId(user.getId());
     }
 
+    public User findUserByLogin(String login) {
+        return this.userDao.findByLogin(login);
+    }
+
     /**
      * @param title Book's title
      * @return List of Books by Title

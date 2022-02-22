@@ -1,4 +1,4 @@
-package javaclub5.library.userLoginService;
+package javaclub5.library.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,19 +25,46 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+/**
+ *  Don't delete, need for further work with redirecting to manager or reader.
+  */
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .passwordEncoder(bCryptPasswordEncoder())
+//                .withUser("reader").password(bCryptPasswordEncoder().encode("123456789")).roles("Reader")
+//                .and()
+//                .withUser("manager").password(bCryptPasswordEncoder().encode("123456789")).roles("Manager");
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/books/**", "/registerNewUser").permitAll()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
+                .authorizeRequests()
+                .antMatchers("/login", "/registerNewUser")
+                    .permitAll()
+                .antMatchers("/books/**")
                 .permitAll()
+//                    .hasAnyRole("Reader", "Manager")
                 .and()
-            .logout()
-                .permitAll();
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/loginRedirect")
+                    .failureUrl("/login?error=true")
+                    .permitAll()
+//                .permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/home")
+//                .permitAll()
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/login?logout=true")
+                    .invalidateHttpSession(true)
+                    .permitAll();
     }
 
     @Bean
