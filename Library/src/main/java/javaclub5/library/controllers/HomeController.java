@@ -9,6 +9,6 @@ public class HomeController {
 
     @GetMapping({"/home", "/Home", "/"})
     public String index() {
-        return "home";
+        return "/home";
     }
 }

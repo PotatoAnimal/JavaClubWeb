@@ -83,7 +83,6 @@ public class LoginController {
 
     @GetMapping("/loginRedirect")
     public String loginRedirect() {
-        UserDTO userDTO;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof UserDetails) {
@@ -93,9 +92,9 @@ public class LoginController {
         }
         User user = userService.findUserByLogin(username);
 
-        if(user.getRole().getId() == 1) {
+        if (user.getRole().getId() == 1) {
             return "redirect:/managerProfile";
-        }else{
+        } else {
             return "redirect:/readers/" + user.getId();
         }
 
