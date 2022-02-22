@@ -39,7 +39,8 @@ public class LogBook {
         if (this == o) return true;
         if (!(o instanceof LogBook)) return false;
         LogBook logBook = (LogBook) o;
-        return getId() == logBook.getId() && Objects.equals(getDataOut(), logBook.getDataOut()) && Objects.equals(getDateIn(), logBook.getDateIn()) && Objects.equals(getUser(), logBook.getUser()) && Objects.equals(getBook(), logBook.getBook());
+        return getId() == logBook.getId() && Objects.equals(getDataOut(), logBook.getDataOut()) && Objects.equals(getDateIn(),
+                logBook.getDateIn()) && Objects.equals(getUser(), logBook.getUser()) && Objects.equals(getBook(), logBook.getBook());
     }
 
     @Override
