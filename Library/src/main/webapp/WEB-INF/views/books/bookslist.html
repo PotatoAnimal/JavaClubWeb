@@ -106,6 +106,7 @@
         <th>IsReading</th>
         <th>AvailBooks</th>
         <th>AvrTimeReadingBook</th>
+        <th>Delete</th>
         <td>
             <form class="btn btn-success" action="/managerProfile">
                 <button>return</button>
@@ -122,15 +123,18 @@
         <td th:text="${userService.getCountReadingBook(book.id)}">IsReading</td>
         <td th:text="${userService.getCountAvailableBook(book.id)}">AvailBooks</td>
         <td th:text="${userService.getAverageDaysReadingBook(book.id)}">AvrTimeReadingBook</td>
+        <td>
+            <form class="btn btn-success" th:method="POST" th:action="@{/books/manager/deleteBook/{bookId} (bookId = ${book.id})}">
+                <button>Delete book</button>
+            </form>
+        </td>
     </tr>
-<!--    <form class="btn btn-success"-->
-<!--          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">-->
-<!--        <button>Delete one copy</button>-->
-<!--    </form>-->
-    <form class="btn btn-success"
-          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
-        <button type="button" class="deletebtn">Delete book</button>
-    </form>
+    <!--    <form class="btn btn-success"-->
+    <!--          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">-->
+    <!--        <button>Delete one copy</button>-->
+    <!--    </form>-->
+
 </table>
+
 </body>
 </html>

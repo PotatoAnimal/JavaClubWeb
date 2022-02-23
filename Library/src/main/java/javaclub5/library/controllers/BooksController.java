@@ -34,11 +34,10 @@ public class BooksController {
         return "redirect:/books"; //need to finish
     }
 
-    @PostMapping("/manager/deleteBook")
+    @PostMapping("/manager/deleteBook/{idBook}")
     public String deleteBook(@PathVariable("idBook") int idBook, Model model) {
-        Book book = bookService.readById(idBook);
-        bookService.delete(book);
+        bookService.deleteBook(idBook);
         model.addAttribute("idBook", idBook);
-        return "manager/deleteBook";
+        return "redirect:/books";
     }
 }

@@ -58,11 +58,12 @@ public class BookDao {
         sf.getCurrentSession().delete(book);
     }
 
-    public boolean deleteBook(Book book) throws SQLException {
-
+    @Transactional
+    public boolean deleteBook(Book book){
         Session session = sf.getCurrentSession();
-        String sql = "DELETE FROM Book where id = :id";
-        Query query = session.createQuery(sql);
+        String hql = "DELETE  FROM Book AS b where id = :id ";// надо прописать кревю,
+        // чтобы был джойн с рег букс, иначе вылетает ошибка при попытке удаления
+        Query query = session.createQuery(hql);
         query.setParameter("id", book.getId());
 
         return query.executeUpdate() > 0;

@@ -33,7 +33,8 @@ public class BookService {
         return  this.bookDao.readByID(id);
     }
 
-    public void delete(Book book) {
-        this.bookDao.delete(book);
+    public boolean deleteBook(int idBook) {
+        Book book = readById(idBook);
+        return bookDao.deleteBook(book);
     }
 }
