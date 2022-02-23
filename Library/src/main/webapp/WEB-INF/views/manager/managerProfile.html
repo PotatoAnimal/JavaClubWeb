@@ -110,7 +110,7 @@
 <form class="btn btn-success" action="/roles">
     <button>Roles</button>
 </form>
-<form class="btn btn-success" action="/regbooks">
+<form method="post" class="btn btn-success" action="/managerRegbooks">
     <button>RegBooks</button>
 </form>
 <table>
@@ -142,8 +142,5 @@
         <td th:text="${userService.getAverageDaysReadingBook(book.id)}">AvrTimeReadingBook</td>
     </tr>
 </table>
-<form method="post" class="btn btn-success" action="/managerRegbooks">
-    <button>RegBooks</button>
-</form>
 </body>
 </html>
