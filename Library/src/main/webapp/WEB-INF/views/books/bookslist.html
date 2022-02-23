@@ -123,6 +123,14 @@
         <td th:text="${userService.getCountAvailableBook(book.id)}">AvailBooks</td>
         <td th:text="${userService.getAverageDaysReadingBook(book.id)}">AvrTimeReadingBook</td>
     </tr>
+<!--    <form class="btn btn-success"-->
+<!--          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">-->
+<!--        <button>Delete one copy</button>-->
+<!--    </form>-->
+    <form class="btn btn-success"
+          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
+        <button type="button" class="deletebtn">Delete book</button>
+    </form>
 </table>
 </body>
 </html>

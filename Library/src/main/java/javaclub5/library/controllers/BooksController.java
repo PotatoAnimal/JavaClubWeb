@@ -1,5 +1,6 @@
 package javaclub5.library.controllers;
 
+import javaclub5.library.dao.BookDao;
 import javaclub5.library.dto.NewBookDTO;
 import javaclub5.library.models.Book;
 import javaclub5.library.services.BookService;
@@ -7,10 +8,7 @@ import javaclub5.library.services.RegBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/books")
@@ -21,6 +19,7 @@ public class BooksController {
 
     @Autowired
     private RegBooksService regBooksService;
+
 
     @GetMapping("/addBook")
     public String addBook(Model model) {
@@ -33,5 +32,13 @@ public class BooksController {
         bookService.addBook(newBookDTO);
         regBooksService.addRegBook(newBookDTO);
         return "redirect:/books"; //need to finish
+    }
+
+    @PostMapping("/manager/deleteBook")
+    public String deleteBook(@PathVariable("idBook") int idBook, Model model) {
+        Book book = bookService.readById(idBook);
+        bookService.delete(book);
+        model.addAttribute("idBook", idBook);
+        return "manager/deleteBook";
     }
 }

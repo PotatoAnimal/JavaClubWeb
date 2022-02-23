@@ -28,4 +28,12 @@ public class BookService {
         bookDao.addBook(book);
         newBookDTO.setId(book.getId());
     }
+
+    public Book readById(int id) {
+        return  this.bookDao.readByID(id);
+    }
+
+    public void delete(Book book) {
+        this.bookDao.delete(book);
+    }
 }
