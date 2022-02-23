@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RegBooksList</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<h2>
+    RegBooks
+</h2>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Book</th>
+        <th>Authors</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th>Donated</th>
+        <th>Operations</th>
+        <td>
+            <form class="btn btn-success" action="/home">
+                <button>home</button>
+            </form>
+        </td>
+    </tr>
+    <tr th:each="regbook : ${regbooks}">
+        <td th:text="${regbook.Id}">ID</td>
+        <td th:text="${regbook.getBook().booksToString(regbook.getBook())}">book</td>
+        <td th:text="${regbook.getBook().authorsToString(regbook.getBook().getAuthors())}">Authors</td>
+        <td th:text="${regbook.Amount}">count</td>
+        <td th:text="${regbook.Price}">price</td>
+        <td th:text="${regbook.Donated}">donated</td>
+        <td th:text="${regbook.Operations}">operations</td>
+    </tr>
+</table>
+<form method="post" class="btn btn-success" action="/addNewRegistration">
+    <button>Add new Registration</button>
+</form>
+</body>
+</html>
