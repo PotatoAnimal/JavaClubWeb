@@ -97,9 +97,12 @@
         <th>Availability</th>
         <th>Action</th>
         <td>
-            <<form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
-            <button>return</button>
-        </form>
+<!--            <form name="logoutForm" action="@{/logout}" method="get" th:hidden="true">-->
+<!--                <input hidden type="submit" value="Sign Out"/>-->
+<!--            </form>-->
+            <form action="/logout" method="post">
+                <input type="submit" value="Logout" />
+            </form>
         </td>
     </tr>
     <tr th:each="book : ${books}">

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,28 +26,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
-/**
- *  Don't delete, need for further work with redirecting to manager or reader.
-  */
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(bCryptPasswordEncoder())
-//                .withUser("reader").password(bCryptPasswordEncoder().encode("123456789")).roles("Reader")
-//                .and()
-//                .withUser("manager").password(bCryptPasswordEncoder().encode("123456789")).roles("Manager");
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login", "/registerNewUser")
-                    .permitAll()
-                .antMatchers("/books/**")
-                .permitAll()
-//                    .hasAnyRole("Reader", "Manager")
+                .antMatchers("/login", "/registerNewUser", "/logout").permitAll()
+                .antMatchers("/books/**").permitAll()
                 .and()
                     .formLogin()
                     .loginPage("/login")
@@ -54,10 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureUrl("/login?error=true")
                     .permitAll()
                 .and()
-                    .logout()
-                    .logoutSuccessUrl("/login?logout=true")
-                    .invalidateHttpSession(true)
-                    .permitAll();
+                    .logout().logoutSuccessUrl("/login")
+                    .permitAll()
+                .and()
+                    .csrf().disable();
     }
 
     @Bean
