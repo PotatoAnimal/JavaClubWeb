@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="UTF-8 ">
-    <title>Statistics</title>
+    <meta charset="UTF-8">
+    <title>You are reading:</title>
 </head>
 <body>
 <h2>
@@ -13,30 +13,24 @@
         <th>ID</th>
         <th>Book</th>
         <th>Authors</th>
-        <th>Date Out</th>
-        <th>Date In</th>
         <td>
             <form class="btn btn-success" action="/home">
                 <button>home</button>
             </form>
         </td>
     </tr>
-    <tr th:each="logbook : ${userLogBook}">
+    <tr th:each="logbook : ${logBooks}">
         <td th:text="${logbook.id}">ID</td>
         <td th:text="${logbook.getBook().booksToString(logbook.getBook())}">book</td>
         <td th:text="${logbook.getBook().authorsToString(logbook.getBook().getAuthors())}">Authors</td>
-        <td th:text="${logbook.DataOut}">dateOut</td>
-        <td th:text="${logbook.DateIn}">dateIn</td>
+        <td>
+            <form th:method="POST" class="btn btn-success"
+                  th:action="@{/readers/{idReader}/return/{idLogBook} (idReader = ${id}, idLogBook = ${logbook.getId()})}">
+                <button>Return Book</button>
+            </form>
+        </td>
     </tr>
 </table>
-<form class="btn btn-success"
-      th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">
-    <button>View Ordered Books</button>
-</form>
-<form class="btn btn-success"
-      th:action="@{/readers/{id}/readingbook (id = ${user.getId()})}">
-    <button>Is Reading Now</button>
-</form>
 <form th:method="GET" class="btn btn-success" th:action="@{/readers/{id} (id = ${user.getId()})}">
     <button>return</button>
 </form>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Registration for new readers</title>
+
+</head>
+<body>
+<!--/*@thymesVar id="user" type=""*/-->
+<form th:method="POST" th:action="@{/registerNewUser}" th:object="${user}">
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <br>
+
+    <label for="surname">Surname:</label>
+    <input type="text" th:field="*{surname}" id="surname">
+
+    <br>
+
+    <label for="login">Login:</label>
+    <input type="text" th:field="*{login}" id="login">
+
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="text" th:field="*{password}" id="password">
+
+    <br>
+
+    <label for="email">Email:</label>
+    <input  type="text" th:field="*{email}" id="email">
+
+    <br>
+
+    <label for="birthday">BirthDate:</label>
+    <input type="date" th:field="*{birthday}" id="birthday"
+           value="2022-02-17"
+           min="0000-00-00" max="3000-00-00">>
+    <br>
+
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>

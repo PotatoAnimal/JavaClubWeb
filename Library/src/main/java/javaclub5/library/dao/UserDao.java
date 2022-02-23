@@ -1,17 +1,11 @@
 package javaclub5.library.dao;
 
-import javaclub5.library.models.Role;
 import javaclub5.library.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-
 
 import javax.transaction.Transactional;
 import java.util.LinkedList;
@@ -28,8 +22,14 @@ public class UserDao {
     }
 
     @Transactional
+    public void addUser(User user) {
+        Session session = this.sf.getCurrentSession();
+        session.persist(user);
+    }
+
+    @Transactional
     public List<User> readAll() {
-        users =  sf.getCurrentSession().createQuery("from User").list();
+        users = sf.getCurrentSession().createQuery("from User").list();
         return users;
     }
 
@@ -53,5 +53,16 @@ public class UserDao {
     public void delete(User user) {
         sf.getCurrentSession().delete(user);
 
+    }
+
+    @Transactional
+    public User findByLogin(String login){
+        Session session = sf.getCurrentSession();
+        String hql = "select u from User u where u.login = :login";
+        Query query = session.createQuery(hql);
+        query.setParameter("login", login);
+        return (query.list().isEmpty())
+                ? null
+                : (User) query.getSingleResult();
     }
 }

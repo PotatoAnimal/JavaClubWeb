@@ -28,6 +28,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
+        factoryBean.setHibernateProperties(hibernateProperties());
         factoryBean.setAnnotatedClasses(User.class,
                 Role.class, LogBook.class,
                 Book.class, RegBooks.class,

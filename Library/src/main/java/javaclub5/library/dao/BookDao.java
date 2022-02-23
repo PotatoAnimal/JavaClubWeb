@@ -1,7 +1,9 @@
 package javaclub5.library.dao;
 
 import javaclub5.library.models.Book;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,12 @@ public class BookDao {
     public BookDao() {
 
     }
+
+    @Transactional
+    public void addBook(Book book){
+        Session session = this.sf.getCurrentSession();
+        session.persist(book);
+     }
 
     @Transactional
     public List<Book> readAll() {
@@ -46,5 +54,56 @@ public class BookDao {
     @Transactional
     public void delete(Book book) {
         sf.getCurrentSession().delete(book);
+    }
+
+    /*
+    * Count how many some book is reading now
+    * */
+    @Transactional
+    public long getCountReadingBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hql = "select count(*) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is null";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
+        long countBook = 0;
+        try {
+            countBook = (long) cnt.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
+        return countBook;
+    }
+
+    /*
+     * Count how many some book is in library
+     * */
+    @Transactional
+    public long getCountBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hql = "select sum(rb.amount*rb.operations) from RegBooks rb where rb.book.id = :id";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
+        long countBook = 0;
+        try {
+            countBook = (long) cnt.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
+        return countBook;
+    }
+    @Transactional
+    public long getCountAvailableBook(int idBook) {
+        return getCountBook(idBook) - getCountReadingBook(idBook);
+    }
+    @Transactional
+    public double getAverageDaysReadingBook(int idBook) {
+        Session session = sf.getCurrentSession();
+        String hql = "select avg(lb.dateIn-lb.dataOut) from LogBook as lb where lb.book.id=:id and lb.dataOut is not null and lb.dateIn is not null";
+        Query cnt = session.createQuery(hql).setParameter("id",idBook);
+        double daysReadingBook = 0;
+        try {
+            daysReadingBook = (double) cnt.uniqueResult();
+        } catch (NullPointerException e) {
+//            e.printStackTrace();
+        }
+        return daysReadingBook;
     }
 }
