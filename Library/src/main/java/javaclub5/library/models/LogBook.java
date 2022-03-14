@@ -19,7 +19,7 @@ public class LogBook {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_book")
     private Book book;
 

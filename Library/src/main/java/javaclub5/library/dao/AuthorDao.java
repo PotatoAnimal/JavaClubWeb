@@ -1,6 +1,7 @@
 package javaclub5.library.dao;
 
 import javaclub5.library.models.Author;
+import javaclub5.library.models.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -20,6 +21,12 @@ public class AuthorDao {
 
     public AuthorDao() {
 
+    }
+
+    @Transactional
+    public void addAuthor(Author author) {
+        Session session = this.sf.getCurrentSession();
+        session.persist(author);
     }
 
     @Transactional

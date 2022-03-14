@@ -123,11 +123,11 @@
         <td th:text="${userService.getCountReadingBook(book.id)}">IsReading</td>
         <td th:text="${userService.getCountAvailableBook(book.id)}">AvailBooks</td>
         <td th:text="${userService.getAverageDaysReadingBook(book.id)}">AvrTimeReadingBook</td>
-        <!--<td>
+        <td>
             <form class="btn btn-success" th:method="POST" th:action="@{/books/manager/deleteBook/{bookId} (bookId = ${book.id})}">
                 <button>Delete book</button>
             </form>
-        </td>-->
+        </td>
     </tr>
     <!--    <form class="btn btn-success"-->
     <!--          th:action="@{/readers/{id}/orderedbook (id = ${user.getId()})}">-->

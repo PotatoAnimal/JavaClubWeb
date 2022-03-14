@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://thymeleaf.org">
+    <title>Adding new author</title>
+
+</head>
+<body>
+<!--/*@thymesVar id="user" type=""*/-->
+<form th:method="POST" th:action="@{/authors/save}" th:object="${author}">
+    <label for="name">Author Name:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <br>
+
+    <label for="surname">Author surname:</label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+
+    <br>
+
+    <label for="birthDay">BirthDate:</label>
+    <input type="date" th:field="*{birthDay}" id="birthDay"
+           value="1500-01-01"
+           min="0000-00-00" max="3000-00-00">>
+    <br>
+
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>

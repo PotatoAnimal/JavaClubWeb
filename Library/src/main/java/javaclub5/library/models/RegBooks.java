@@ -18,7 +18,7 @@ public class RegBooks {
     private boolean donated;
     @Column(name = "operations", nullable = false)
     private int operations;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_book")
     private Book book;
 
