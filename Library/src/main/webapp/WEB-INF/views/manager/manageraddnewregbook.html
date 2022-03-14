@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Registration</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<h2>
+    Register Book
+</h2>
+<body>
+<form th:method="POST" th:action="@{/register}" >
+    <table>
+        <tr>
+            <td>
+                <label for="title"> Book Title: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${book.title}" id="title"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="AuthorName"> Author Name: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${author.name}" id="AuthorName"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="AuthorSurname"> Author Surname: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${author.surname}" id="AuthorSurname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Count"> Count: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${regbooks.amount}" id="Count"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Price"> Price: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${regbooks.price}" id="Price"/>
+            </td>
+        </tr>
+        <tr>
+            <input type="checkbox" th:field="${regbooks.donated}" id="donated">
+            <label for="donated">Donated</label>
+        </tr>
+        <tr>
+            <td>
+                <label for="Operation"> Operation: </label>
+            </td>
+            <td>
+                <input type="text" th:field = "${regbooks.operations}" id="Operation"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Register">
+            </td>
+            <td>
+                <input type="reset" value="Clear">
+            </td>
+
+        </tr>
+    </table>
+</form>
+</body>
+</html>
