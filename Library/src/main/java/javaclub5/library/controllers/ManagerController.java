@@ -7,6 +7,7 @@ import javaclub5.library.models.Author;
 import javaclub5.library.models.Book;
 import javaclub5.library.models.RegBooks;
 import javaclub5.library.models.User;
+import javaclub5.library.services.ManagerService;
 import javaclub5.library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class ManagerController {
     RegBooksDao regBooksDao;
     @Autowired
     AuthorDao authorDao;
+    @Autowired
+    ManagerService managerService;
     @GetMapping("/managerProfile")
     public String managerProfile(Model model) {
         model.addAttribute("userService", userService);
@@ -54,11 +57,10 @@ public class ManagerController {
                                 @ModelAttribute("author") Author author,
                                 @ModelAttribute("regbooks") RegBooks regBooks,
                                 Model model) {
-        authorDao.addAuthor(author);
         List<Author> authorList = new ArrayList<>();
         authorList.add(author);
         book.setAuthors(authorList);
-        bookDao.addBook(book);
+        book = managerService.checkBook(book);
         regBooks.setBook(book);
         regBooksDao.create(regBooks);
         return "redirect: /managerRegbooks";
