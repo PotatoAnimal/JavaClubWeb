@@ -26,7 +26,6 @@ public class ManagerService {
                 }
             }
         }
-        authorDao.addAuthor(book.getAuthors().get(0));
         bookDao.addBook(book);
         return book;
     }
@@ -41,6 +40,16 @@ public class ManagerService {
                 return true;
             }
         }
+        oldAuthors = authorDao.readAll();
+        for (Author author: oldAuthors) {
+            if (author.getName()
+                    .equalsIgnoreCase(authors.get(0).getName().replaceAll(" ", ""))
+                    && author.getSurname()
+                    .equalsIgnoreCase(authors.get(0).getSurname().replaceAll(" ", ""))) {
+                return false;
+            }
+        }
+        authorDao.addAuthor(book.getAuthors().get(0));
         return false;
     }
 }
